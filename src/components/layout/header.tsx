@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Menu } from "lucide-react";
-import { NAV_LINKS } from "@/lib/constants";
+import { HEADER_NAV_LINKS } from "@/lib/constants";
 import { useScrollPosition } from "@/hooks/use-scroll-position";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/shared/theme-toggle";
@@ -38,7 +38,7 @@ export function Header() {
             className="hidden items-center gap-1 lg:flex"
             aria-label="Main navigation"
           >
-            {NAV_LINKS.map((link) => (
+            {HEADER_NAV_LINKS.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}

@@ -1,17 +1,25 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { MapPin, Phone, Mail, Clock } from "lucide-react";
+import { Phone, Mail } from "lucide-react";
 import { SITE_CONFIG, WHATSAPP_URL } from "@/lib/constants";
 import { WhatsAppIcon } from "@/components/shared/whatsapp-icon";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 
 const contactItems = [
-  { icon: MapPin, label: "Address", value: SITE_CONFIG.address },
-  { icon: Phone, label: "Phone", value: SITE_CONFIG.phone, href: `tel:${SITE_CONFIG.phone}` },
-  { icon: Mail, label: "Email", value: SITE_CONFIG.email, href: `mailto:${SITE_CONFIG.email}` },
-  { icon: Clock, label: "Hours", value: SITE_CONFIG.hours },
+  {
+    icon: Phone,
+    label: "Phone",
+    value: SITE_CONFIG.phone,
+    href: `tel:${SITE_CONFIG.phone.replace(/\s/g, "")}`,
+  },
+  {
+    icon: Mail,
+    label: "Email",
+    value: SITE_CONFIG.email,
+    href: `mailto:${SITE_CONFIG.email}`,
+  },
 ];
 
 export function ContactInfo() {
@@ -23,8 +31,7 @@ export function ContactInfo() {
           <motion.div
             key={item.label}
             initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
+            animate={{ opacity: 1, x: 0 }}
             transition={{ delay: index * 0.1 }}
           >
             <Card className="border-border/50">
@@ -36,16 +43,12 @@ export function ContactInfo() {
                   <p className="text-sm font-medium text-muted-foreground">
                     {item.label}
                   </p>
-                  {item.href ? (
-                    <a
-                      href={item.href}
-                      className="mt-1 font-medium hover:text-primary"
-                    >
-                      {item.value}
-                    </a>
-                  ) : (
-                    <p className="mt-1 font-medium">{item.value}</p>
-                  )}
+                  <a
+                    href={item.href}
+                    className="mt-1 font-medium hover:text-primary"
+                  >
+                    {item.value}
+                  </a>
                 </div>
               </CardContent>
             </Card>
@@ -58,11 +61,7 @@ export function ContactInfo() {
         className="w-full bg-[#25D366] hover:bg-[#20BD5A] text-white shadow-lg shadow-[#25D366]/25"
         size="lg"
       >
-        <a
-          href={WHATSAPP_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">
           <WhatsAppIcon className="mr-2 h-5 w-5" />
           Message us on WhatsApp
         </a>

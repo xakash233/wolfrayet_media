@@ -19,6 +19,7 @@ export default function BlogPage() {
         subtitle="Expert tips, industry trends, and actionable strategies to grow your business."
         showCta={false}
         compact
+        hideEyebrow
       />
 
       <AnimatedSection>

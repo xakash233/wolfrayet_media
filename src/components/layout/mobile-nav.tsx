@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
-import { NAV_LINKS } from "@/lib/constants";
+import { HEADER_NAV_LINKS } from "@/lib/constants";
 import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/shared/logo";
 import { cn } from "@/lib/utils";
@@ -47,7 +47,7 @@ export function MobileNav({ open, onClose, pathname }: MobileNavProps) {
               </Button>
             </div>
             <ul className="flex flex-col gap-1">
-              {NAV_LINKS.map((link, index) => (
+              {HEADER_NAV_LINKS.map((link, index) => (
                 <motion.li
                   key={link.href}
                   initial={{ opacity: 0, x: 20 }}

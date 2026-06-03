@@ -2,16 +2,9 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import {
-  MessageCircle,
-  Bot,
-  Clock,
-  MapPin,
-  Sparkles,
-} from "lucide-react";
+import { MessageCircle, Bot, Sparkles } from "lucide-react";
 import { ContactForm } from "@/components/sections/contact-form";
 import { ContactInfo } from "@/components/sections/contact-info";
-import { GoogleMap } from "@/components/sections/google-map";
 import { FAQAccordion } from "@/components/sections/faq-accordion";
 import { WhatsAppIcon } from "@/components/shared/whatsapp-icon";
 import { SITE_CONFIG, WHATSAPP_URL } from "@/lib/constants";
@@ -109,28 +102,7 @@ export function ContactEnhanced() {
           <div className="mt-8">
             <ContactInfo />
           </div>
-          <div className="mt-8 rounded-xl border border-border bg-muted/30 p-4">
-            <div className="flex items-start gap-3">
-              <Clock className="mt-0.5 h-5 w-5 text-primary" />
-              <div>
-                <p className="font-medium">Business Hours</p>
-                <p className="text-sm text-muted-foreground">{SITE_CONFIG.hours}</p>
-              </div>
-            </div>
-            <div className="mt-4 flex items-start gap-3">
-              <MapPin className="mt-0.5 h-5 w-5 text-primary" />
-              <div>
-                <p className="font-medium">Office</p>
-                <p className="text-sm text-muted-foreground">{SITE_CONFIG.address}</p>
-              </div>
-            </div>
-          </div>
         </div>
-      </div>
-
-      <div>
-        <h3 className="mb-6 text-center text-xl font-bold">Find Us</h3>
-        <GoogleMap />
       </div>
 
       <div className="rounded-2xl border border-border p-8">

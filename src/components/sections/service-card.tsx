@@ -10,6 +10,14 @@ import {
   Palette,
   BarChart3,
   Code2,
+  Users,
+  Megaphone,
+  Mail,
+  TrendingUp,
+  Star,
+  Video,
+  Rocket,
+  Server,
   type LucideIcon,
 } from "lucide-react";
 import type { Service } from "@/types";
@@ -23,6 +31,14 @@ const iconMap: Record<string, LucideIcon> = {
   Palette,
   BarChart3,
   Code2,
+  Users,
+  Megaphone,
+  Mail,
+  TrendingUp,
+  Star,
+  Video,
+  Rocket,
+  Server,
 };
 
 interface ServiceCardProps {

@@ -27,6 +27,7 @@ export default function PortfolioPage() {
         subtitle="Real results for real brands. Explore case studies with metrics that prove our impact."
         showCta
         compact
+        hideEyebrow
       />
 
       <AnimatedSection>

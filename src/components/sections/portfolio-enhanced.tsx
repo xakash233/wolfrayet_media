@@ -55,8 +55,7 @@ export function PortfolioEnhanced({
           <motion.div
             key={stat.label}
             initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ delay: i * 0.1 }}
             className="glass-card flex items-center gap-4 p-6"
           >
@@ -73,8 +72,8 @@ export function PortfolioEnhanced({
 
       <motion.div
         initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
         className="mb-12 overflow-hidden rounded-3xl border border-primary/20"
       >
         <button

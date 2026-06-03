@@ -7,6 +7,15 @@ export interface Service {
   href: string;
 }
 
+export interface ServiceCategory {
+  number: number;
+  id: string;
+  title: string;
+  description: string;
+  icon: string;
+  items: string[];
+}
+
 export interface TeamMember {
   id: string;
   name: string;
@@ -34,12 +43,20 @@ export interface Testimonial {
 export interface PricingPlan {
   id: string;
   name: string;
-  price: number;
+  priceDisplay: string;
   period: string;
   description: string;
+  bestFor: string;
+  summary?: string;
   features: string[];
   highlighted?: boolean;
+  badge?: string;
   cta: string;
+}
+
+export interface CustomAddOn {
+  items: string[];
+  summary: string;
 }
 
 export interface FAQItem {

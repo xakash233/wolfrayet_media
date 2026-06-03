@@ -8,6 +8,7 @@ interface AnimatedSectionProps {
   className?: string;
   delay?: number;
   id?: string;
+  compact?: boolean;
 }
 
 export function AnimatedSection({
@@ -15,15 +16,20 @@ export function AnimatedSection({
   className,
   delay = 0,
   id,
+  compact = false,
 }: AnimatedSectionProps) {
   return (
     <motion.section
       id={id}
-      initial={{ opacity: 0, y: 32 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-60px" }}
-      transition={{ duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] }}
-      className={cn("section-padding", className)}
+      initial={{ opacity: 0, y: 24 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay, ease: [0.22, 1, 0.36, 1] }}
+      className={cn(
+        compact
+          ? "px-4 py-10 sm:px-6 sm:py-12 lg:px-8 lg:py-14"
+          : "section-padding",
+        className
+      )}
     >
       <div className="mx-auto max-w-7xl">{children}</div>
     </motion.section>

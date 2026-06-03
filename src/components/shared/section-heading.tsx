@@ -9,6 +9,7 @@ interface SectionHeadingProps {
   description?: string;
   align?: "left" | "center";
   className?: string;
+  compact?: boolean;
 }
 
 export function SectionHeading({
@@ -17,15 +18,15 @@ export function SectionHeading({
   description,
   align = "center",
   className,
+  compact = false,
 }: SectionHeadingProps) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
+      animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
       className={cn(
-        "mb-12 max-w-3xl",
+        compact ? "mb-8 max-w-3xl" : "mb-12 max-w-3xl",
         align === "center" && "mx-auto text-center",
         className
       )}
@@ -39,7 +40,14 @@ export function SectionHeading({
         {title}
       </h2>
       {description && (
-        <p className="mt-4 text-lg text-muted-foreground">{description}</p>
+        <p
+          className={cn(
+            "mt-4 text-muted-foreground",
+            compact ? "text-sm leading-relaxed sm:text-base" : "text-lg"
+          )}
+        >
+          {description}
+        </p>
       )}
     </motion.div>
   );

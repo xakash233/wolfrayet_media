@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { Star, Quote, ArrowRight } from "lucide-react";
 import type { Testimonial } from "@/types";
 import { Button } from "@/components/ui/button";
+import { Hero } from "@/components/sections/hero";
 import { TestimonialsCarousel } from "@/components/sections/testimonials-carousel";
 import { CTASection } from "@/components/sections/cta-section";
 import { AnimatedSection } from "@/components/shared/animated-section";
@@ -26,32 +27,20 @@ export function TestimonialsPageContent({
 
   return (
     <>
-      <section className="relative overflow-hidden pt-28 pb-16">
-        <div className="absolute inset-0 bg-mesh-dark" />
-        <div className="absolute inset-0 bg-gradient-to-b from-primary/5 to-transparent" />
-        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="mx-auto max-w-4xl text-center"
-          >
-            <p className="text-sm font-semibold uppercase tracking-widest text-primary">
-              Client Stories
-            </p>
-            <h1 className="mt-3 text-4xl font-bold sm:text-5xl lg:text-6xl">
-              Our Clients <span className="gradient-text">Love Us</span>
-            </h1>
-            <p className="mt-4 text-lg text-muted-foreground">
-              Real brands. Real results. Hear from leaders who trusted Wolfrayet
-              Media to transform their digital growth.
-            </p>
-          </motion.div>
+      <Hero
+        title="Our Clients Love Us"
+        subtitle="Real brands. Real results. Hear from leaders who trusted Wolfrayet Media to transform their digital growth."
+        showCta={false}
+        compact
+        hideEyebrow
+      />
 
+      <AnimatedSection compact>
           <motion.div
             initial={{ opacity: 0, y: 32 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="mx-auto mt-12 max-w-4xl"
+            className="mx-auto max-w-4xl"
           >
             <div className="glass-card relative overflow-hidden p-8 sm:p-12">
               <Quote className="absolute right-8 top-8 h-16 w-16 text-primary/10" />
@@ -112,8 +101,7 @@ export function TestimonialsPageContent({
               </div>
             ))}
           </motion.div>
-        </div>
-      </section>
+      </AnimatedSection>
 
       <AnimatedSection>
         <SectionHeading

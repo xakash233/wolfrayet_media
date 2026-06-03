@@ -39,6 +39,14 @@ const serviceImages = [
   "1557804506-669a77965ba3",
   "1551288049-bebda4e38f71",
   "1498050108023-c5249f237b27",
+  "1557804506-669a77965ba3",
+  "1460925895917-afdab827c52f",
+  "1432888498266-38ffec3eaf0a",
+  "1611162616305-c69b3fa7fbe0",
+  "1552664730-d307ca884978",
+  "1551288049-bebda4e38f71",
+  "1454165804606-c3d57bc86b40",
+  "1558494949-ef010cbdcc31",
 ];
 
 export function ServicesEnhanced({ services }: ServicesEnhancedProps) {
@@ -68,14 +76,14 @@ export function ServicesEnhanced({ services }: ServicesEnhancedProps) {
       </div>
 
       <Tabs defaultValue={services[0]?.id} className="w-full">
-        <TabsList className="mb-8 flex h-auto w-full flex-wrap justify-start gap-2 bg-transparent p-0">
+        <TabsList className="mb-8 flex h-auto max-h-48 w-full flex-wrap justify-start gap-2 overflow-y-auto bg-transparent p-0">
           {services.map((s) => (
             <TabsTrigger
               key={s.id}
               value={s.id}
-              className="rounded-full border border-border data-[state=active]:border-primary data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
+              className="rounded-full border border-border px-3 py-1.5 text-xs sm:text-sm data-[state=active]:border-primary data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
             >
-              {s.title}
+              {s.title.replace(/\s*\([^)]*\)/g, "").trim()}
             </TabsTrigger>
           ))}
         </TabsList>

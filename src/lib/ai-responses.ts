@@ -61,7 +61,7 @@ const KEYWORD_RESPONSES: { keywords: string[]; response: string }[] = [
   },
   {
     keywords: ["contact", "call", "meet", "talk", "email", "phone"],
-    response: `Reach us at ${SITE_CONFIG.email}, ${SITE_CONFIG.phone}, or WhatsApp. Office hours: ${SITE_CONFIG.hours}. Address: ${SITE_CONFIG.address}. Use the Contact page (/contact) or tap the green WhatsApp button — we reply within 24 hours.`,
+    response: `Reach us at ${SITE_CONFIG.email}, ${SITE_CONFIG.phone}, or WhatsApp. Use the Contact page (/contact) or tap the green WhatsApp button — we reply within 24 hours.`,
   },
   {
     keywords: ["testimonial", "review", "client", "feedback"],

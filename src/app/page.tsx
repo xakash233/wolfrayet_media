@@ -1,6 +1,5 @@
 import { Hero } from "@/components/sections/hero";
-import { AboutPreview } from "@/components/sections/about-preview";
-import { StatsCounter } from "@/components/sections/stats-counter";
+import { BrandIntroSection } from "@/components/sections/brand-intro-section";
 import { ServiceCard } from "@/components/sections/service-card";
 import { FeaturesGrid } from "@/components/sections/features-grid";
 import { TestimonialsCarousel } from "@/components/sections/testimonials-carousel";
@@ -11,8 +10,8 @@ import { CTASection } from "@/components/sections/cta-section";
 import { LogoSlider } from "@/components/sections/logo-slider";
 import { AnimatedSection } from "@/components/shared/animated-section";
 import { SectionHeading } from "@/components/shared/section-heading";
-import { services } from "@/data/services";
-import { stats, features, clientLogos } from "@/data/stats";
+import { featuredServices } from "@/data/services";
+import { features, clientLogos } from "@/data/stats";
 import { testimonials } from "@/data/testimonials";
 import { pricingPlans } from "@/data/pricing";
 import { faqItems } from "@/data/faq";
@@ -24,40 +23,37 @@ import { Button } from "@/components/ui/button";
 export default function HomePage() {
   return (
     <>
-      <Hero />
+      <Hero showCta={false} showViewMore viewMoreHref="/#intro" />
 
-      <AnimatedSection className="bg-muted/20">
-        <AboutPreview />
-      </AnimatedSection>
+      <BrandIntroSection />
 
-      <AnimatedSection>
-        <StatsCounter stats={stats} />
-      </AnimatedSection>
-
-      <AnimatedSection>
+      <AnimatedSection compact>
         <SectionHeading
+          compact
           eyebrow="Services"
           title="What We Do Best"
-          description="Digital marketing and custom web development — built to accelerate your growth."
+          description="We provide a wide array of digital marketing solutions designed to boost brand visibility, attract high-intent customers, generate qualified leads, and drive sustainable business growth."
         />
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {services.map((service, index) => (
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {featuredServices.map((service, index) => (
             <ServiceCard key={service.id} service={service} index={index} />
           ))}
         </div>
       </AnimatedSection>
 
-      <AnimatedSection className="bg-muted/20">
+      <AnimatedSection compact className="bg-muted/20">
         <SectionHeading
+          compact
           eyebrow="Why Us"
-          title="Built for Results"
-          description="We combine strategy, creativity, and technology to deliver measurable outcomes."
+          title="Results You Can Measure, Success You Can Trust"
+          description="Accelerate Your Business Growth with Strategic Digital Marketing, Creative Brand Solutions, and Results-Driven Technology."
         />
         <FeaturesGrid features={features} />
       </AnimatedSection>
 
-      <AnimatedSection>
+      <AnimatedSection compact>
         <SectionHeading
+          compact
           eyebrow="Testimonials"
           title="Our Clients Love Us"
           description="Don't just take our word for it—hear from brands we've helped grow."
@@ -65,42 +61,50 @@ export default function HomePage() {
         <TestimonialsCarousel testimonials={testimonials} showViewAll />
       </AnimatedSection>
 
-      <AnimatedSection className="border-y border-border/50">
-        <p className="mb-6 text-center text-sm font-semibold uppercase tracking-widest text-muted-foreground">
+      <AnimatedSection compact className="border-y border-border/50 py-8 sm:py-10">
+        <p className="mb-4 text-center text-sm font-semibold uppercase tracking-widest text-muted-foreground">
           Trusted by industry leaders
         </p>
         <LogoSlider logos={clientLogos} />
       </AnimatedSection>
 
-      <AnimatedSection>
+      <AnimatedSection compact>
         <SectionHeading
+          compact
           eyebrow="Pricing"
           title="Plans That Scale With You"
-          description="Transparent pricing with no hidden fees. Choose the plan that fits your goals."
+          description="India-based digital marketing packages in INR. GST extra. View all plans on our services page."
         />
-        <PricingCards plans={pricingPlans} />
+        <PricingCards plans={pricingPlans} compact />
+        <div className="mt-6 text-center">
+          <Button asChild variant="outline">
+            <Link href="/services#pricing">View All Pricing Packages</Link>
+          </Button>
+        </div>
       </AnimatedSection>
 
-      <AnimatedSection className="bg-muted/20">
+      <AnimatedSection compact className="bg-muted/20">
         <SectionHeading
+          compact
           eyebrow="Blog"
           title="Latest Insights"
           description="Stay informed with our marketing tips, trends, and case studies."
         />
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {blogPosts.slice(0, 3).map((post, index) => (
             <BlogCard key={post.slug} post={post} index={index} />
           ))}
         </div>
-        <div className="mt-10 text-center">
+        <div className="mt-6 text-center">
           <Button asChild variant="outline" size="lg">
             <Link href="/blog">View All Posts</Link>
           </Button>
         </div>
       </AnimatedSection>
 
-      <AnimatedSection>
+      <AnimatedSection compact>
         <SectionHeading
+          compact
           eyebrow="FAQ"
           title="Frequently Asked Questions"
           description="Everything you need to know about working with Wolfrayet Media."
@@ -108,11 +112,8 @@ export default function HomePage() {
         <FAQAccordion items={faqItems} />
       </AnimatedSection>
 
-      <AnimatedSection>
+      <AnimatedSection compact className="space-y-8">
         <NewsletterSignup />
-      </AnimatedSection>
-
-      <AnimatedSection>
         <CTASection />
       </AnimatedSection>
     </>

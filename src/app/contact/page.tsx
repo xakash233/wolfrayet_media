@@ -17,6 +17,7 @@ export default function ContactPage() {
         subtitle="Let's Get Started — WhatsApp for instant chat, AI for quick answers, or the form for detailed projects."
         showCta={false}
         compact
+        hideEyebrow
       />
 
       <AnimatedSection>
