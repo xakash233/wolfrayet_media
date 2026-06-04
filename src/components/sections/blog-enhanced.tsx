@@ -1,8 +1,9 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { AnimatedSectionImage } from "@/components/shared/animated-section-image";
+import { sectionTransition } from "@/lib/animations";
 import { Calendar, Clock, ArrowRight, BookOpen } from "lucide-react";
 import type { BlogPost } from "@/types";
 import { BlogListing } from "@/components/sections/blog-listing";
@@ -21,19 +22,22 @@ export function BlogEnhanced({ posts }: BlogEnhancedProps) {
   return (
     <div className="space-y-16">
       <motion.article
-        initial={{ opacity: 0, y: 24 }}
-        animate={{ opacity: 1, y: 0 }}
+        initial={false}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-40px" }}
+        transition={sectionTransition(0)}
         className="group overflow-hidden rounded-3xl border border-border"
       >
         <Link href={`/blog/${featured.slug}`} className="grid lg:grid-cols-2">
           <div className="relative aspect-[16/10] lg:aspect-auto lg:min-h-[360px]">
-            <Image
+            <AnimatedSectionImage
               src={featured.image}
               alt={featured.title}
               fill
-              className="object-cover transition-transform duration-700 group-hover:scale-105"
-              sizes="(max-width: 1024px) 100vw, 50vw"
               priority
+              className="h-full w-full"
+              imageClassName="object-cover transition-transform duration-[3.5s] group-hover:scale-105"
+              sizes="(max-width: 1024px) 100vw, 50vw"
             />
             <div className="absolute left-4 top-4 rounded-full bg-primary px-4 py-1.5 text-xs font-bold text-primary-foreground">
               Featured

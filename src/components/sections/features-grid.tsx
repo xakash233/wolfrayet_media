@@ -12,6 +12,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import type { Feature } from "@/types";
+import { sectionTransition } from "@/lib/animations";
 
 const iconMap: Record<string, LucideIcon> = {
   LineChart,
@@ -35,10 +36,10 @@ export function FeaturesGrid({ features }: FeaturesGridProps) {
         return (
           <motion.div
             key={feature.id}
-            initial={{ opacity: 0, y: 20 }}
+            initial={false}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: index * 0.08 }}
+            transition={sectionTransition(index * 0.1)}
             whileHover={{ scale: 1.02 }}
             className="glass-card group p-6"
           >

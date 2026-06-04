@@ -21,6 +21,9 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import type { Service } from "@/types";
+import { AnimatedSectionImage } from "@/components/shared/animated-section-image";
+import { serviceImageUrl } from "@/lib/images";
+import { sectionTransition } from "@/lib/animations";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 const iconMap: Record<string, LucideIcon> = {
@@ -51,18 +54,28 @@ export function ServiceCard({ service, index = 0 }: ServiceCardProps) {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 24 }}
+      initial={false}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ delay: index * 0.08 }}
+      transition={sectionTransition(index * 0.1)}
       whileHover={{ y: -4 }}
     >
       <Link href={service.href}>
-        <Card className="group h-full border-border/50 bg-card/50 transition-all hover:border-primary/50 hover:shadow-xl hover:shadow-primary/5">
-          <CardHeader>
-            <div className="mb-2 flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
-              <Icon className="h-6 w-6" />
+        <Card className="group h-full overflow-hidden border-border/50 bg-card/50 transition-all hover:border-primary/50 hover:shadow-xl hover:shadow-primary/5">
+          <div className="relative aspect-[16/9] overflow-hidden">
+            <AnimatedSectionImage
+              src={serviceImageUrl(service.id, 640, 360)}
+              alt={service.title}
+              fill
+              className="h-full w-full"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+            <div className="absolute bottom-4 left-4 flex h-11 w-11 items-center justify-center rounded-xl bg-primary text-primary-foreground shadow-lg">
+              <Icon className="h-5 w-5" aria-hidden />
             </div>
+          </div>
+          <CardHeader className="pb-2">
             <CardTitle className="text-xl">{service.title}</CardTitle>
           </CardHeader>
           <CardContent>

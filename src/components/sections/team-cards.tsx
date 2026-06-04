@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { LinkedinIcon, TwitterIcon } from "@/components/shared/social-icons";
 import type { TeamMember } from "@/types";
 import { Card, CardContent } from "@/components/ui/card";
 
@@ -12,50 +11,33 @@ interface TeamCardsProps {
 
 export function TeamCards({ members }: TeamCardsProps) {
   return (
-    <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+    <div className="mx-auto grid w-full max-w-5xl grid-cols-1 items-stretch justify-items-center gap-6 sm:grid-cols-2 lg:grid-cols-3">
       {members.map((member, index) => (
         <motion.div
           key={member.id}
-          initial={{ opacity: 0, y: 24 }}
+          initial={false}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: index * 0.1 }}
           whileHover={{ y: -4 }}
+          className="flex h-full w-full max-w-[300px] justify-center"
         >
-          <Card className="overflow-hidden border-border/50 transition-shadow hover:shadow-xl">
-            <div className="relative aspect-square overflow-hidden">
+          <Card className="flex h-full w-full flex-col overflow-hidden border-border/50 transition-shadow hover:shadow-xl">
+            <div className="relative aspect-square w-full shrink-0 overflow-hidden">
               <Image
                 src={member.image}
                 alt={member.name}
                 fill
-                className="object-cover transition-transform duration-500 group-hover:scale-105"
-                sizes="(max-width: 768px) 100vw, 25vw"
+                className="object-cover object-top transition-transform duration-500 hover:scale-105"
+                sizes="(max-width: 640px) 100vw, 320px"
               />
             </div>
-            <CardContent className="p-6">
+            <CardContent className="flex flex-1 flex-col p-6 text-center">
               <h3 className="font-bold">{member.name}</h3>
               <p className="text-sm text-primary">{member.role}</p>
-              <p className="mt-2 text-sm text-muted-foreground">{member.bio}</p>
-              <div className="mt-4 flex gap-2">
-                {member.social.linkedin && (
-                  <a
-                    href={member.social.linkedin}
-                    aria-label={`${member.name} LinkedIn`}
-                    className="text-muted-foreground hover:text-primary"
-                  >
-                    <LinkedinIcon className="h-4 w-4" />
-                  </a>
-                )}
-                {member.social.twitter && (
-                  <a
-                    href={member.social.twitter}
-                    aria-label={`${member.name} Twitter`}
-                    className="text-muted-foreground hover:text-primary"
-                  >
-                    <TwitterIcon className="h-4 w-4" />
-                  </a>
-                )}
-              </div>
+              <p className="mt-2 min-h-[5.5rem] flex-1 text-sm leading-relaxed text-muted-foreground">
+                {member.bio}
+              </p>
             </CardContent>
           </Card>
         </motion.div>

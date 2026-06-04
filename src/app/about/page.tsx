@@ -25,9 +25,10 @@ export default function AboutPage() {
         showCta={false}
         compact
         hideEyebrow
+        heroImage="about"
       />
 
-      <AnimatedSection className="pt-4">
+      <AnimatedSection>
         <VisionMissionSection />
       </AnimatedSection>
 
@@ -35,13 +36,14 @@ export default function AboutPage() {
         <SectionHeading
           eyebrow="Our Story"
           title="Company Timeline"
-          description="A decade-plus journey of growth, innovation, and client success."
+          description="Founded in March 2026 — our first months delivering web development, SEO, and IT services."
         />
         <Timeline events={timeline} />
       </AnimatedSection>
 
       <AnimatedSection>
         <SectionHeading
+          align="center"
           eyebrow="Team"
           title="Meet the Experts"
           description="Passionate marketers, strategists, and creatives dedicated to your success."

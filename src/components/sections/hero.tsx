@@ -1,15 +1,16 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
+import { SSR_SAFE_INITIAL } from "@/lib/motion-safe";
 import { ArrowRight } from "lucide-react";
+import { AnimatedSectionImage } from "@/components/shared/animated-section-image";
+import { HeroVideoBackground } from "@/components/sections/hero-video-background";
 import { SITE_CONFIG } from "@/lib/constants";
+import { HERO_IMAGES } from "@/lib/images";
+import { sectionTransition } from "@/lib/animations";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-
-const DEFAULT_HERO_IMAGE =
-  "https://images.unsplash.com/photo-1551434678-e076c223a692?w=1920&h=1080&fit=crop&q=75";
 
 interface HeroProps {
   title?: string;
@@ -22,8 +23,12 @@ interface HeroProps {
   /** Override background image (e.g. blog post featured image). */
   imageSrc?: string;
   imageAlt?: string;
+  /** Preset hero background when imageSrc is not set */
+  heroImage?: keyof typeof HERO_IMAGES;
   /** Hide Wolfrayet Media label above title (inner pages). */
   hideEyebrow?: boolean;
+  /** Homepage: full-screen video background with image fallback */
+  videoIntro?: boolean;
 }
 
 export function Hero({
@@ -33,10 +38,13 @@ export function Hero({
   compact = false,
   showViewMore = false,
   viewMoreHref = "/#intro",
-  imageSrc = DEFAULT_HERO_IMAGE,
-  imageAlt = "",
+  imageSrc,
+  imageAlt = "Modern digital marketing and technology workspace",
+  heroImage = "default",
   hideEyebrow = false,
+  videoIntro = false,
 }: HeroProps) {
+  const backgroundSrc = imageSrc ?? HERO_IMAGES[heroImage];
   const reducedMotion = useReducedMotion();
   const isHomeTagline = title === SITE_CONFIG.tagline;
 
@@ -46,17 +54,25 @@ export function Hero({
       className="relative flex min-h-[100svh] w-full items-center justify-center overflow-hidden"
     >
       {/* Full-bleed background — covers entire hero to all edges */}
-      <div className="absolute inset-0 z-0 h-full min-h-[100svh] w-full" aria-hidden>
-        <Image
-          src={imageSrc}
-          alt={imageAlt}
-          fill
-          priority={!compact}
-          fetchPriority={!compact ? "high" : "auto"}
-          className="h-full min-h-full w-full object-cover object-center"
-          sizes="100vw"
+      <div className="absolute inset-0 z-0 min-h-[100svh] w-full" aria-hidden>
+        {videoIntro ? (
+          <HeroVideoBackground className="min-h-[100svh] w-full" />
+        ) : (
+          <AnimatedSectionImage
+            src={backgroundSrc}
+            alt={imageAlt}
+            fill
+            priority={!compact}
+            imageClassName="object-cover object-center"
+            sizes="100vw"
+          />
+        )}
+        <div
+          className={cn(
+            "absolute inset-0",
+            videoIntro ? "bg-black/50" : "bg-black/75"
+          )}
         />
-        <div className="absolute inset-0 bg-black/75" />
         <div className="absolute inset-0 bg-hero-glow bg-mesh-dark" />
       </div>
 
@@ -68,9 +84,9 @@ export function Hero({
       >
         {!hideEyebrow && (
           <motion.p
-            initial={reducedMotion ? false : { opacity: 0, y: 20 }}
+            initial={SSR_SAFE_INITIAL}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: reducedMotion ? 0 : 0.5 }}
+            transition={sectionTransition(0)}
             className="hero-eyebrow mb-5 text-primary"
           >
             {SITE_CONFIG.name}
@@ -78,12 +94,12 @@ export function Hero({
         )}
 
         <motion.h1
-          initial={reducedMotion ? false : { opacity: 0, y: 24 }}
+          initial={SSR_SAFE_INITIAL}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: reducedMotion ? 0 : 0.6, delay: 0.1 }}
+          transition={sectionTransition(0.12)}
           className={cn(
             "mx-auto max-w-5xl text-white text-balance",
-            isHomeTagline ? "hero-title-home uppercase tracking-wide" : "hero-title"
+            isHomeTagline ? "hero-title-home tracking-wide" : "hero-title"
           )}
         >
           {isHomeTagline ? (
@@ -99,9 +115,9 @@ export function Hero({
 
         {subtitle && (
           <motion.p
-            initial={reducedMotion ? false : { opacity: 0, y: 24 }}
+            initial={SSR_SAFE_INITIAL}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: reducedMotion ? 0 : 0.6, delay: 0.2 }}
+            transition={sectionTransition(0.24)}
             className="hero-subtitle mx-auto mt-6 max-w-3xl text-white/90"
           >
             {subtitle}
@@ -110,9 +126,9 @@ export function Hero({
 
         {showViewMore && (
           <motion.div
-            initial={reducedMotion ? false : { opacity: 0, y: 16 }}
+            initial={SSR_SAFE_INITIAL}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: reducedMotion ? 0 : 0.5, delay: 0.25 }}
+            transition={sectionTransition(0.32)}
             className="mt-6"
           >
             <Button
@@ -128,9 +144,9 @@ export function Hero({
 
         {showCta && (
           <motion.div
-            initial={reducedMotion ? false : { opacity: 0, y: 24 }}
+            initial={SSR_SAFE_INITIAL}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: reducedMotion ? 0 : 0.6, delay: 0.3 }}
+            transition={sectionTransition(0.4)}
             className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row"
           >
             <Button asChild variant="premium" size="lg" className="group">
@@ -151,15 +167,15 @@ export function Hero({
 
       {!compact && (
         <motion.div
-          initial={{ opacity: 0 }}
+          initial={SSR_SAFE_INITIAL}
           animate={{ opacity: 1 }}
-          transition={{ delay: 1 }}
+          transition={sectionTransition(0.85)}
           className="absolute bottom-8 left-1/2 z-10 -translate-x-1/2"
           aria-hidden
         >
           <motion.div
             animate={reducedMotion ? undefined : { y: [0, 8, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
+            transition={{ duration: 1.8, repeat: Infinity }}
             className="h-10 w-6 rounded-full border-2 border-white/30 p-1"
           >
             <motion.div className="mx-auto h-2 w-1 rounded-full bg-white/60" />

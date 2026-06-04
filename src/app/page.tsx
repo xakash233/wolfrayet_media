@@ -1,4 +1,6 @@
 import { Hero } from "@/components/sections/hero";
+import { AnimatedSectionImage } from "@/components/shared/animated-section-image";
+import { SECTION_IMAGES } from "@/lib/images";
 import { BrandIntroSection } from "@/components/sections/brand-intro-section";
 import { ServiceCard } from "@/components/sections/service-card";
 import { FeaturesGrid } from "@/components/sections/features-grid";
@@ -7,11 +9,10 @@ import { PricingCards } from "@/components/sections/pricing-cards";
 import { FAQAccordion } from "@/components/sections/faq-accordion";
 import { NewsletterSignup } from "@/components/sections/newsletter-signup";
 import { CTASection } from "@/components/sections/cta-section";
-import { LogoSlider } from "@/components/sections/logo-slider";
 import { AnimatedSection } from "@/components/shared/animated-section";
 import { SectionHeading } from "@/components/shared/section-heading";
 import { featuredServices } from "@/data/services";
-import { features, clientLogos } from "@/data/stats";
+import { features } from "@/data/stats";
 import { testimonials } from "@/data/testimonials";
 import { pricingPlans } from "@/data/pricing";
 import { faqItems } from "@/data/faq";
@@ -23,7 +24,12 @@ import { Button } from "@/components/ui/button";
 export default function HomePage() {
   return (
     <>
-      <Hero showCta={false} showViewMore viewMoreHref="/#intro" />
+      <Hero
+        videoIntro
+        showCta={false}
+        showViewMore
+        viewMoreHref="/#intro"
+      />
 
       <BrandIntroSection />
 
@@ -42,6 +48,16 @@ export default function HomePage() {
       </AnimatedSection>
 
       <AnimatedSection compact className="bg-muted/20">
+        <div className="relative mb-8 aspect-[21/8] overflow-hidden rounded-2xl border border-border/50 sm:mb-10">
+          <AnimatedSectionImage
+            src={SECTION_IMAGES.features}
+            alt="Strategic business growth and analytics"
+            fill
+            className="h-full w-full"
+            sizes="100vw"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-background/90 via-background/50 to-transparent" />
+        </div>
         <SectionHeading
           compact
           eyebrow="Why Us"
@@ -59,13 +75,6 @@ export default function HomePage() {
           description="Don't just take our word for it—hear from brands we've helped grow."
         />
         <TestimonialsCarousel testimonials={testimonials} showViewAll />
-      </AnimatedSection>
-
-      <AnimatedSection compact className="border-y border-border/50 py-8 sm:py-10">
-        <p className="mb-4 text-center text-sm font-semibold uppercase tracking-widest text-muted-foreground">
-          Trusted by industry leaders
-        </p>
-        <LogoSlider logos={clientLogos} />
       </AnimatedSection>
 
       <AnimatedSection compact>
@@ -112,7 +121,7 @@ export default function HomePage() {
         <FAQAccordion items={faqItems} />
       </AnimatedSection>
 
-      <AnimatedSection compact className="space-y-8">
+      <AnimatedSection compact className="space-y-5">
         <NewsletterSignup />
         <CTASection />
       </AnimatedSection>

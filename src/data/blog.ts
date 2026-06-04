@@ -1,4 +1,5 @@
 import type { BlogPost } from "@/types";
+import { blogImageUrl } from "@/lib/images";
 
 export const blogPosts: BlogPost[] = [
   {
@@ -21,7 +22,7 @@ The brands that win in 2024 will combine technical excellence with genuinely hel
     author: "Sneha Kapoor",
     date: "2024-03-15",
     readTime: "8 min read",
-    image: "https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?w=800&h=500&fit=crop",
+    image: blogImageUrl("SEO"),
     featured: true,
   },
   {
@@ -45,7 +46,7 @@ Consistency beats perfection. Post regularly, test different formats, and double
     author: "Priya Mehta",
     date: "2024-03-10",
     readTime: "12 min read",
-    image: "https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=800&h=500&fit=crop",
+    image: blogImageUrl("Social Media"),
   },
   {
     slug: "ppc-roas-optimization",
@@ -68,7 +69,7 @@ Start with your highest-spending campaigns and apply these optimizations systema
     author: "Rahul Verma",
     date: "2024-03-05",
     readTime: "10 min read",
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=500&fit=crop",
+    image: blogImageUrl("PPC"),
   },
   {
     slug: "content-marketing-roi",
@@ -89,7 +90,7 @@ Use UTM parameters, marketing automation, and CRM integration to build a complet
     author: "Akash Sharma",
     date: "2024-02-28",
     readTime: "7 min read",
-    image: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=500&fit=crop",
+    image: blogImageUrl("Content"),
   },
   {
     slug: "brand-storytelling",
@@ -110,7 +111,7 @@ Start with your origin story, customer success stories, and the "why" behind wha
     author: "Rahul Verma",
     date: "2024-02-20",
     readTime: "6 min read",
-    image: "https://images.unsplash.com/photo-1557804506-669a77965ba3?w=800&h=500&fit=crop",
+    image: blogImageUrl("Branding"),
   },
   {
     slug: "email-marketing-automation",
@@ -132,7 +133,7 @@ Segment your list, personalize beyond {first_name}, and always provide value bef
     author: "Priya Mehta",
     date: "2024-02-15",
     readTime: "9 min read",
-    image: "https://images.unsplash.com/photo-1557201103-d672f7cae0c2?w=800&h=500&fit=crop",
+    image: blogImageUrl("Email"),
   },
 ];
 

@@ -7,6 +7,7 @@ import type { CustomAddOn, PricingPlan } from "@/types";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
+import { VIEWPORT_ONCE } from "@/lib/motion-safe";
 
 interface PricingPackagesProps {
   plans: PricingPlan[];
@@ -23,8 +24,9 @@ function PricingPlanCard({
 }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 24 }}
-      animate={{ opacity: 1, y: 0 }}
+      initial={false}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={VIEWPORT_ONCE}
       transition={{ delay: index * 0.06 }}
     >
       <Card
@@ -116,8 +118,9 @@ export function PricingPackages({
       </div>
 
       <motion.div
-        initial={{ opacity: 0, y: 16 }}
-        animate={{ opacity: 1, y: 0 }}
+        initial={false}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={VIEWPORT_ONCE}
         className="mx-auto max-w-4xl rounded-2xl border border-dashed border-primary/40 bg-primary/5 p-8"
       >
         <h3 className="text-xl font-bold">Custom Add-Ons</h3>

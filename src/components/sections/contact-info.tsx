@@ -6,6 +6,7 @@ import { SITE_CONFIG, WHATSAPP_URL } from "@/lib/constants";
 import { WhatsAppIcon } from "@/components/shared/whatsapp-icon";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { VIEWPORT_ONCE } from "@/lib/motion-safe";
 
 const contactItems = [
   {
@@ -30,8 +31,9 @@ export function ContactInfo() {
         return (
           <motion.div
             key={item.label}
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
+            initial={false}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={VIEWPORT_ONCE}
             transition={{ delay: index * 0.1 }}
           >
             <Card className="border-border/50">

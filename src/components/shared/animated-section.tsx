@@ -1,6 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { SSR_SAFE_INITIAL, VIEWPORT_ONCE } from "@/lib/motion-safe";
+import { sectionTransition } from "@/lib/animations";
 import { cn } from "@/lib/utils";
 
 interface AnimatedSectionProps {
@@ -21,12 +23,13 @@ export function AnimatedSection({
   return (
     <motion.section
       id={id}
-      initial={{ opacity: 0, y: 24 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay, ease: [0.22, 1, 0.36, 1] }}
+      initial={SSR_SAFE_INITIAL}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={VIEWPORT_ONCE}
+      transition={sectionTransition(delay)}
       className={cn(
         compact
-          ? "px-4 py-10 sm:px-6 sm:py-12 lg:px-8 lg:py-14"
+          ? "px-4 py-5 sm:px-6 sm:py-6 lg:px-8 lg:py-8"
           : "section-padding",
         className
       )}

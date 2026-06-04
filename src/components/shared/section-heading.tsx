@@ -1,6 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { sectionTransition } from "@/lib/animations";
+import { SSR_SAFE_INITIAL, VIEWPORT_ONCE } from "@/lib/motion-safe";
 import { cn } from "@/lib/utils";
 
 interface SectionHeadingProps {
@@ -22,11 +24,12 @@ export function SectionHeading({
 }: SectionHeadingProps) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
+      initial={SSR_SAFE_INITIAL}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={VIEWPORT_ONCE}
+      transition={sectionTransition(0)}
       className={cn(
-        compact ? "mb-8 max-w-3xl" : "mb-12 max-w-3xl",
+        compact ? "mb-5 max-w-3xl" : "mb-6 max-w-3xl",
         align === "center" && "mx-auto text-center",
         className
       )}

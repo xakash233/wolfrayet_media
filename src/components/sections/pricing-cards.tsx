@@ -7,6 +7,7 @@ import type { PricingPlan } from "@/types";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
+import { VIEWPORT_ONCE } from "@/lib/motion-safe";
 
 interface PricingCardsProps {
   plans: PricingPlan[];
@@ -21,8 +22,9 @@ export function PricingCards({ plans, compact = false }: PricingCardsProps) {
       {displayPlans.map((plan, index) => (
         <motion.div
           key={plan.id}
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={false}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={VIEWPORT_ONCE}
           transition={{ delay: index * 0.1 }}
           whileHover={{ y: -4 }}
         >

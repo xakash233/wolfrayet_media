@@ -4,6 +4,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { SITE_CONFIG } from "@/lib/constants";
+import { VIEWPORT_ONCE } from "@/lib/motion-safe";
 
 interface AboutPreviewProps {
   findOutMoreHref?: string;
@@ -17,8 +18,9 @@ export function AboutPreview({
   return (
     <div className="mx-auto max-w-4xl">
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
+        initial={false}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={VIEWPORT_ONCE}
         transition={{ duration: 0.5 }}
         className="rounded-2xl border border-border bg-card/40 p-8 sm:p-10"
       >

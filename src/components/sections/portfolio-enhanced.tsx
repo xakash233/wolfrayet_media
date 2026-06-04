@@ -11,6 +11,8 @@ import {
   Layers,
   ArrowUpRight,
 } from "lucide-react";
+import { AnimatedSectionImage } from "@/components/shared/animated-section-image";
+import { sectionTransition } from "@/lib/animations";
 import type { PortfolioProject } from "@/types";
 import {
   Dialog,
@@ -54,9 +56,10 @@ export function PortfolioEnhanced({
         {portfolioStats.map((stat, i) => (
           <motion.div
             key={stat.label}
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: i * 0.1 }}
+            initial={false}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-40px" }}
+            transition={sectionTransition(i * 0.1)}
             className="glass-card flex items-center gap-4 p-6"
           >
             <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary">
@@ -71,9 +74,10 @@ export function PortfolioEnhanced({
       </div>
 
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
+        initial={false}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-40px" }}
+        transition={sectionTransition(0)}
         className="mb-12 overflow-hidden rounded-3xl border border-primary/20"
       >
         <button
@@ -82,13 +86,14 @@ export function PortfolioEnhanced({
           className="group relative block w-full text-left"
         >
           <div className="relative aspect-[21/9] min-h-[220px] sm:min-h-[280px]">
-            <Image
+            <AnimatedSectionImage
               src={featured.image}
               alt={featured.title}
               fill
-              className="object-cover transition-transform duration-700 group-hover:scale-105"
-              sizes="100vw"
               priority
+              className="h-full w-full"
+              imageClassName="h-full w-full object-cover transition-transform duration-[3.5s] group-hover:scale-105"
+              sizes="100vw"
             />
             <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/50 to-transparent" />
             <div className="absolute inset-0 flex flex-col justify-center p-8 sm:p-12">
@@ -132,16 +137,15 @@ export function PortfolioEnhanced({
         ))}
       </div>
 
-      <motion.div layout className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        <AnimatePresence mode="popLayout">
+      <motion.div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <AnimatePresence initial={false}>
           {filtered.map((project, index) => (
             <motion.button
               key={project.slug}
-              layout
-              initial={{ opacity: 0, scale: 0.95 }}
+              initial={{ opacity: 0, scale: 0.98 }}
               animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.95 }}
-              transition={{ delay: index * 0.04 }}
+              exit={{ opacity: 0, scale: 0.98 }}
+              transition={sectionTransition(index * 0.08)}
               onClick={() => setSelectedProject(project)}
               className={cn(
                 "group relative overflow-hidden rounded-2xl border border-border/50 bg-card text-left transition-all hover:border-primary/40 hover:shadow-xl hover:shadow-primary/5",

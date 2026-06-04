@@ -21,7 +21,7 @@ export function Header() {
   return (
     <>
       <motion.header
-        initial={{ y: -100 }}
+        initial={false}
         animate={{ y: 0 }}
         transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
         className={cn(
@@ -43,10 +43,14 @@ export function Header() {
                 key={link.href}
                 href={link.href}
                 className={cn(
-                  "rounded-lg px-4 py-2 text-sm font-medium transition-colors hover:text-primary",
+                  "rounded-lg px-4 py-2 text-sm font-medium transition-colors",
                   pathname === link.href
                     ? "text-primary"
-                    : "text-muted-foreground"
+                    : cn(
+                        "text-white hover:text-white/85",
+                        scrolled &&
+                          "text-foreground hover:text-foreground/80 dark:text-white dark:hover:text-white/85"
+                      )
                 )}
               >
                 {link.label}
@@ -67,7 +71,11 @@ export function Header() {
             <Button
               variant="ghost"
               size="icon"
-              className="lg:hidden"
+              className={cn(
+                "lg:hidden",
+                !scrolled &&
+                  "text-white hover:bg-white/10 hover:text-white dark:text-white"
+              )}
               onClick={() => setMobileOpen(true)}
               aria-label="Open menu"
               aria-expanded={mobileOpen}

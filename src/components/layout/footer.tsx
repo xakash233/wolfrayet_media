@@ -49,13 +49,13 @@ export function Footer() {
     <footer className="border-t border-white/10 bg-[#070b14] text-white">
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={false}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           className="grid gap-12 lg:grid-cols-4"
         >
           <div className="lg:col-span-2">
-            <Logo size="lg" />
+            <Logo size="lg" staticLogo />
             <p className="mt-4 max-w-md text-white/70">
               {SITE_CONFIG.description}
             </p>
@@ -123,7 +123,7 @@ export function Footer() {
         <Separator className="my-8 bg-white/10" />
 
         <motion.div
-          initial={{ opacity: 0 }}
+          initial={false}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           className="flex flex-col items-center justify-between gap-4 sm:flex-row"

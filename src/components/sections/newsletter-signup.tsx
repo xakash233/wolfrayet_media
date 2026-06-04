@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Mail } from "lucide-react";
+import { sectionTransition } from "@/lib/animations";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
@@ -22,9 +23,10 @@ export function NewsletterSignup() {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
+      initial={false}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
+      transition={sectionTransition(0)}
       className="glass-card mx-auto max-w-xl p-8 text-center"
     >
       <Mail className="mx-auto h-10 w-10 text-primary" />

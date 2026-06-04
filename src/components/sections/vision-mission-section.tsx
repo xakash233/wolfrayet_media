@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Eye, Target, Sparkles } from "lucide-react";
 import { SITE_CONFIG } from "@/lib/constants";
+import { VIEWPORT_ONCE } from "@/lib/motion-safe";
 import { cn } from "@/lib/utils";
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -120,8 +121,9 @@ export function VisionMissionSection() {
   return (
     <div className="relative">
       <motion.div
-        initial={{ opacity: 0, y: 16 }}
-        animate={{ opacity: 1, y: 0 }}
+        initial={false}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={VIEWPORT_ONCE}
         transition={{ duration: 0.5 }}
         className="mb-10 text-center"
       >
@@ -139,8 +141,9 @@ export function VisionMissionSection() {
 
       <motion.div
         variants={container}
-        initial="hidden"
-        animate="show"
+        initial={false}
+        whileInView="show"
+        viewport={VIEWPORT_ONCE}
         className="grid gap-8 lg:grid-cols-2"
       >
         <VisionMissionCard
@@ -162,9 +165,10 @@ export function VisionMissionSection() {
       </motion.div>
 
       <motion.div
-        initial={{ opacity: 0, scaleX: 0 }}
-        animate={{ opacity: 1, scaleX: 1 }}
-        transition={{ delay: 0.5, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+        initial={false}
+        whileInView={{ opacity: 1, scaleX: 1 }}
+        viewport={VIEWPORT_ONCE}
+        transition={{ delay: 0.35, duration: 0.55, ease: EASE }}
         className="mx-auto mt-12 h-px max-w-md bg-gradient-to-r from-transparent via-primary/40 to-transparent"
       />
     </div>

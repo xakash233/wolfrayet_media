@@ -28,6 +28,7 @@ export default function PortfolioPage() {
         showCta
         compact
         hideEyebrow
+        heroImage="portfolio"
       />
 
       <AnimatedSection>

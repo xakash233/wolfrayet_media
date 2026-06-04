@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { PageTransitionProvider } from "@/components/providers/page-transition-provider";
@@ -8,11 +7,8 @@ import { Footer } from "@/components/layout/footer";
 import { FloatingActions } from "@/components/shared/floating-actions";
 import { SITE_CONFIG } from "@/lib/constants";
 
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-geist-sans",
-  display: "swap",
-});
+const DM_SANS_STYLESHEET =
+  "https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_CONFIG.url),
@@ -58,7 +54,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.variable} font-sans antialiased`}>
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
+        <link href={DM_SANS_STYLESHEET} rel="stylesheet" />
+      </head>
+      <body className="font-sans antialiased">
         <ThemeProvider>
           <a href="#main-content" className="skip-link">
             Skip to main content

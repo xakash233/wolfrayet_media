@@ -34,7 +34,7 @@ export function ProcessWorkflow() {
         return (
           <motion.div
             key={step.title}
-            initial={{ opacity: 0, y: 24 }}
+            initial={false}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: index * 0.15 }}

@@ -54,29 +54,32 @@ export const features: Feature[] = [
 
 export const timeline: TimelineEvent[] = [
   {
-    year: "2012",
-    title: "Founded",
-    description: "Wolfrayet Media launched with a mission to democratize digital marketing.",
+    id: "founded-2026",
+    year: "Mar 2026",
+    title: "Wolfrayet Media Founded",
+    description:
+      "Krishna Kumar launched Wolfrayet Media with a mission to deliver best-in-class digital marketing, web development, and IT services from India.",
   },
   {
-    year: "2015",
-    title: "First 50 Clients",
-    description: "Reached milestone of 50 satisfied clients across India and abroad.",
+    id: "web-apr-2026",
+    year: "Apr 2026",
+    title: "Web Development — Corporate Website",
+    description:
+      "Built and launched a fast, mobile-first business website with Next.js, contact flows, and analytics for a regional services company.",
   },
   {
-    year: "2018",
-    title: "Team Expansion",
-    description: "Grew to 20+ specialists covering SEO, PPC, content, and design.",
+    id: "seo-may-2026",
+    year: "May 2026",
+    title: "SEO — Local Search Growth",
+    description:
+      "On-page SEO, Google Business Profile optimization, and content strategy that improved local rankings and inbound leads within 90 days.",
   },
   {
-    year: "2021",
-    title: "Award Recognition",
-    description: "Named Top Digital Agency by Marketing Excellence Awards.",
-  },
-  {
-    year: "2024",
-    title: "Global Reach",
-    description: "Serving 120+ clients across 15 countries with remote-first operations.",
+    id: "it-jun-2026",
+    year: "Jun 2026",
+    title: "IT Services — Infrastructure & Support",
+    description:
+      "Deployed secure hosting, email, backups, and ongoing IT support so a client team could run campaigns and operations without downtime.",
   },
 ];
 

@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Hero } from "@/components/sections/hero";
+import { AnimatedSectionImage } from "@/components/shared/animated-section-image";
+import { SECTION_IMAGES } from "@/lib/images";
 import { ServicesEnhanced } from "@/components/sections/services-enhanced";
 import { ServiceCatalog } from "@/components/sections/service-catalog";
 import { PricingPackages } from "@/components/sections/pricing-packages";
@@ -42,9 +44,20 @@ export default function ServicesPage() {
         showCta
         compact
         hideEyebrow
+        heroImage="services"
       />
 
       <AnimatedSection>
+        <div className="relative mb-10 aspect-[21/7] overflow-hidden rounded-2xl border border-border/50">
+          <AnimatedSectionImage
+            src={SECTION_IMAGES.features}
+            alt="Digital marketing services and analytics"
+            fill
+            className="h-full w-full"
+            sizes="100vw"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-background/85 via-background/50 to-transparent" />
+        </div>
         <SectionHeading
           eyebrow="What We Offer"
           title="Comprehensive Marketing Services"

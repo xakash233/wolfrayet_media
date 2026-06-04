@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Check } from "lucide-react";
 import type { ServiceCategory } from "@/types";
+import { VIEWPORT_ONCE } from "@/lib/motion-safe";
 
 interface ServiceCatalogProps {
   categories: ServiceCategory[];
@@ -15,8 +16,9 @@ export function ServiceCatalog({ categories }: ServiceCatalogProps) {
         <motion.article
           key={category.id}
           id={category.id}
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={false}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={VIEWPORT_ONCE}
           transition={{ delay: index * 0.03 }}
           className="scroll-mt-28 rounded-2xl border border-border bg-card/40 p-6 sm:p-8"
         >

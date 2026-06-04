@@ -3,7 +3,10 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { SITE_CONFIG } from "@/lib/constants";
 
-const LOGO_SRC = "/logo/logo.png";
+/** 840×297 — both assets share this ratio */
+const LOGO_BLACK = "/logo/black.png";
+const LOGO_WHITE = "/logo/white.png";
+const LOGO_ASPECT = "aspect-[280/99]";
 
 interface LogoProps {
   className?: string;
@@ -12,13 +15,44 @@ interface LogoProps {
   priority?: boolean;
   size?: "sm" | "md" | "lg";
   onClick?: () => void;
+  /** Dark backgrounds (footer) — always white logo */
+  staticLogo?: boolean;
 }
 
 const sizeMap = {
-  sm: { width: 120, height: 40, className: "h-8 w-auto sm:h-9" },
-  md: { width: 160, height: 48, className: "h-9 w-auto sm:h-10" },
-  lg: { width: 200, height: 56, className: "h-10 w-auto sm:h-12" },
+  sm: { box: "h-9 sm:h-10" },
+  md: { box: "h-10 sm:h-11" },
+  lg: { box: "h-11 sm:h-14" },
 };
+
+function LogoImage({
+  src,
+  alt,
+  boxClass,
+  imageClassName,
+  priority,
+  visibleClass,
+}: {
+  src: string;
+  alt: string;
+  boxClass: string;
+  imageClassName?: string;
+  priority?: boolean;
+  visibleClass?: string;
+}) {
+  return (
+    <span className={cn(boxClass, visibleClass)}>
+      <Image
+        src={src}
+        alt={alt}
+        fill
+        priority={priority}
+        sizes="(max-width: 768px) 180px, 240px"
+        className={cn("object-contain object-left", imageClassName)}
+      />
+    </span>
+  );
+}
 
 export function Logo({
   className,
@@ -27,22 +61,39 @@ export function Logo({
   priority = false,
   size = "md",
   onClick,
+  staticLogo = false,
 }: LogoProps) {
   const dimensions = sizeMap[size];
+  const boxClass = cn(
+    "relative inline-block shrink-0",
+    LOGO_ASPECT,
+    imageClassName ?? dimensions.box
+  );
 
-  const image = (
-    <Image
-      src={LOGO_SRC}
+  const image = staticLogo ? (
+    <LogoImage
+      src={LOGO_WHITE}
       alt={`${SITE_CONFIG.name} logo`}
-      width={dimensions.width}
-      height={dimensions.height}
+      boxClass={boxClass}
       priority={priority}
-      className={cn(
-        dimensions.className,
-        "object-contain object-left",
-        imageClassName
-      )}
     />
+  ) : (
+    <span className="inline-flex shrink-0 items-center">
+      <LogoImage
+        src={LOGO_WHITE}
+        alt={`${SITE_CONFIG.name} logo`}
+        boxClass={boxClass}
+        priority={priority}
+        visibleClass="hidden dark:block"
+      />
+      <LogoImage
+        src={LOGO_BLACK}
+        alt={`${SITE_CONFIG.name} logo`}
+        boxClass={boxClass}
+        priority={priority}
+        visibleClass="dark:hidden"
+      />
+    </span>
   );
 
   if (!href) {

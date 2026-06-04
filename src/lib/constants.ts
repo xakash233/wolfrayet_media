@@ -1,12 +1,12 @@
 export const SITE_CONFIG = {
   name: "Wolfrayet Media",
-  tagline: "Best in class digital marketing & web development agency",
+  tagline: "Best In Class Digital Marketing & Web Development Agency",
   heroTaglineLines: [
-    "Best in class digital marketing",
-    "& web development agency",
+    "Best In Class Digital Marketing",
+    "& Web Development Agency",
   ] as const,
   heroHeadline:
-    "Your trusted digital marketing and web development partner",
+    "Your Trusted Digital Marketing And Web Development Partner",
   heroDescription:
     "We help businesses grow online through customized digital marketing and web development solutions. By combining creativity, technology, and data-driven strategies, we create high-performing websites and targeted marketing campaigns that boost brand visibility, generate leads, and increase conversions. Our end-to-end services include web design, development, SEO, social media marketing, and paid advertising, all tailored to support long-term business growth.",
   description:

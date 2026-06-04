@@ -1,9 +1,11 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Check, ArrowRight, Zap, Shield, Clock } from "lucide-react";
+import { AnimatedSectionImage } from "@/components/shared/animated-section-image";
+import { serviceImageUrl } from "@/lib/images";
+import { sectionTransition } from "@/lib/animations";
 import type { Service } from "@/types";
 import { ServiceCard } from "@/components/sections/service-card";
 import { Button } from "@/components/ui/button";
@@ -31,24 +33,6 @@ const highlights = [
   },
 ];
 
-const serviceImages = [
-  "1432888498266-38ffec3eaf0a",
-  "1460925895917-afdab827c52f",
-  "1611162616305-c69b3fa7fbe0",
-  "1552664730-d307ca884978",
-  "1557804506-669a77965ba3",
-  "1551288049-bebda4e38f71",
-  "1498050108023-c5249f237b27",
-  "1557804506-669a77965ba3",
-  "1460925895917-afdab827c52f",
-  "1432888498266-38ffec3eaf0a",
-  "1611162616305-c69b3fa7fbe0",
-  "1552664730-d307ca884978",
-  "1551288049-bebda4e38f71",
-  "1454165804606-c3d57bc86b40",
-  "1558494949-ef010cbdcc31",
-];
-
 export function ServicesEnhanced({ services }: ServicesEnhancedProps) {
   return (
     <div className="space-y-20">
@@ -56,10 +40,10 @@ export function ServicesEnhanced({ services }: ServicesEnhancedProps) {
         {highlights.map((h, i) => (
           <motion.div
             key={h.title}
-            initial={{ opacity: 0, y: 16 }}
+            initial={false}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: i * 0.08 }}
+            transition={sectionTransition(i * 0.1)}
             className="glass-card p-6 text-center"
           >
             <h.icon className="mx-auto h-8 w-8 text-primary" />
@@ -87,19 +71,20 @@ export function ServicesEnhanced({ services }: ServicesEnhancedProps) {
             </TabsTrigger>
           ))}
         </TabsList>
-        {services.map((service, index) => (
+        {services.map((service) => (
           <TabsContent key={service.id} value={service.id}>
             <motion.div
-              initial={{ opacity: 0, y: 12 }}
+              initial={false}
               animate={{ opacity: 1, y: 0 }}
+              transition={sectionTransition(0)}
               className="grid items-center gap-10 rounded-3xl border border-border bg-card/50 p-6 lg:grid-cols-2 lg:p-10"
             >
               <div className="relative aspect-video overflow-hidden rounded-2xl">
-                <Image
-                  src={`https://images.unsplash.com/photo-${serviceImages[index]}?w=900&h=560&fit=crop`}
+                <AnimatedSectionImage
+                  src={serviceImageUrl(service.id)}
                   alt={service.title}
                   fill
-                  className="object-cover"
+                  className="h-full w-full"
                   sizes="50vw"
                 />
               </div>

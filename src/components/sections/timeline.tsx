@@ -13,12 +13,12 @@ export function Timeline({ events }: TimelineProps) {
       <div className="absolute left-4 top-0 h-full w-px bg-border md:left-1/2 md:-translate-x-px" />
       {events.map((event, index) => (
         <motion.div
-          key={event.year}
-          initial={{ opacity: 0, x: index % 2 === 0 ? -24 : 24 }}
+          key={event.id}
+          initial={false}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           transition={{ delay: index * 0.1 }}
-          className={`relative mb-12 flex items-start gap-8 md:mb-16 ${
+          className={`relative mb-8 flex items-start gap-8 md:mb-10 ${
             index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
           }`}
         >

@@ -14,6 +14,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { LoadingSpinner } from "@/components/shared/loading-spinner";
+import { VIEWPORT_ONCE } from "@/lib/motion-safe";
 
 export function ContactForm() {
   const [submitted, setSubmitted] = useState(false);
@@ -62,8 +63,9 @@ export function ContactForm() {
 
   return (
     <motion.form
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
+      initial={false}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={VIEWPORT_ONCE}
       onSubmit={handleSubmit(onSubmit)}
       className="glass-card space-y-6 p-8"
       noValidate

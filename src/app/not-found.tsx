@@ -10,12 +10,12 @@ export default function NotFound() {
     <section className="relative flex min-h-screen items-center justify-center overflow-hidden px-4 pt-24">
       <div className="absolute inset-0 bg-mesh-dark" />
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
+        initial={false}
         animate={{ opacity: 1, y: 0 }}
         className="relative z-10 text-center"
       >
         <motion.p
-          initial={{ scale: 0.8, opacity: 0 }}
+          initial={false}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ delay: 0.1 }}
           className="text-[8rem] font-bold leading-none gradient-text sm:text-[12rem]"

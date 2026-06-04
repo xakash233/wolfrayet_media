@@ -58,8 +58,10 @@ export function MobileNav({ open, onClose, pathname }: MobileNavProps) {
                     href={link.href}
                     onClick={onClose}
                     className={cn(
-                      "block rounded-lg px-4 py-3 text-lg font-medium transition-colors hover:bg-muted",
-                      pathname === link.href && "bg-muted text-primary"
+                      "block rounded-lg px-4 py-3 text-lg font-medium transition-colors",
+                      pathname === link.href
+                        ? "bg-primary/10 text-primary"
+                        : "text-foreground hover:bg-muted dark:text-white"
                     )}
                   >
                     {link.label}

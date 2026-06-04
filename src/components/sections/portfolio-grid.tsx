@@ -44,15 +44,14 @@ export function PortfolioGrid({ projects, categories }: PortfolioGridProps) {
         ))}
       </div>
 
-      <motion.div layout className="columns-1 gap-6 sm:columns-2 lg:columns-3">
-        <AnimatePresence mode="popLayout">
+      <div className="columns-1 gap-6 sm:columns-2 lg:columns-3">
+        <AnimatePresence initial={false}>
           {filtered.map((project, index) => (
             <motion.button
               key={project.slug}
-              layout
-              initial={{ opacity: 0, scale: 0.9 }}
+              initial={{ opacity: 0, scale: 0.98 }}
               animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.9 }}
+              exit={{ opacity: 0, scale: 0.98 }}
               transition={{ delay: index * 0.05 }}
               onClick={() => setSelectedProject(project)}
               className={cn(
@@ -82,7 +81,7 @@ export function PortfolioGrid({ projects, categories }: PortfolioGridProps) {
             </motion.button>
           ))}
         </AnimatePresence>
-      </motion.div>
+      </div>
 
       <Dialog
         open={!!selectedProject}

@@ -10,6 +10,8 @@ import { WhatsAppIcon } from "@/components/shared/whatsapp-icon";
 import { SITE_CONFIG, WHATSAPP_URL } from "@/lib/constants";
 import { faqItems } from "@/data/faq";
 import { Button } from "@/components/ui/button";
+import { VIEWPORT_ONCE } from "@/lib/motion-safe";
+import { sectionTransition } from "@/lib/animations";
 
 export function ContactEnhanced() {
   const quickFaqs = faqItems.slice(0, 3);
@@ -21,8 +23,10 @@ export function ContactEnhanced() {
           href={WHATSAPP_URL}
           target="_blank"
           rel="noopener noreferrer"
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={false}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={VIEWPORT_ONCE}
+          transition={sectionTransition(0)}
           whileHover={{ y: -4 }}
           className="group flex flex-col items-center rounded-2xl border border-[#25D366]/30 bg-[#25D366]/10 p-6 text-center transition-shadow hover:shadow-lg hover:shadow-[#25D366]/20"
         >
@@ -39,9 +43,10 @@ export function ContactEnhanced() {
         </motion.a>
 
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.05 }}
+          initial={false}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={VIEWPORT_ONCE}
+          transition={sectionTransition(0.1)}
           className="glass-card flex flex-col items-center p-6 text-center"
         >
           <div className="flex h-14 w-14 items-center justify-center rounded-full bg-primary text-primary-foreground">
@@ -57,9 +62,10 @@ export function ContactEnhanced() {
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 }}
+          initial={false}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={VIEWPORT_ONCE}
+          transition={sectionTransition(0.2)}
           className="glass-card flex flex-col items-center p-6 text-center"
         >
           <div className="flex h-14 w-14 items-center justify-center rounded-full bg-muted">

@@ -3,6 +3,9 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import { AnimatedSectionImage } from "@/components/shared/animated-section-image";
+import { SECTION_IMAGES } from "@/lib/images";
+import { sectionTransition } from "@/lib/animations";
 import { Button } from "@/components/ui/button";
 
 interface CTASectionProps {
@@ -24,13 +27,25 @@ export function CTASection({
 }: CTASectionProps) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 24 }}
+      initial={false}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      className="relative overflow-hidden rounded-3xl border border-primary/20 bg-gradient-to-br from-primary/20 via-background to-background p-8 sm:p-12 lg:p-16"
+      transition={sectionTransition(0)}
+      className="relative overflow-hidden rounded-3xl border border-primary/20 p-8 sm:p-12 lg:p-16"
     >
-      <div className="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-primary/20 blur-3xl" />
-      <div className="absolute -bottom-20 -left-20 h-64 w-64 rounded-full bg-cyan-500/10 blur-3xl" />
+      <div className="absolute inset-0 z-0" aria-hidden>
+        <AnimatedSectionImage
+          src={SECTION_IMAGES.cta}
+          alt=""
+          fill
+          className="h-full w-full"
+          imageClassName="h-full w-full object-cover"
+          sizes="100vw"
+        />
+        <div className="absolute inset-0 bg-gradient-to-br from-background/95 via-background/88 to-primary/25" />
+      </div>
+      <div className="absolute -right-20 -top-20 z-[1] h-64 w-64 rounded-full bg-primary/20 blur-3xl" />
+      <div className="absolute -bottom-20 -left-20 z-[1] h-64 w-64 rounded-full bg-cyan-500/10 blur-3xl" />
       <div className="relative z-10 mx-auto max-w-2xl text-center">
         <h2 className="text-3xl font-bold sm:text-4xl">{title}</h2>
         <p className="mt-4 text-lg text-muted-foreground">{description}</p>

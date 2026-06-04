@@ -13,6 +13,7 @@ import { AnimatedSection } from "@/components/shared/animated-section";
 import { SectionHeading } from "@/components/shared/section-heading";
 import { testimonialStats } from "@/data/testimonials";
 import { WHATSAPP_URL } from "@/lib/constants";
+import { VIEWPORT_ONCE } from "@/lib/motion-safe";
 
 interface TestimonialsPageContentProps {
   testimonials: Testimonial[];
@@ -33,12 +34,14 @@ export function TestimonialsPageContent({
         showCta={false}
         compact
         hideEyebrow
+        heroImage="testimonials"
       />
 
       <AnimatedSection compact>
           <motion.div
-            initial={{ opacity: 0, y: 32 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={false}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={VIEWPORT_ONCE}
             transition={{ delay: 0.2 }}
             className="mx-auto max-w-4xl"
           >
@@ -83,8 +86,9 @@ export function TestimonialsPageContent({
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+            initial={false}
+            whileInView={{ opacity: 1 }}
+            viewport={VIEWPORT_ONCE}
             transition={{ delay: 0.4 }}
             className="mt-12 grid grid-cols-2 gap-6 lg:grid-cols-4"
           >
@@ -122,7 +126,7 @@ export function TestimonialsPageContent({
           {testimonials.map((t, index) => (
             <motion.article
               key={t.id}
-              initial={{ opacity: 0, y: 20 }}
+              initial={false}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.05 }}

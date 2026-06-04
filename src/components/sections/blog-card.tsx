@@ -1,11 +1,12 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Calendar, Clock, ArrowRight } from "lucide-react";
 import type { BlogPost } from "@/types";
+import { AnimatedSectionImage } from "@/components/shared/animated-section-image";
 import { formatDate } from "@/lib/utils";
+import { sectionTransition } from "@/lib/animations";
 import { Card, CardContent } from "@/components/ui/card";
 
 interface BlogCardProps {
@@ -16,24 +17,24 @@ interface BlogCardProps {
 export function BlogCard({ post, index = 0 }: BlogCardProps) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 24 }}
+      initial={false}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ delay: index * 0.08 }}
+      transition={sectionTransition(index * 0.1)}
       whileHover={{ y: -4 }}
     >
       <Link href={`/blog/${post.slug}`}>
         <Card className="group h-full overflow-hidden border-border/50 transition-all hover:border-primary/30 hover:shadow-xl">
           <div className="relative aspect-[16/10] overflow-hidden">
-            <Image
+            <AnimatedSectionImage
               src={post.image}
               alt={post.title}
               fill
-              className="object-cover transition-transform duration-500 group-hover:scale-105"
+              className="h-full w-full"
               sizes="(max-width: 768px) 100vw, 33vw"
             />
             {post.featured && (
-              <span className="absolute left-4 top-4 rounded-full bg-primary px-3 py-1 text-xs font-semibold text-primary-foreground">
+              <span className="absolute left-4 top-4 z-10 rounded-full bg-primary px-3 py-1 text-xs font-semibold text-primary-foreground">
                 Featured
               </span>
             )}
