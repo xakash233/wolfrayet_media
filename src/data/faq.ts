@@ -37,4 +37,22 @@ export const faqItems: FAQItem[] = [
     answer:
       "We start with a comprehensive audit of your current digital presence, competitor analysis, and goal-setting workshop. Within two weeks, you'll have a customized strategy roadmap and campaign launch plan.",
   },
+  {
+    id: "7",
+    question: "Are you one of the best digital marketing agencies near me?",
+    answer:
+      "Wolfrayet Media serves clients across India and worldwide with the same standards you'd expect from top digital marketing companies and popular marketing agencies — dedicated strategy, transparent reporting, and measurable ROI on SEO, PPC, and social campaigns.",
+  },
+  {
+    id: "8",
+    question: "Do you offer PPC and performance marketing services?",
+    answer:
+      "Yes. As a best PPC agency and digital performance marketing partner, we manage Google Ads, Meta Ads, paid search, retargeting, and conversion optimization with weekly reporting and ROAS-focused improvements.",
+  },
+  {
+    id: "9",
+    question: "Can you help with local SEO and ecommerce marketing?",
+    answer:
+      "Absolutely. Our best local SEO agency workflows cover Google Business Profile, local rankings, and review strategy. For online stores, we act as a best ecommerce marketing agency with product SEO, paid social, and conversion-focused web development.",
+  },
 ];

@@ -15,12 +15,12 @@ import {
   itServicesCategory,
 } from "@/data/service-categories";
 import { customAddOns, pricingNote, pricingPlans } from "@/data/pricing";
-import { SITE_CONFIG } from "@/lib/constants";
+import { SEO_META } from "@/lib/seo-keywords";
 import { Check, X } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Digital Marketing Services",
-  description: `Explore ${SITE_CONFIG.name} full digital marketing services — SEO, PPC, social media, web development, branding, analytics, pricing packages (INR), and more.`,
+  title: SEO_META.services.title,
+  description: SEO_META.services.description,
 };
 
 const comparison = [

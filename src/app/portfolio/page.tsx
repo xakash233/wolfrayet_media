@@ -9,12 +9,12 @@ import {
   portfolioProjects,
   getPortfolioCategories,
 } from "@/data/portfolio";
-import { SITE_CONFIG } from "@/lib/constants";
 import { Button } from "@/components/ui/button";
+import { SEO_META } from "@/lib/seo-keywords";
 
 export const metadata: Metadata = {
-  title: "Portfolio & Case Studies",
-  description: `Explore ${SITE_CONFIG.name} case studies — SEO, PPC, branding, and e-commerce wins with measurable ROI.`,
+  title: SEO_META.portfolio.title,
+  description: SEO_META.portfolio.description,
 };
 
 export default function PortfolioPage() {

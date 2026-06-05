@@ -6,11 +6,11 @@ import { BlogEnhanced } from "@/components/sections/blog-enhanced";
 import { NewsletterSignup } from "@/components/sections/newsletter-signup";
 import { AnimatedSection } from "@/components/shared/animated-section";
 import { blogPosts } from "@/data/blog";
-import { SITE_CONFIG } from "@/lib/constants";
+import { SEO_META } from "@/lib/seo-keywords";
 
 export const metadata: Metadata = {
-  title: "Marketing Blog & Insights",
-  description: `Expert marketing insights, SEO trends, and growth strategies from the ${SITE_CONFIG.name} team.`,
+  title: SEO_META.blog.title,
+  description: SEO_META.blog.description,
 };
 
 export default function BlogPage() {

@@ -8,9 +8,11 @@ export const SITE_CONFIG = {
   heroHeadline:
     "Your Trusted Digital Marketing And Web Development Partner",
   heroDescription:
-    "We help businesses grow online through customized digital marketing and web development solutions. By combining creativity, technology, and data-driven strategies, we create high-performing websites and targeted marketing campaigns that boost brand visibility, generate leads, and increase conversions. Our end-to-end services include web design, development, SEO, social media marketing, and paid advertising, all tailored to support long-term business growth.",
+    "As a best digital marketing agency and top marketing agency, we help businesses grow through customized SEO, PPC, social media marketing, and web development. From best local SEO agency strategies to performance marketing and ecommerce campaigns, we deliver high-performing websites and paid advertising that boost visibility, generate leads, and increase conversions.",
   description:
-    "Wolfrayet Media helps brands grow with creative strategies, SEO campaigns, and digital solutions that boost visibility, engagement, and long-term success.",
+    "Wolfrayet Media is among the best digital marketing agencies and top digital marketing companies — offering SEO, PPC, social media marketing, performance marketing, local SEO, web development, and IT services.",
+  seoDescription:
+    "Wolfrayet Media is a best digital marketing agency and top digital marketing company offering SEO, PPC, social media marketing, performance marketing, local SEO, web development, and IT services near you.",
   bannerLongDescription:
     "By combining creativity, technology, and data-driven insights, we build powerful websites and execute targeted marketing campaigns that enhance brand visibility, attract qualified leads, and increase conversions. Our team works closely with every client to understand their goals, ensuring each solution is customized to reflect their brand identity and support long-term business growth. From website design and development to SEO, social media marketing, and paid advertising, we provide end-to-end digital solutions that help businesses stay ahead in today's competitive digital landscape.",
   vision:

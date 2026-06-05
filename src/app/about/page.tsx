@@ -9,11 +9,11 @@ import { AnimatedSection } from "@/components/shared/animated-section";
 import { SectionHeading } from "@/components/shared/section-heading";
 import { teamMembers } from "@/data/team";
 import { timeline, features } from "@/data/stats";
-import { SITE_CONFIG } from "@/lib/constants";
+import { SEO_META } from "@/lib/seo-keywords";
 
 export const metadata: Metadata = {
-  title: "About Us",
-  description: `Learn about ${SITE_CONFIG.name} — our vision, mission, team, and commitment to digital marketing excellence.`,
+  title: SEO_META.about.title,
+  description: SEO_META.about.description,
 };
 
 export default function AboutPage() {
@@ -55,7 +55,7 @@ export default function AboutPage() {
         <SectionHeading
           eyebrow="Why Choose Us"
           title="The Wolfrayet Advantage"
-          description="What sets us apart in a crowded digital marketing landscape."
+          description="What sets us apart among the best digital marketing firms and top performance marketing agencies."
         />
         <FeaturesGrid features={features} />
       </AnimatedSection>

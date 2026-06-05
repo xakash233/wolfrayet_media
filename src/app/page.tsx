@@ -1,4 +1,17 @@
+import type { Metadata } from "next";
 import { Hero } from "@/components/sections/hero";
+import { SeoKeywordsSection } from "@/components/sections/seo-keywords-section";
+import { SEO_META } from "@/lib/seo-keywords";
+import { SITE_CONFIG } from "@/lib/constants";
+
+export const metadata: Metadata = {
+  title: SEO_META.home.title,
+  description: SEO_META.home.description,
+  openGraph: {
+    title: `${SEO_META.home.title} | ${SITE_CONFIG.name}`,
+    description: SEO_META.home.description,
+  },
+};
 import { AnimatedSectionImage } from "@/components/shared/animated-section-image";
 import { SECTION_IMAGES } from "@/lib/images";
 import { BrandIntroSection } from "@/components/sections/brand-intro-section";
@@ -37,8 +50,8 @@ export default function HomePage() {
         <SectionHeading
           compact
           eyebrow="Services"
-          title="What We Do Best"
-          description="We provide a wide array of digital marketing solutions designed to boost brand visibility, attract high-intent customers, generate qualified leads, and drive sustainable business growth."
+          title="Top Digital Marketing Services"
+          description="Best digital marketing services from a top PPC agency and best local SEO agency — SEO, paid search, social media, content marketing, ecommerce, and web development."
         />
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {featuredServices.map((service, index) => (
@@ -110,6 +123,8 @@ export default function HomePage() {
           </Button>
         </div>
       </AnimatedSection>
+
+      <SeoKeywordsSection />
 
       <AnimatedSection compact>
         <SectionHeading

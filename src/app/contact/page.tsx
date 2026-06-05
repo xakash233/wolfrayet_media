@@ -4,11 +4,11 @@ import { ContactEnhanced } from "@/components/sections/contact-enhanced";
 import { AnimatedSectionImage } from "@/components/shared/animated-section-image";
 import { AnimatedSection } from "@/components/shared/animated-section";
 import { SECTION_IMAGES } from "@/lib/images";
-import { SITE_CONFIG } from "@/lib/constants";
+import { SEO_META } from "@/lib/seo-keywords";
 
 export const metadata: Metadata = {
-  title: "Contact Us",
-  description: `Get in touch with ${SITE_CONFIG.name} via WhatsApp, AI chat, or contact form. We respond within 24 hours.`,
+  title: SEO_META.contact.title,
+  description: SEO_META.contact.description,
 };
 
 export default function ContactPage() {
