@@ -12,7 +12,8 @@ import {
   ArrowUpRight,
 } from "lucide-react";
 import { AnimatedSectionImage } from "@/components/shared/animated-section-image";
-import { sectionTransition } from "@/lib/animations";
+import { scrollRevealTransition } from "@/lib/animations";
+import { useScrollReveal, ScrollReveal } from "@/components/shared/scroll-reveal";
 import type { PortfolioProject } from "@/types";
 import {
   Dialog,
@@ -35,6 +36,34 @@ const portfolioStats = [
   { icon: Layers, label: "Industries", value: "15+" },
 ];
 
+function PortfolioStatCard({
+  stat,
+  index,
+}: {
+  stat: (typeof portfolioStats)[number];
+  index: number;
+}) {
+  const reveal = useScrollReveal({ index, duration: 1.35 });
+
+  return (
+    <motion.div
+      ref={reveal.ref}
+      initial={reveal.initial}
+      animate={reveal.animate}
+      transition={reveal.transition}
+      className="glass-card flex items-center gap-4 p-6"
+    >
+      <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary">
+        <stat.icon className="h-6 w-6" />
+      </div>
+      <div>
+        <p className="text-2xl font-bold">{stat.value}</p>
+        <p className="text-sm text-muted-foreground">{stat.label}</p>
+      </div>
+    </motion.div>
+  );
+}
+
 export function PortfolioEnhanced({
   projects,
   categories,
@@ -54,30 +83,13 @@ export function PortfolioEnhanced({
     <>
       <div className="mb-12 grid gap-4 sm:grid-cols-3">
         {portfolioStats.map((stat, i) => (
-          <motion.div
-            key={stat.label}
-            initial={false}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-40px" }}
-            transition={sectionTransition(i * 0.1)}
-            className="glass-card flex items-center gap-4 p-6"
-          >
-            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary">
-              <stat.icon className="h-6 w-6" />
-            </div>
-            <div>
-              <p className="text-2xl font-bold">{stat.value}</p>
-              <p className="text-sm text-muted-foreground">{stat.label}</p>
-            </div>
-          </motion.div>
+          <PortfolioStatCard key={stat.label} stat={stat} index={i} />
         ))}
       </div>
 
-      <motion.div
-        initial={false}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-40px" }}
-        transition={sectionTransition(0)}
+      <ScrollReveal
+        index={0}
+        duration={1.55}
         className="mb-12 overflow-hidden rounded-3xl border border-primary/20"
       >
         <button
@@ -121,9 +133,9 @@ export function PortfolioEnhanced({
             </div>
           </div>
         </button>
-      </motion.div>
+      </ScrollReveal>
 
-      <div className="mb-8 flex flex-wrap justify-center gap-2">
+      <ScrollReveal index={1} duration={1.3} className="mb-8 flex flex-wrap justify-center gap-2">
         {categories.map((cat) => (
           <Button
             key={cat}
@@ -135,7 +147,7 @@ export function PortfolioEnhanced({
             {cat}
           </Button>
         ))}
-      </div>
+      </ScrollReveal>
 
       <motion.div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         <AnimatePresence initial={false}>
@@ -145,7 +157,7 @@ export function PortfolioEnhanced({
               initial={{ opacity: 0, scale: 0.98 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.98 }}
-              transition={sectionTransition(index * 0.08)}
+              transition={scrollRevealTransition(index, 1.2)}
               onClick={() => setSelectedProject(project)}
               className={cn(
                 "group relative overflow-hidden rounded-2xl border border-border/50 bg-card text-left transition-all hover:border-primary/40 hover:shadow-xl hover:shadow-primary/5",

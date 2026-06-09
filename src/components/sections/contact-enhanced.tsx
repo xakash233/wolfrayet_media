@@ -7,11 +7,44 @@ import { ContactForm } from "@/components/sections/contact-form";
 import { ContactInfo } from "@/components/sections/contact-info";
 import { FAQAccordion } from "@/components/sections/faq-accordion";
 import { WhatsAppIcon } from "@/components/shared/whatsapp-icon";
+import { ScrollReveal } from "@/components/shared/scroll-reveal";
 import { SITE_CONFIG, WHATSAPP_URL } from "@/lib/constants";
 import { faqItems } from "@/data/faq";
 import { Button } from "@/components/ui/button";
-import { VIEWPORT_ONCE } from "@/lib/motion-safe";
-import { sectionTransition } from "@/lib/animations";
+
+function ContactChannelCard({
+  children,
+  index,
+  href,
+  className,
+}: {
+  children: React.ReactNode;
+  index: number;
+  href?: string;
+  className?: string;
+}) {
+  const inner = href ? (
+    <motion.a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      whileHover={{ y: -4 }}
+      className={className}
+    >
+      {children}
+    </motion.a>
+  ) : (
+    <motion.div whileHover={{ y: -4 }} className={className}>
+      {children}
+    </motion.div>
+  );
+
+  return (
+    <ScrollReveal index={index} duration={1.4}>
+      {inner}
+    </ScrollReveal>
+  );
+}
 
 export function ContactEnhanced() {
   const quickFaqs = faqItems.slice(0, 3);
@@ -19,15 +52,9 @@ export function ContactEnhanced() {
   return (
     <div className="space-y-16">
       <div className="grid gap-4 sm:grid-cols-3">
-        <motion.a
+        <ContactChannelCard
+          index={0}
           href={WHATSAPP_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          initial={false}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={VIEWPORT_ONCE}
-          transition={sectionTransition(0)}
-          whileHover={{ y: -4 }}
           className="group flex flex-col items-center rounded-2xl border border-[#25D366]/30 bg-[#25D366]/10 p-6 text-center transition-shadow hover:shadow-lg hover:shadow-[#25D366]/20"
         >
           <div className="flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg shadow-[#25D366]/30">
@@ -40,13 +67,10 @@ export function ContactEnhanced() {
           <span className="mt-4 text-sm font-semibold group-hover:underline">
             Message us now →
           </span>
-        </motion.a>
+        </ContactChannelCard>
 
-        <motion.div
-          initial={false}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={VIEWPORT_ONCE}
-          transition={sectionTransition(0.1)}
+        <ContactChannelCard
+          index={1}
           className="glass-card flex flex-col items-center p-6 text-center"
         >
           <div className="flex h-14 w-14 items-center justify-center rounded-full bg-primary text-primary-foreground">
@@ -59,13 +83,10 @@ export function ContactEnhanced() {
           <p className="mt-4 text-xs text-muted-foreground">
             Tap the chat button bottom-right
           </p>
-        </motion.div>
+        </ContactChannelCard>
 
-        <motion.div
-          initial={false}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={VIEWPORT_ONCE}
-          transition={sectionTransition(0.2)}
+        <ContactChannelCard
+          index={2}
           className="glass-card flex flex-col items-center p-6 text-center"
         >
           <div className="flex h-14 w-14 items-center justify-center rounded-full bg-muted">
@@ -81,10 +102,12 @@ export function ContactEnhanced() {
           >
             Jump to form ↓
           </a>
-        </motion.div>
+        </ContactChannelCard>
       </div>
 
-      <div
+      <ScrollReveal
+        index={3}
+        duration={1.55}
         id="contact-form"
         className="grid gap-12 rounded-3xl border border-border bg-card/30 p-6 lg:grid-cols-2 lg:p-10"
       >
@@ -109,9 +132,13 @@ export function ContactEnhanced() {
             <ContactInfo />
           </div>
         </div>
-      </div>
+      </ScrollReveal>
 
-      <div className="rounded-2xl border border-border p-8">
+      <ScrollReveal
+        index={4}
+        duration={1.5}
+        className="rounded-2xl border border-border p-8"
+      >
         <h3 className="text-center text-lg font-bold">Quick Answers</h3>
         <div className="mt-6">
           <FAQAccordion items={quickFaqs} />
@@ -121,7 +148,7 @@ export function ContactEnhanced() {
             <Link href="/contact">View all FAQs on Home</Link>
           </Button>
         </div>
-      </div>
+      </ScrollReveal>
     </div>
   );
 }

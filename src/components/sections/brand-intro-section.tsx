@@ -1,11 +1,10 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { Logo } from "@/components/shared/logo";
 import { AnimatedSectionImage } from "@/components/shared/animated-section-image";
 import { SITE_CONFIG } from "@/lib/constants";
 import { HERO_IMAGES, SECTION_IMAGES } from "@/lib/images";
-import { sectionTransition } from "@/lib/animations";
+import { ScrollReveal } from "@/components/shared/scroll-reveal";
 import { cn } from "@/lib/utils";
 
 interface BrandIntroSectionProps {
@@ -56,13 +55,7 @@ export function BrandIntroSection({
           )}
         >
           {!fullScreen && (
-            <motion.div
-              initial={false}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={sectionTransition(0)}
-              className="relative aspect-[4/3] overflow-hidden rounded-3xl border border-border/60 shadow-xl lg:aspect-[5/4]"
-            >
+            <ScrollReveal index={0} duration={1.5} className="relative aspect-[4/3] overflow-hidden rounded-3xl border border-border/60 shadow-xl lg:aspect-[5/4]">
               <AnimatedSectionImage
                 src={SECTION_IMAGES.intro}
                 alt="Business growth and digital partnership"
@@ -70,14 +63,12 @@ export function BrandIntroSection({
                 className="h-full w-full"
                 sizes="(max-width: 1024px) 100vw, 50vw"
               />
-            </motion.div>
+            </ScrollReveal>
           )}
 
-          <motion.div
-            initial={false}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={sectionTransition(fullScreen ? 0 : 0.15)}
+          <ScrollReveal
+            index={fullScreen ? 0 : 1}
+            duration={1.55}
             className={cn(
               "w-full rounded-3xl border text-center shadow-2xl backdrop-blur-md",
               fullScreen
@@ -113,7 +104,7 @@ export function BrandIntroSection({
             >
               {SITE_CONFIG.heroDescription}
             </p>
-          </motion.div>
+          </ScrollReveal>
         </div>
       </div>
     </section>

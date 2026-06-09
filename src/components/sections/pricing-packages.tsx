@@ -6,8 +6,8 @@ import { Check } from "lucide-react";
 import type { CustomAddOn, PricingPlan } from "@/types";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
+import { useScrollReveal, ScrollReveal } from "@/components/shared/scroll-reveal";
 import { cn } from "@/lib/utils";
-import { VIEWPORT_ONCE } from "@/lib/motion-safe";
 
 interface PricingPackagesProps {
   plans: PricingPlan[];
@@ -22,12 +22,15 @@ function PricingPlanCard({
   plan: PricingPlan;
   index: number;
 }) {
+  const reveal = useScrollReveal({ index, duration: 1.4 });
+
   return (
     <motion.div
-      initial={false}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={VIEWPORT_ONCE}
-      transition={{ delay: index * 0.06 }}
+      ref={reveal.ref}
+      initial={reveal.initial}
+      animate={reveal.animate}
+      transition={reveal.transition}
+      whileHover={{ y: -4 }}
     >
       <Card
         className={cn(
@@ -97,9 +100,9 @@ export function PricingPackages({
 
   return (
     <div className="space-y-16">
-      <p className="mx-auto max-w-3xl text-center text-sm text-muted-foreground">
+      <ScrollReveal index={0} duration={1.3} className="mx-auto max-w-3xl text-center text-sm text-muted-foreground">
         {note}
-      </p>
+      </ScrollReveal>
 
       <div className="grid gap-8 lg:grid-cols-2 xl:grid-cols-3">
         {corePlans.map((plan, index) => (
@@ -117,10 +120,9 @@ export function PricingPackages({
         ))}
       </div>
 
-      <motion.div
-        initial={false}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={VIEWPORT_ONCE}
+      <ScrollReveal
+        index={corePlans.length + topTierPlans.length}
+        duration={1.5}
         className="mx-auto max-w-4xl rounded-2xl border border-dashed border-primary/40 bg-primary/5 p-8"
       >
         <h3 className="text-xl font-bold">Custom Add-Ons</h3>
@@ -136,7 +138,7 @@ export function PricingPackages({
         <Button asChild variant="premium" className="mt-6">
           <Link href="/contact">Request Custom Quote</Link>
         </Button>
-      </motion.div>
+      </ScrollReveal>
     </div>
   );
 }

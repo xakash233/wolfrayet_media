@@ -2,13 +2,12 @@
 
 import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
-import { SSR_SAFE_INITIAL } from "@/lib/motion-safe";
 import { ArrowRight } from "lucide-react";
 import { AnimatedSectionImage } from "@/components/shared/animated-section-image";
 import { HeroVideoBackground } from "@/components/sections/hero-video-background";
+import { ScrollReveal } from "@/components/shared/scroll-reveal";
 import { SITE_CONFIG } from "@/lib/constants";
 import { HERO_IMAGES } from "@/lib/images";
-import { sectionTransition } from "@/lib/animations";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import type { CmsHeroVideo } from "@/lib/cms/types";
@@ -56,7 +55,6 @@ export function Hero({
       aria-label={compact ? "Page hero" : "Hero"}
       className="relative flex min-h-[100svh] w-full items-center justify-center overflow-hidden"
     >
-      {/* Full-bleed background — covers entire hero to all edges */}
       <div className="absolute inset-0 z-0 min-h-[100svh] w-full" aria-hidden>
         {videoIntro ? (
           <HeroVideoBackground
@@ -91,52 +89,51 @@ export function Hero({
         )}
       >
         {!hideEyebrow && (
-          <motion.p
-            initial={SSR_SAFE_INITIAL}
-            animate={{ opacity: 1, y: 0 }}
-            transition={sectionTransition(0)}
+          <ScrollReveal
+            index={0}
+            duration={1.4}
             className="hero-eyebrow mb-5 text-primary"
           >
             {SITE_CONFIG.name}
-          </motion.p>
+          </ScrollReveal>
         )}
 
-        <motion.h1
-          initial={SSR_SAFE_INITIAL}
-          animate={{ opacity: 1, y: 0 }}
-          transition={sectionTransition(0.12)}
+        <ScrollReveal
+          index={hideEyebrow ? 0 : 1}
+          duration={1.5}
           className={cn(
             "mx-auto max-w-6xl text-white text-balance",
             isHomeTagline ? "hero-title-home tracking-wide" : "hero-title"
           )}
+          as="div"
         >
-          {isHomeTagline ? (
-            <>
-              {SITE_CONFIG.heroTaglineLines[0]}
-              <br />
-              {SITE_CONFIG.heroTaglineLines[1]}
-            </>
-          ) : (
-            title
-          )}
-        </motion.h1>
+          <h1>
+            {isHomeTagline ? (
+              <>
+                {SITE_CONFIG.heroTaglineLines[0]}
+                <br />
+                {SITE_CONFIG.heroTaglineLines[1]}
+              </>
+            ) : (
+              title
+            )}
+          </h1>
+        </ScrollReveal>
 
         {subtitle && (
-          <motion.p
-            initial={SSR_SAFE_INITIAL}
-            animate={{ opacity: 1, y: 0 }}
-            transition={sectionTransition(0.24)}
+          <ScrollReveal
+            index={hideEyebrow ? 1 : 2}
+            duration={1.45}
             className="hero-subtitle mx-auto mt-6 max-w-3xl text-white/90"
           >
             {subtitle}
-          </motion.p>
+          </ScrollReveal>
         )}
 
         {showViewMore && (
-          <motion.div
-            initial={SSR_SAFE_INITIAL}
-            animate={{ opacity: 1, y: 0 }}
-            transition={sectionTransition(0.32)}
+          <ScrollReveal
+            index={hideEyebrow ? 2 : 3}
+            duration={1.35}
             className="mt-6"
           >
             <Button
@@ -147,14 +144,13 @@ export function Hero({
             >
               <Link href={viewMoreHref}>View More</Link>
             </Button>
-          </motion.div>
+          </ScrollReveal>
         )}
 
         {showCta && (
-          <motion.div
-            initial={SSR_SAFE_INITIAL}
-            animate={{ opacity: 1, y: 0 }}
-            transition={sectionTransition(0.4)}
+          <ScrollReveal
+            index={hideEyebrow ? (showViewMore ? 3 : 2) : showViewMore ? 4 : 3}
+            duration={1.5}
             className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row"
           >
             <Button asChild variant="premium" size="lg" className="group">
@@ -169,26 +165,27 @@ export function Hero({
             <Button asChild variant="glass" size="lg">
               <Link href="/services">Explore Services</Link>
             </Button>
-          </motion.div>
+          </ScrollReveal>
         )}
       </div>
 
       {!compact && (
-        <motion.div
-          initial={SSR_SAFE_INITIAL}
-          animate={{ opacity: 1 }}
-          transition={sectionTransition(0.85)}
+        <ScrollReveal
+          index={5}
+          duration={1.2}
+          y={24}
+          blur={0}
           className="absolute bottom-8 left-1/2 z-10 -translate-x-1/2"
-          aria-hidden
         >
           <motion.div
+            aria-hidden
             animate={reducedMotion ? undefined : { y: [0, 8, 0] }}
             transition={{ duration: 1.8, repeat: Infinity }}
             className="h-10 w-6 rounded-full border-2 border-white/30 p-1"
           >
             <motion.div className="mx-auto h-2 w-1 rounded-full bg-white/60" />
           </motion.div>
-        </motion.div>
+        </ScrollReveal>
       )}
     </section>
   );

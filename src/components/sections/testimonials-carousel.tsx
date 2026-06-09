@@ -10,6 +10,7 @@ import Link from "next/link";
 import type { Testimonial } from "@/types";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { ScrollReveal } from "@/components/shared/scroll-reveal";
 
 interface TestimonialsCarouselProps {
   testimonials: Testimonial[];
@@ -40,7 +41,7 @@ export function TestimonialsCarousel({
   }, [emblaApi]);
 
   return (
-    <div className="relative">
+    <ScrollReveal index={0} duration={1.5} className="relative">
       <div className="overflow-hidden rounded-2xl" ref={emblaRef}>
         <div className="flex gap-4">
           {testimonials.map((testimonial) => (
@@ -140,6 +141,6 @@ export function TestimonialsCarousel({
           </Button>
         )}
       </div>
-    </div>
+    </ScrollReveal>
   );
 }

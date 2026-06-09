@@ -1,10 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { ScrollReveal } from "@/components/shared/scroll-reveal";
 import { Button } from "@/components/ui/button";
 import { SITE_CONFIG } from "@/lib/constants";
-import { VIEWPORT_ONCE } from "@/lib/motion-safe";
 
 interface AboutPreviewProps {
   findOutMoreHref?: string;
@@ -17,11 +16,9 @@ export function AboutPreview({
 }: AboutPreviewProps) {
   return (
     <div className="mx-auto max-w-4xl">
-      <motion.div
-        initial={false}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={VIEWPORT_ONCE}
-        transition={{ duration: 0.5 }}
+      <ScrollReveal
+        index={0}
+        duration={1.5}
         className="rounded-2xl border border-border bg-card/40 p-8 sm:p-10"
       >
         <p className="text-sm font-semibold uppercase tracking-widest text-primary">
@@ -36,7 +33,7 @@ export function AboutPreview({
             <Link href={findOutMoreHref}>Find Out More</Link>
           </Button>
         )}
-      </motion.div>
+      </ScrollReveal>
     </div>
   );
 }

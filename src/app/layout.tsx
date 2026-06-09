@@ -2,10 +2,12 @@ import type { Metadata } from "next";
 import { headers } from "next/headers";
 import "./globals.css";
 import { ThemeProvider } from "@/components/providers/theme-provider";
+import { MotionProvider } from "@/components/providers/motion-provider";
 import { PageTransitionProvider } from "@/components/providers/page-transition-provider";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { FloatingActions } from "@/components/shared/floating-actions";
+import { StartProjectFab } from "@/components/shared/start-project-fab";
 import { PromoPopup } from "@/components/shared/promo-popup";
 import { OrganizationJsonLd } from "@/components/shared/json-ld";
 import { SITE_CONFIG } from "@/lib/constants";
@@ -68,22 +70,23 @@ export default function RootLayout({
       <body className="font-sans antialiased">
         {!isAdmin && <OrganizationJsonLd />}
         <ThemeProvider>
-          {!isAdmin && (
-            <a href="#main-content" className="skip-link">
-              Skip to main content
-            </a>
-          )}
-          {!isAdmin && <Header />}
-          {isAdmin ? (
-            children
+          {!isAdmin ? (
+            <MotionProvider>
+              <a href="#main-content" className="skip-link">
+                Skip to main content
+              </a>
+              <Header />
+              <main id="main-content" tabIndex={-1} className="outline-none">
+                <PageTransitionProvider>{children}</PageTransitionProvider>
+              </main>
+              <Footer />
+              <FloatingActions />
+              <StartProjectFab />
+              <PromoPopup />
+            </MotionProvider>
           ) : (
-            <main id="main-content" tabIndex={-1} className="outline-none">
-              <PageTransitionProvider>{children}</PageTransitionProvider>
-            </main>
+            children
           )}
-          {!isAdmin && <Footer />}
-          {!isAdmin && <FloatingActions />}
-          {!isAdmin && <PromoPopup />}
         </ThemeProvider>
       </body>
     </html>

@@ -1,28 +1,9 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { Eye, Target, Sparkles } from "lucide-react";
 import { SITE_CONFIG } from "@/lib/constants";
-import { VIEWPORT_ONCE } from "@/lib/motion-safe";
+import { ScrollReveal } from "@/components/shared/scroll-reveal";
 import { cn } from "@/lib/utils";
-const EASE = [0.22, 1, 0.36, 1] as const;
-
-const container = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: { staggerChildren: 0.12, delayChildren: 0.08 },
-  },
-};
-
-const card = {
-  hidden: { opacity: 0, y: 28 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.55, ease: EASE },
-  },
-};
 
 interface VisionMissionCardProps {
   label: string;
@@ -59,8 +40,10 @@ function VisionMissionCard({
         };
 
   return (
-    <motion.article
-      variants={card}
+    <ScrollReveal
+      as="article"
+      index={index + 1}
+      duration={1.55}
       className={cn(
         "group relative overflow-hidden rounded-3xl border bg-card/60 p-8 backdrop-blur-sm transition-shadow duration-300 sm:p-10",
         accentStyles.border,
@@ -113,20 +96,14 @@ function VisionMissionCard({
           {body}
         </p>
       </div>
-    </motion.article>
+    </ScrollReveal>
   );
 }
 
 export function VisionMissionSection() {
   return (
     <div className="relative">
-      <motion.div
-        initial={false}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={VIEWPORT_ONCE}
-        transition={{ duration: 0.5 }}
-        className="mb-10 text-center"
-      >
+      <ScrollReveal index={0} duration={1.45} className="mb-10 text-center">
         <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-1.5 text-sm font-medium text-primary">
           <Sparkles className="h-4 w-4" aria-hidden />
           About Wolfrayet Media
@@ -137,15 +114,9 @@ export function VisionMissionSection() {
         <p className="mx-auto mt-3 max-w-2xl text-muted-foreground">
           Where we&apos;re headed and how we help brands grow every day.
         </p>
-      </motion.div>
+      </ScrollReveal>
 
-      <motion.div
-        variants={container}
-        initial={false}
-        whileInView="show"
-        viewport={VIEWPORT_ONCE}
-        className="grid gap-8 lg:grid-cols-2"
-      >
+      <div className="grid gap-8 lg:grid-cols-2">
         <VisionMissionCard
           label="Our Vision"
           title="Trusted Global Growth Partner"
@@ -162,15 +133,18 @@ export function VisionMissionSection() {
           accent="violet"
           index={1}
         />
-      </motion.div>
+      </div>
 
-      <motion.div
-        initial={false}
-        whileInView={{ opacity: 1, scaleX: 1 }}
-        viewport={VIEWPORT_ONCE}
-        transition={{ delay: 0.35, duration: 0.55, ease: EASE }}
-        className="mx-auto mt-12 h-px max-w-md bg-gradient-to-r from-transparent via-primary/40 to-transparent"
-      />
+      <ScrollReveal
+        index={3}
+        duration={1.3}
+        y={0}
+        blur={0}
+        className="mx-auto mt-12 h-px max-w-md origin-center bg-gradient-to-r from-transparent via-primary/40 to-transparent"
+        aria-hidden
+      >
+        <span className="sr-only">Section divider</span>
+      </ScrollReveal>
     </div>
   );
 }

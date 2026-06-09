@@ -1,8 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { SSR_SAFE_INITIAL, VIEWPORT_ONCE } from "@/lib/motion-safe";
-import { sectionTransition } from "@/lib/animations";
+import { ScrollReveal } from "@/components/shared/scroll-reveal";
 import { cn } from "@/lib/utils";
 
 interface AnimatedSectionProps {
@@ -21,12 +19,11 @@ export function AnimatedSection({
   compact = false,
 }: AnimatedSectionProps) {
   return (
-    <motion.section
+    <ScrollReveal
+      as="section"
       id={id}
-      initial={SSR_SAFE_INITIAL}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={VIEWPORT_ONCE}
-      transition={sectionTransition(delay)}
+      index={delay}
+      duration={1.5}
       className={cn(
         compact
           ? "px-4 py-5 sm:px-6 sm:py-6 lg:px-8 lg:py-8"
@@ -35,6 +32,6 @@ export function AnimatedSection({
       )}
     >
       <div className="mx-auto max-w-7xl">{children}</div>
-    </motion.section>
+    </ScrollReveal>
   );
 }

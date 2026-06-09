@@ -1,38 +1,29 @@
 "use client";
 
-import { useState } from "react";
+import { useFormState, useFormStatus } from "react-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { loginAction, type LoginState } from "./actions";
+
+const initialState: LoginState = {};
+
+function SubmitButton() {
+  const { pending } = useFormStatus();
+  return (
+    <Button type="submit" className="mt-6 w-full" disabled={pending}>
+      {pending ? "Signing in…" : "Sign in"}
+    </Button>
+  );
+}
 
 export default function AdminLoginPage() {
-  const [userId, setUserId] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
-
-  async function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    setLoading(true);
-    setError("");
-    const res = await fetch("/api/admin/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      credentials: "same-origin",
-      body: JSON.stringify({ userId, password }),
-    });
-    setLoading(false);
-    if (!res.ok) {
-      setError("Invalid user ID or password");
-      return;
-    }
-    window.location.assign("/admin");
-  }
+  const [state, formAction] = useFormState(loginAction, initialState);
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-muted/30 px-4">
       <form
-        onSubmit={handleSubmit}
+        action={formAction}
         className="w-full max-w-sm rounded-xl border border-border bg-card p-8 shadow-lg"
       >
         <h1 className="text-2xl font-bold">Admin Login</h1>
@@ -44,29 +35,28 @@ export default function AdminLoginPage() {
             <Label htmlFor="userId">User ID</Label>
             <Input
               id="userId"
+              name="userId"
               type="text"
-              value={userId}
-              onChange={(e) => setUserId(e.target.value)}
               required
               autoComplete="username"
+              autoFocus
             />
           </div>
           <div className="space-y-2">
             <Label htmlFor="password">Password</Label>
             <Input
               id="password"
+              name="password"
               type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
               required
               autoComplete="current-password"
             />
           </div>
         </div>
-        {error && <p className="mt-3 text-sm text-destructive">{error}</p>}
-        <Button type="submit" className="mt-6 w-full" disabled={loading}>
-          {loading ? "Signing in…" : "Sign in"}
-        </Button>
+        {state.error && (
+          <p className="mt-3 text-sm text-destructive">{state.error}</p>
+        )}
+        <SubmitButton />
       </form>
     </div>
   );

@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Star, Quote, ArrowRight } from "lucide-react";
+import { useScrollReveal, ScrollReveal } from "@/components/shared/scroll-reveal";
 import type { Testimonial } from "@/types";
 import { Button } from "@/components/ui/button";
 import { Hero } from "@/components/sections/hero";
@@ -13,11 +14,68 @@ import { AnimatedSection } from "@/components/shared/animated-section";
 import { SectionHeading } from "@/components/shared/section-heading";
 import { testimonialStats } from "@/data/testimonials";
 import { WHATSAPP_URL } from "@/lib/constants";
-import { VIEWPORT_ONCE } from "@/lib/motion-safe";
-
 interface TestimonialsPageContentProps {
   testimonials: Testimonial[];
   featured?: Testimonial;
+}
+
+function TestimonialReviewCard({
+  testimonial: t,
+  index,
+}: {
+  testimonial: Testimonial;
+  index: number;
+}) {
+  const reveal = useScrollReveal({ index, duration: 1.35 });
+
+  return (
+    <motion.article
+      ref={reveal.ref as unknown as React.Ref<HTMLElement>}
+      initial={reveal.initial}
+      animate={reveal.animate}
+      transition={reveal.transition}
+      className="glass-card flex flex-col p-6 sm:p-8"
+    >
+      <div className="flex items-start justify-between gap-4">
+        <div className="flex items-center gap-4">
+          <Image
+            src={t.avatar}
+            alt={t.name}
+            width={56}
+            height={56}
+            className="rounded-xl object-cover"
+          />
+          <div>
+            <p className="font-bold">{t.name}</p>
+            <p className="text-sm text-muted-foreground">
+              {t.role} · {t.company}
+            </p>
+          </div>
+        </div>
+        <div className="flex gap-0.5">
+          {Array.from({ length: t.rating }).map((_, i) => (
+            <Star
+              key={i}
+              className="h-4 w-4 fill-primary text-primary"
+            />
+          ))}
+        </div>
+      </div>
+      {t.service && (
+        <span className="mt-4 inline-flex w-fit rounded-full border border-primary/30 bg-primary/5 px-3 py-1 text-xs font-medium text-primary">
+          {t.service}
+        </span>
+      )}
+      <p className="mt-4 flex-1 leading-relaxed text-muted-foreground">
+        &ldquo;{t.content}&rdquo;
+      </p>
+      {t.metric && (
+        <p className="mt-4 text-sm font-semibold text-primary">
+          Result: {t.metric}
+        </p>
+      )}
+    </motion.article>
+  );
 }
 
 export function TestimonialsPageContent({
@@ -38,13 +96,7 @@ export function TestimonialsPageContent({
       />
 
       <AnimatedSection compact>
-          <motion.div
-            initial={false}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={VIEWPORT_ONCE}
-            transition={{ delay: 0.2 }}
-            className="mx-auto max-w-4xl"
-          >
+          <ScrollReveal index={0} duration={1.55} className="mx-auto max-w-4xl">
             <div className="glass-card relative overflow-hidden p-8 sm:p-12">
               <Quote className="absolute right-8 top-8 h-16 w-16 text-primary/10" />
               <div className="flex flex-col gap-6 sm:flex-row sm:items-center">
@@ -83,13 +135,13 @@ export function TestimonialsPageContent({
                 </div>
               </div>
             </div>
-          </motion.div>
+          </ScrollReveal>
 
-          <motion.div
-            initial={false}
-            whileInView={{ opacity: 1 }}
-            viewport={VIEWPORT_ONCE}
-            transition={{ delay: 0.4 }}
+          <ScrollReveal
+            index={1}
+            duration={1.45}
+            y={40}
+            blur={4}
             className="mt-12 grid grid-cols-2 gap-6 lg:grid-cols-4"
           >
             {testimonialStats.map((stat) => (
@@ -104,7 +156,7 @@ export function TestimonialsPageContent({
                 <p className="mt-1 text-sm text-muted-foreground">{stat.label}</p>
               </div>
             ))}
-          </motion.div>
+          </ScrollReveal>
       </AnimatedSection>
 
       <AnimatedSection>
@@ -124,58 +176,13 @@ export function TestimonialsPageContent({
         />
         <div className="grid gap-6 sm:grid-cols-2">
           {testimonials.map((t, index) => (
-            <motion.article
-              key={t.id}
-              initial={false}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.05 }}
-              className="glass-card flex flex-col p-6 sm:p-8"
-            >
-              <div className="flex items-start justify-between gap-4">
-                <div className="flex items-center gap-4">
-                  <Image
-                    src={t.avatar}
-                    alt={t.name}
-                    width={56}
-                    height={56}
-                    className="rounded-xl object-cover"
-                  />
-                  <div>
-                    <p className="font-bold">{t.name}</p>
-                    <p className="text-sm text-muted-foreground">
-                      {t.role} · {t.company}
-                    </p>
-                  </div>
-                </div>
-                <div className="flex gap-0.5">
-                  {Array.from({ length: t.rating }).map((_, i) => (
-                    <Star
-                      key={i}
-                      className="h-4 w-4 fill-primary text-primary"
-                    />
-                  ))}
-                </div>
-              </div>
-              {t.service && (
-                <span className="mt-4 inline-flex w-fit rounded-full border border-primary/30 bg-primary/5 px-3 py-1 text-xs font-medium text-primary">
-                  {t.service}
-                </span>
-              )}
-              <p className="mt-4 flex-1 text-muted-foreground leading-relaxed">
-                &ldquo;{t.content}&rdquo;
-              </p>
-              {t.metric && (
-                <p className="mt-4 text-sm font-semibold text-primary">
-                  Result: {t.metric}
-                </p>
-              )}
-            </motion.article>
+            <TestimonialReviewCard key={t.id} testimonial={t} index={index} />
           ))}
         </div>
       </AnimatedSection>
 
       <AnimatedSection>
+        <ScrollReveal index={0} duration={1.5}>
         <div className="rounded-3xl border border-[#25D366]/30 bg-[#25D366]/5 p-8 text-center sm:p-12">
           <h3 className="text-2xl font-bold">Join 120+ Happy Clients</h3>
           <p className="mx-auto mt-2 max-w-lg text-muted-foreground">
@@ -200,6 +207,7 @@ export function TestimonialsPageContent({
             </Button>
           </div>
         </div>
+        </ScrollReveal>
       </AnimatedSection>
 
       <AnimatedSection>

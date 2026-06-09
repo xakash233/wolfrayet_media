@@ -57,10 +57,12 @@
 
   html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
     @apply font-sans;
   }
 
   body {
+    overflow-x: hidden;
     @apply bg-background font-sans text-foreground antialiased;
     font-family: var(--font-dm-sans);
     font-optical-sizing: auto;
@@ -169,5 +171,61 @@
     border-radius: 9999px;
     background: #25d366;
     animation: whatsapp-pulse 2s ease-out infinite;
+  }
+
+  /* Lesse Studio–style infinite marquee */
+  @keyframes marquee-forward {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  @keyframes marquee-reverse {
+    from {
+      transform: translateX(-50%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+
+  .marquee-row:hover .marquee-track {
+    animation-play-state: paused;
+  }
+
+  .marquee-track-forward {
+    animation: marquee-forward 55s linear infinite;
+  }
+
+  .marquee-track-reverse {
+    animation: marquee-reverse 60s linear infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-track-forward,
+    .marquee-track-reverse {
+      animation: none;
+    }
+  }
+
+  /* Lenis smooth scroll */
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+
+  .lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+  }
+
+  .lenis.lenis-stopped {
+    overflow: hidden;
   }
 }

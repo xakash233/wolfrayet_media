@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Mail } from "lucide-react";
+import { ScrollReveal } from "@/components/shared/scroll-reveal";
 import {
   FacebookIcon,
   InstagramIcon,
@@ -48,12 +49,7 @@ export function Footer() {
   return (
     <footer className="border-t border-white/10 bg-[#070b14] text-white">
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-        <motion.div
-          initial={false}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="grid gap-12 lg:grid-cols-4"
-        >
+        <ScrollReveal index={0} duration={1.5} className="grid gap-12 lg:grid-cols-4">
           <div className="lg:col-span-2">
             <Logo size="lg" staticLogo />
             <p className="mt-4 max-w-md text-white/70">
@@ -118,14 +114,15 @@ export function Footer() {
               </p>
             )}
           </div>
-        </motion.div>
+        </ScrollReveal>
 
         <Separator className="my-8 bg-white/10" />
 
-        <motion.div
-          initial={false}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
+        <ScrollReveal
+          index={1}
+          duration={1.3}
+          y={32}
+          blur={0}
           className="flex flex-col items-center justify-between gap-4 sm:flex-row"
         >
           <p className="text-sm text-white/60">
@@ -141,7 +138,7 @@ export function Footer() {
               {SITE_CONFIG.email}
             </a>
           </div>
-        </motion.div>
+        </ScrollReveal>
       </div>
     </footer>
   );

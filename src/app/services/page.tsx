@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { Hero } from "@/components/sections/hero";
-import { AnimatedSectionImage } from "@/components/shared/animated-section-image";
-import { SECTION_IMAGES } from "@/lib/images";
-import { ServicesEnhanced } from "@/components/sections/services-enhanced";
+import { ServicesBentoGrid } from "@/components/sections/services-bento-grid";
 import { ServiceCatalog } from "@/components/sections/service-catalog";
 import { PricingPackages } from "@/components/sections/pricing-packages";
 import { ProcessWorkflow } from "@/components/sections/process-workflow";
@@ -10,10 +8,10 @@ import { CTASection } from "@/components/sections/cta-section";
 import { AnimatedSection } from "@/components/shared/animated-section";
 import { SectionHeading } from "@/components/shared/section-heading";
 import { getCmsServices } from "@/lib/cms/data";
-import { buildServicesFromCms } from "@/lib/cms/services";
 import { customAddOns, pricingNote, pricingPlans } from "@/data/pricing";
 import { SEO_META } from "@/lib/seo-keywords";
 import { Check, X } from "lucide-react";
+import type { ServiceCategory } from "@/types";
 
 export const revalidate = 60;
 
@@ -35,9 +33,19 @@ const comparison = [
 ];
 
 export default async function ServicesPage() {
-  const services = await buildServicesFromCms();
   const { digitalMarketingCategories, itServicesCategory } =
     await getCmsServices();
+
+  const itCategory: ServiceCategory = {
+    number: 0,
+    id: itServicesCategory.id,
+    title: itServicesCategory.title,
+    description: itServicesCategory.description,
+    icon: "Server",
+    items: [...itServicesCategory.items],
+  };
+
+  const allCategories = [...digitalMarketingCategories, itCategory];
 
   return (
     <>
@@ -50,32 +58,20 @@ export default async function ServicesPage() {
         heroImage="services"
       />
 
-      <AnimatedSection>
-        <div className="relative mb-10 aspect-[21/7] overflow-hidden rounded-2xl border border-border/50">
-          <AnimatedSectionImage
-            src={SECTION_IMAGES.features}
-            alt="Digital marketing services and analytics"
-            fill
-            className="h-full w-full"
-            sizes="100vw"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-background/85 via-background/50 to-transparent" />
-        </div>
-        <SectionHeading
-          eyebrow="What We Offer"
-          title="Comprehensive Marketing Services"
-          description="Browse service cards and tabs, or jump to the full numbered catalog below."
+      <div className="py-12 sm:py-16 lg:py-20">
+        <ServicesBentoGrid
+          categories={digitalMarketingCategories}
+          itCategory={itCategory}
         />
-        <ServicesEnhanced services={services} />
-      </AnimatedSection>
+      </div>
 
       <AnimatedSection className="bg-muted/20">
         <SectionHeading
           eyebrow="Full Catalog"
-          title="Full Digital Marketing Services List"
-          description="All services organized by topic — exactly as in our service menu."
+          title="Every Service, Listed"
+          description="Detailed breakdown of everything included in each category."
         />
-        <ServiceCatalog categories={digitalMarketingCategories} />
+        <ServiceCatalog categories={allCategories} />
       </AnimatedSection>
 
       <AnimatedSection id="pricing">
@@ -98,25 +94,6 @@ export default async function ServicesPage() {
           description="A proven four-step framework that delivers consistent results."
         />
         <ProcessWorkflow />
-      </AnimatedSection>
-
-      <AnimatedSection>
-        <SectionHeading
-          eyebrow="IT Services"
-          title={itServicesCategory.title}
-          description={itServicesCategory.description}
-        />
-        <div className="mx-auto grid max-w-5xl gap-4 sm:grid-cols-2">
-          {itServicesCategory.items.map((item) => (
-            <div
-              key={item}
-              className="rounded-xl border border-border bg-card/40 p-4 text-sm text-muted-foreground"
-            >
-              <span className="mr-2 text-primary">•</span>
-              {item}
-            </div>
-          ))}
-        </div>
       </AnimatedSection>
 
       <AnimatedSection className="bg-muted/20">

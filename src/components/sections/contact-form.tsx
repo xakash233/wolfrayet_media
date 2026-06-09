@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { motion } from "framer-motion";
 import { Send, CheckCircle } from "lucide-react";
+import { ScrollReveal } from "@/components/shared/scroll-reveal";
 import {
   contactFormSchema,
   type ContactFormValues,
@@ -14,8 +15,6 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { LoadingSpinner } from "@/components/shared/loading-spinner";
-import { VIEWPORT_ONCE } from "@/lib/motion-safe";
-
 export function ContactForm() {
   const [submitted, setSubmitted] = useState(false);
   const {
@@ -62,10 +61,8 @@ export function ContactForm() {
   }
 
   return (
-    <motion.form
-      initial={false}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={VIEWPORT_ONCE}
+    <ScrollReveal index={0} duration={1.5}>
+    <form
       onSubmit={handleSubmit(onSubmit)}
       className="glass-card space-y-6 p-8"
       noValidate
@@ -144,6 +141,7 @@ export function ContactForm() {
           </>
         )}
       </Button>
-    </motion.form>
+    </form>
+    </ScrollReveal>
   );
 }

@@ -1,8 +1,7 @@
 "use client";
 
 /**
- * No route-key remount / opacity fade — those caused blank pages until hard reload.
- * Children render directly for reliable Next.js client navigation.
+ * Direct render — route-level opacity fades caused blank pages on navigation.
  */
 export function PageTransitionProvider({
   children,

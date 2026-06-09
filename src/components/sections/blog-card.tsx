@@ -5,8 +5,8 @@ import { motion } from "framer-motion";
 import { Calendar, Clock, ArrowRight } from "lucide-react";
 import type { BlogPost } from "@/types";
 import { AnimatedSectionImage } from "@/components/shared/animated-section-image";
+import { useScrollReveal } from "@/components/shared/scroll-reveal";
 import { formatDate } from "@/lib/utils";
-import { sectionTransition } from "@/lib/animations";
 import { Card, CardContent } from "@/components/ui/card";
 
 interface BlogCardProps {
@@ -15,13 +15,15 @@ interface BlogCardProps {
 }
 
 export function BlogCard({ post, index = 0 }: BlogCardProps) {
+  const reveal = useScrollReveal({ index, duration: 1.25 });
+
   return (
     <motion.div
-      initial={false}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={sectionTransition(index * 0.1)}
-      whileHover={{ y: -4 }}
+      ref={reveal.ref}
+      initial={reveal.initial}
+      animate={reveal.animate}
+      transition={reveal.transition}
+      whileHover={{ y: -6 }}
     >
       <Link href={`/blog/${post.slug}`}>
         <Card className="group h-full overflow-hidden border-border/50 transition-all hover:border-primary/30 hover:shadow-xl">

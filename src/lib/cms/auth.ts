@@ -36,9 +36,14 @@ function safeCompare(value: string, expected: string): boolean {
 }
 
 export function verifyAdminCredentials(userId: string, password: string): boolean {
-  const expectedUserId = process.env.ADMIN_USER_ID ?? "admin";
-  const expectedPassword = process.env.ADMIN_PASSWORD ?? "wolfrayet-admin-change-me";
-  return safeCompare(userId, expectedUserId) && safeCompare(password, expectedPassword);
+  const expectedUserId = (process.env.ADMIN_USER_ID ?? "admin").trim();
+  const expectedPassword = (
+    process.env.ADMIN_PASSWORD ?? "wolfrayet-admin-change-me"
+  ).trim();
+  return (
+    safeCompare(userId.trim(), expectedUserId) &&
+    safeCompare(password.trim(), expectedPassword)
+  );
 }
 
 export async function isAdminAuthenticated(): Promise<boolean> {

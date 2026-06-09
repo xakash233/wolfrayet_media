@@ -1,8 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { sectionTransition } from "@/lib/animations";
-import { SSR_SAFE_INITIAL, VIEWPORT_ONCE } from "@/lib/motion-safe";
+import { ScrollReveal } from "@/components/shared/scroll-reveal";
 import { cn } from "@/lib/utils";
 
 interface SectionHeadingProps {
@@ -23,11 +21,7 @@ export function SectionHeading({
   compact = false,
 }: SectionHeadingProps) {
   return (
-    <motion.div
-      initial={SSR_SAFE_INITIAL}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={VIEWPORT_ONCE}
-      transition={sectionTransition(0)}
+    <div
       className={cn(
         compact ? "mb-5 max-w-3xl" : "mb-6 max-w-3xl",
         align === "center" && "mx-auto text-center",
@@ -35,23 +29,29 @@ export function SectionHeading({
       )}
     >
       {eyebrow && (
-        <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-primary">
-          {eyebrow}
-        </p>
+        <ScrollReveal index={0} duration={1.2}>
+          <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-primary">
+            {eyebrow}
+          </p>
+        </ScrollReveal>
       )}
-      <h2 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
-        {title}
-      </h2>
+      <ScrollReveal index={1} duration={1.35}>
+        <h2 className="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
+          {title}
+        </h2>
+      </ScrollReveal>
       {description && (
-        <p
-          className={cn(
-            "mt-4 text-muted-foreground",
-            compact ? "text-sm leading-relaxed sm:text-base" : "text-lg"
-          )}
-        >
-          {description}
-        </p>
+        <ScrollReveal index={2} duration={1.25}>
+          <p
+            className={cn(
+              "mt-4 text-muted-foreground",
+              compact ? "text-sm leading-relaxed sm:text-base" : "text-lg"
+            )}
+          >
+            {description}
+          </p>
+        </ScrollReveal>
       )}
-    </motion.div>
+    </div>
   );
 }

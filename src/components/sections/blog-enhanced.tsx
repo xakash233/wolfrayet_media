@@ -1,9 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
 import { AnimatedSectionImage } from "@/components/shared/animated-section-image";
-import { sectionTransition } from "@/lib/animations";
+import { ScrollReveal } from "@/components/shared/scroll-reveal";
 import { Calendar, Clock, ArrowRight, BookOpen } from "lucide-react";
 import type { BlogPost } from "@/types";
 import { BlogListing } from "@/components/sections/blog-listing";
@@ -21,11 +20,10 @@ export function BlogEnhanced({ posts }: BlogEnhancedProps) {
 
   return (
     <div className="space-y-16">
-      <motion.article
-        initial={false}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-40px" }}
-        transition={sectionTransition(0)}
+      <ScrollReveal
+        as="article"
+        index={0}
+        duration={1.55}
         className="group overflow-hidden rounded-3xl border border-border"
       >
         <Link href={`/blog/${featured.slug}`} className="grid lg:grid-cols-2">
@@ -69,10 +67,10 @@ export function BlogEnhanced({ posts }: BlogEnhancedProps) {
             </span>
           </div>
         </Link>
-      </motion.article>
+      </ScrollReveal>
 
       <div className="grid gap-8 lg:grid-cols-4">
-        <div className="lg:col-span-1">
+        <ScrollReveal index={1} duration={1.45} className="lg:col-span-1">
           <div className="sticky top-28 space-y-6">
             <div className="glass-card p-6">
               <BookOpen className="h-8 w-8 text-primary" />
@@ -100,10 +98,10 @@ export function BlogEnhanced({ posts }: BlogEnhancedProps) {
               </Button>
             </div>
           </div>
-        </div>
-        <div className="lg:col-span-3">
+        </ScrollReveal>
+        <ScrollReveal index={2} duration={1.5} className="lg:col-span-3">
           <BlogListing posts={posts} />
-        </div>
+        </ScrollReveal>
       </div>
     </div>
   );

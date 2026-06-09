@@ -22,8 +22,8 @@ import {
 } from "lucide-react";
 import type { Service } from "@/types";
 import { AnimatedSectionImage } from "@/components/shared/animated-section-image";
+import { useScrollReveal } from "@/components/shared/scroll-reveal";
 import { serviceImageUrl } from "@/lib/images";
-import { sectionTransition } from "@/lib/animations";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 const iconMap: Record<string, LucideIcon> = {
@@ -51,14 +51,15 @@ interface ServiceCardProps {
 
 export function ServiceCard({ service, index = 0 }: ServiceCardProps) {
   const Icon = iconMap[service.icon] ?? Search;
+  const reveal = useScrollReveal({ index, duration: 1.25 });
 
   return (
     <motion.div
-      initial={false}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={sectionTransition(index * 0.1)}
-      whileHover={{ y: -4 }}
+      ref={reveal.ref}
+      initial={reveal.initial}
+      animate={reveal.animate}
+      transition={reveal.transition}
+      whileHover={{ y: -6 }}
     >
       <Link href={service.href}>
         <Card className="group h-full overflow-hidden border-border/50 bg-card/50 transition-all hover:border-primary/50 hover:shadow-xl hover:shadow-primary/5">
