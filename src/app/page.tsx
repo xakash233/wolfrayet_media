@@ -37,9 +37,10 @@ import { Button } from "@/components/ui/button";
 
 export const revalidate = 60;
 
-export default function HomePage() {
-  const settings = getCmsSettings();
-  const featuredServices = buildFeaturedServicesFromCms();
+export default async function HomePage() {
+  const settings = await getCmsSettings();
+  const featuredServices = await buildFeaturedServicesFromCms();
+  const blogPosts = await getBlogPosts();
 
   return (
     <>
@@ -120,7 +121,7 @@ export default function HomePage() {
           description="Stay informed with our marketing tips, trends, and case studies."
         />
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {getBlogPosts().slice(0, 3).map((post, index) => (
+          {blogPosts.slice(0, 3).map((post, index) => (
             <BlogCard key={post.slug} post={post} index={index} />
           ))}
         </div>

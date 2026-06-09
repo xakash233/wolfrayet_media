@@ -13,7 +13,9 @@ export const metadata: Metadata = {
   description: SEO_META.blog.description,
 };
 
-export default function BlogPage() {
+export default async function BlogPage() {
+  const posts = await getBlogPosts();
+
   return (
     <>
       <Hero
@@ -36,7 +38,7 @@ export default function BlogPage() {
           />
           <div className="absolute inset-0 bg-gradient-to-r from-background/90 via-background/55 to-transparent" />
         </div>
-        <BlogEnhanced posts={getBlogPosts()} />
+        <BlogEnhanced posts={posts} />
       </AnimatedSection>
 
       <AnimatedSection className="bg-muted/20">

@@ -1,10 +1,15 @@
 import {
-  defaultCmsBlog,
-  defaultCmsServices,
-  defaultCmsSettings,
-  defaultCmsTeam,
-} from "@/lib/cms/defaults";
-import { readCmsFile } from "@/lib/cms/storage";
+  createCmsEnquiry,
+  fetchCmsBlogPosts,
+  fetchCmsEnquiries,
+  fetchCmsServices,
+  fetchCmsSettings,
+  fetchCmsTeam,
+  saveCmsBlogPosts,
+  saveCmsServices,
+  saveCmsSettings,
+  saveCmsTeam,
+} from "@/lib/cms/repository";
 import type {
   CmsBlogData,
   CmsEnquiry,
@@ -13,22 +18,30 @@ import type {
   CmsTeamData,
 } from "@/lib/cms/types";
 
-export function getCmsSettings(): CmsSettings {
-  return readCmsFile("settings.json", defaultCmsSettings);
+export async function getCmsSettings(): Promise<CmsSettings> {
+  return fetchCmsSettings();
 }
 
-export function getCmsServices(): CmsServicesData {
-  return readCmsFile("services.json", defaultCmsServices);
+export async function getCmsServices(): Promise<CmsServicesData> {
+  return fetchCmsServices();
 }
 
-export function getCmsBlogPosts(): CmsBlogData {
-  return readCmsFile("blog.json", defaultCmsBlog);
+export async function getCmsBlogPosts(): Promise<CmsBlogData> {
+  return fetchCmsBlogPosts();
 }
 
-export function getCmsTeam(): CmsTeamData {
-  return readCmsFile("team.json", defaultCmsTeam);
+export async function getCmsTeam(): Promise<CmsTeamData> {
+  return fetchCmsTeam();
 }
 
-export function getCmsEnquiries(): CmsEnquiry[] {
-  return readCmsFile<CmsEnquiry[]>("enquiries.json", []);
+export async function getCmsEnquiries(): Promise<CmsEnquiry[]> {
+  return fetchCmsEnquiries();
 }
+
+export {
+  saveCmsSettings,
+  saveCmsServices,
+  saveCmsBlogPosts,
+  saveCmsTeam,
+  createCmsEnquiry,
+};

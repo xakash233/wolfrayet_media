@@ -34,9 +34,10 @@ const comparison = [
   { feature: "Custom web development (Next.js / React)", us: true, typical: false },
 ];
 
-export default function ServicesPage() {
-  const services = buildServicesFromCms();
-  const { digitalMarketingCategories, itServicesCategory } = getCmsServices();
+export default async function ServicesPage() {
+  const services = await buildServicesFromCms();
+  const { digitalMarketingCategories, itServicesCategory } =
+    await getCmsServices();
 
   return (
     <>

@@ -1,17 +1,20 @@
 import type { Service } from "@/types";
 import { getCmsServices } from "@/lib/cms/data";
 
-export function buildServicesFromCms(): Service[] {
-  const { digitalMarketingCategories, itServicesCategory } = getCmsServices();
+export async function buildServicesFromCms(): Promise<Service[]> {
+  const { digitalMarketingCategories, itServicesCategory } =
+    await getCmsServices();
 
-  const categoryServices: Service[] = digitalMarketingCategories.map((category) => ({
-    id: category.id,
-    title: category.title,
-    description: category.description,
-    icon: category.icon,
-    features: [...category.items],
-    href: `/services#${category.id}`,
-  }));
+  const categoryServices: Service[] = digitalMarketingCategories.map(
+    (category) => ({
+      id: category.id,
+      title: category.title,
+      description: category.description,
+      icon: category.icon,
+      features: [...category.items],
+      href: `/services#${category.id}`,
+    })
+  );
 
   const itServices: Service = {
     id: itServicesCategory.id,
@@ -22,7 +25,9 @@ export function buildServicesFromCms(): Service[] {
     href: `/services#${itServicesCategory.id}`,
   };
 
-  const webDevIndex = categoryServices.findIndex((s) => s.id === "web-development");
+  const webDevIndex = categoryServices.findIndex(
+    (s) => s.id === "web-development"
+  );
 
   return [
     ...categoryServices.slice(0, webDevIndex + 1),
@@ -41,8 +46,8 @@ const featuredIds = [
   "social-ads",
 ] as const;
 
-export function buildFeaturedServicesFromCms(): Service[] {
-  const services = buildServicesFromCms();
+export async function buildFeaturedServicesFromCms(): Promise<Service[]> {
+  const services = await buildServicesFromCms();
   return featuredIds
     .map((id) => services.find((s) => s.id === id))
     .filter((s): s is Service => s !== undefined);
