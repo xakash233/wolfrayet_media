@@ -7,7 +7,7 @@ import { FeaturesGrid } from "@/components/sections/features-grid";
 import { CTASection } from "@/components/sections/cta-section";
 import { AnimatedSection } from "@/components/shared/animated-section";
 import { SectionHeading } from "@/components/shared/section-heading";
-import { teamMembers } from "@/data/team";
+import { getCmsTeam } from "@/lib/cms/data";
 import { timeline, features } from "@/data/stats";
 import { SEO_META } from "@/lib/seo-keywords";
 
@@ -16,7 +16,10 @@ export const metadata: Metadata = {
   description: SEO_META.about.description,
 };
 
+export const revalidate = 60;
+
 export default function AboutPage() {
+  const teamMembers = getCmsTeam();
   return (
     <>
       <Hero
@@ -55,7 +58,7 @@ export default function AboutPage() {
         <SectionHeading
           eyebrow="Why Choose Us"
           title="The Wolfrayet Advantage"
-          description="What sets us apart among the best digital marketing firms and top performance marketing agencies."
+          description="Wolfrayet Media delivers data-driven digital marketing and web solutions, combining innovation, strategy, and measurable growth to help brands outperform competitors."
         />
         <FeaturesGrid features={features} />
       </AnimatedSection>

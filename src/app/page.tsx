@@ -24,21 +24,28 @@ import { NewsletterSignup } from "@/components/sections/newsletter-signup";
 import { CTASection } from "@/components/sections/cta-section";
 import { AnimatedSection } from "@/components/shared/animated-section";
 import { SectionHeading } from "@/components/shared/section-heading";
-import { featuredServices } from "@/data/services";
+import { getCmsSettings } from "@/lib/cms/data";
+import { buildFeaturedServicesFromCms } from "@/lib/cms/services";
 import { features } from "@/data/stats";
 import { testimonials } from "@/data/testimonials";
 import { pricingPlans } from "@/data/pricing";
 import { faqItems } from "@/data/faq";
-import { blogPosts } from "@/data/blog";
+import { getBlogPosts } from "@/data/blog";
 import { BlogCard } from "@/components/sections/blog-card";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
+export const revalidate = 60;
+
 export default function HomePage() {
+  const settings = getCmsSettings();
+  const featuredServices = buildFeaturedServicesFromCms();
+
   return (
     <>
       <Hero
         videoIntro
+        videoConfig={settings.heroVideo}
         showCta={false}
         showViewMore
         viewMoreHref="/#intro"
@@ -51,7 +58,7 @@ export default function HomePage() {
           compact
           eyebrow="Services"
           title="Top Digital Marketing Services"
-          description="Best digital marketing services from a top PPC agency and best local SEO agency — SEO, paid search, social media, content marketing, ecommerce, and web development."
+          description="Turn your digital presence into a powerful growth engine with top digital marketing services that boost visibility, attract qualified leads, increase conversions, and drive sustainable business success."
         />
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {featuredServices.map((service, index) => (
@@ -85,7 +92,7 @@ export default function HomePage() {
           compact
           eyebrow="Testimonials"
           title="Our Clients Love Us"
-          description="Don't just take our word for it—hear from brands we've helped grow."
+          description="Our clients love us for delivering powerful digital solutions, exceptional service, and measurable results that drive sustainable business growth and long-term success."
         />
         <TestimonialsCarousel testimonials={testimonials} showViewAll />
       </AnimatedSection>
@@ -113,7 +120,7 @@ export default function HomePage() {
           description="Stay informed with our marketing tips, trends, and case studies."
         />
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {blogPosts.slice(0, 3).map((post, index) => (
+          {getBlogPosts().slice(0, 3).map((post, index) => (
             <BlogCard key={post.slug} post={post} index={index} />
           ))}
         </div>

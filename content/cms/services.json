@@ -1,0 +1,260 @@
+{
+  "digitalMarketingCategories": [
+    {
+      "number": 1,
+      "id": "seo",
+      "title": "Search Engine Optimization (SEO)",
+      "description": "Improve rankings, traffic, and visibility with technical, on-page, off-page, and local SEO.",
+      "icon": "Search",
+      "items": [
+        "On-Page SEO",
+        "Off-Page SEO / Link Building",
+        "Technical SEO",
+        "Local SEO",
+        "E-commerce SEO",
+        "Mobile SEO",
+        "International SEO",
+        "SEO Competitor Analysis",
+        "SEO Keyword Research",
+        "SEO Content Optimization",
+        "Google Business Profile Optimization",
+        "SEO Audits & Reporting"
+      ]
+    },
+    {
+      "number": 2,
+      "id": "ppc",
+      "title": "Pay-Per-Click Advertising (PPC)",
+      "description": "Drive qualified leads with paid search, display, shopping, and remarketing across major ad platforms.",
+      "icon": "Target",
+      "items": [
+        "Google Search Ads",
+        "Google Display Ads",
+        "Bing/Microsoft Ads",
+        "YouTube Advertising",
+        "Remarketing Campaigns",
+        "Shopping Ads / E-commerce Ads",
+        "Landing Page Optimization",
+        "Conversion Tracking Setup",
+        "A/B Testing for Ads",
+        "PPC Campaign Management"
+      ]
+    },
+    {
+      "number": 3,
+      "id": "smm",
+      "title": "Social Media Marketing (SMM)",
+      "description": "Grow your brand with strategy, content, community management, and measurable engagement.",
+      "icon": "Share2",
+      "items": [
+        "Social Media Strategy Development",
+        "Social Media Account Setup & Optimization",
+        "Content Calendar Creation",
+        "Social Media Post Design",
+        "Caption Writing & Hashtag Research",
+        "Community Management (Comments & DMs)",
+        "Social Media Growth & Engagement Campaigns",
+        "Monthly Social Media Analytics"
+      ]
+    },
+    {
+      "number": 4,
+      "id": "social-ads",
+      "title": "Social Media Advertising",
+      "description": "Scale reach and conversions with paid social campaigns, retargeting, and creative optimization.",
+      "icon": "Megaphone",
+      "items": [
+        "Facebook & Instagram Ads",
+        "TikTok Ads",
+        "LinkedIn Ads",
+        "Snapchat Ads",
+        "Pinterest Ads",
+        "Social Media Retargeting",
+        "Audience Segmentation",
+        "Ad Creative Design & Copywriting",
+        "Campaign Optimization & Reporting"
+      ]
+    },
+    {
+      "number": 5,
+      "id": "content",
+      "title": "Content Marketing",
+      "description": "Attract and convert audiences with blogs, copy, long-form assets, and strategic content planning.",
+      "icon": "PenLine",
+      "items": [
+        "Blog Writing",
+        "Website Copywriting",
+        "SEO Content Creation",
+        "Articles & Long-Form Content",
+        "Case Studies & Whitepapers",
+        "E-books & Lead Magnets",
+        "Video Scripts",
+        "Social Media Content Creation",
+        "Content Strategy & Planning"
+      ]
+    },
+    {
+      "number": 6,
+      "id": "email",
+      "title": "Email Marketing & Automation",
+      "description": "Nurture leads and customers with newsletters, automations, and performance-focused email flows.",
+      "icon": "Mail",
+      "items": [
+        "Newsletter Creation",
+        "Promotional Email Campaigns",
+        "Email Template Design",
+        "Drip Campaigns / Automation Flows",
+        "Abandoned Cart Emails",
+        "Lead Nurture Sequences",
+        "Email List Segmentation",
+        "Deliverability Optimization",
+        "Email Analytics & Reporting"
+      ]
+    },
+    {
+      "number": 7,
+      "id": "web-development",
+      "title": "Website Design & Development",
+      "description": "Launch fast, secure, mobile-ready websites and stores built for UX, speed, and conversions.",
+      "icon": "Code2",
+      "items": [
+        "Custom Website Design",
+        "WordPress Development",
+        "Shopify Development",
+        "E-commerce Website Setup",
+        "Landing Page Design",
+        "UX/UI Design",
+        "Website Speed Optimization",
+        "Mobile Responsive Design",
+        "Website Maintenance & Security Updates"
+      ]
+    },
+    {
+      "number": 8,
+      "id": "branding",
+      "title": "Branding & Creative Services",
+      "description": "Build a memorable brand with identity systems, messaging, and creative assets across channels.",
+      "icon": "Palette",
+      "items": [
+        "Logo Design",
+        "Brand Identity Development",
+        "Brand Messaging & Tone of Voice",
+        "Brand Guidelines",
+        "Marketing Collateral Design",
+        "Social Media Graphics",
+        "Ad Creatives",
+        "Packaging & Print Design"
+      ]
+    },
+    {
+      "number": 9,
+      "id": "cro",
+      "title": "Conversion Rate Optimization (CRO)",
+      "description": "Turn more visitors into customers with UX audits, testing, and funnel optimization.",
+      "icon": "TrendingUp",
+      "items": [
+        "UX Audits",
+        "Funnel Analysis",
+        "A/B Testing",
+        "Heatmaps & User Behavior Tracking",
+        "Landing Page Optimization",
+        "Checkout Optimization",
+        "Lead Form Optimization"
+      ]
+    },
+    {
+      "number": 10,
+      "id": "orm",
+      "title": "Online Reputation Management (ORM)",
+      "description": "Protect and improve how your brand is perceived online with review and sentiment strategies.",
+      "icon": "Star",
+      "items": [
+        "Review Monitoring",
+        "Review Generation Strategies",
+        "Responding to Reviews",
+        "Online Reputation Repair",
+        "Brand Sentiment Tracking",
+        "Crisis Management Support"
+      ]
+    },
+    {
+      "number": 11,
+      "id": "influencer",
+      "title": "Influencer & Creator Marketing",
+      "description": "Partner with creators to expand reach, build trust, and drive campaign performance.",
+      "icon": "Users",
+      "items": [
+        "Influencer Research & Outreach",
+        "Campaign Strategy & Planning",
+        "Contract Negotiation",
+        "Influencer Content Approval",
+        "Campaign Management",
+        "Performance Tracking"
+      ]
+    },
+    {
+      "number": 12,
+      "id": "video",
+      "title": "Video Marketing",
+      "description": "Engage audiences with short-form, product, testimonial, and edited video content.",
+      "icon": "Video",
+      "items": [
+        "Short-Form Video Content (Reels, TikToks, Shorts)",
+        "Explainer Videos",
+        "Product Videos",
+        "Testimonial Videos",
+        "Storyboarding & Scriptwriting",
+        "Video Editing"
+      ]
+    },
+    {
+      "number": 13,
+      "id": "analytics",
+      "title": "Analytics, Tracking & Reporting",
+      "description": "Measure what matters with GA4, tags, dashboards, and clear performance reporting.",
+      "icon": "BarChart3",
+      "items": [
+        "Google Analytics Setup (GA4)",
+        "Conversion Tracking Setup",
+        "Tag Manager Configuration",
+        "Custom Dashboard Creation (Looker Studio)",
+        "Monthly Performance Reports",
+        "Competitor & Market Analysis"
+      ]
+    },
+    {
+      "number": 14,
+      "id": "digital-growth",
+      "title": "Additional Digital Growth Services",
+      "description": "Extend your stack with automation, CRM, funnels, and strategic growth consulting.",
+      "icon": "Rocket",
+      "items": [
+        "Affiliate Marketing Setup",
+        "Marketing Automation",
+        "CRM Setup & Integration",
+        "SMS Marketing",
+        "Funnel Building",
+        "Lead Generation Campaigns",
+        "Digital Strategy Consulting"
+      ]
+    }
+  ],
+  "itServicesCategory": {
+    "number": 0,
+    "icon": "Server",
+    "id": "it-services",
+    "title": "IT Services",
+    "description": "Infrastructure, cloud, and network leadership for scalable, secure business systems.",
+    "items": [
+      "Mentor infrastructure engineers and administrators",
+      "Plan and design scalable IT infrastructure (servers, storage, networking).",
+      "Define cloud/on-premises hybrid strategies.",
+      "Ensure disaster recovery and business continuity planning.",
+      "Cloud migration (AWS, Azure, GCP).",
+      "Optimize cloud resource usage and costs.",
+      "Backup and Storage management.",
+      "Design and maintain LAN/WAN infrastructure",
+      "Oversee firewalls, VPNs, and load balancers"
+    ]
+  }
+}

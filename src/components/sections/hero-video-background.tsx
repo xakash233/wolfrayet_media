@@ -7,9 +7,17 @@ import { cn } from "@/lib/utils";
 
 interface HeroVideoBackgroundProps {
   className?: string;
+  webm?: string;
+  mp4?: string;
+  poster?: string;
 }
 
-export function HeroVideoBackground({ className }: HeroVideoBackgroundProps) {
+export function HeroVideoBackground({
+  className,
+  webm = HERO_VIDEO.webm,
+  mp4 = HERO_VIDEO.mp4,
+  poster = HERO_VIDEO.poster,
+}: HeroVideoBackgroundProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
@@ -36,7 +44,7 @@ export function HeroVideoBackground({ className }: HeroVideoBackgroundProps) {
   return (
     <div className={cn("absolute inset-0 overflow-hidden", className)}>
       <Image
-        src={HERO_VIDEO.poster}
+        src={poster}
         alt=""
         fill
         priority
@@ -53,8 +61,8 @@ export function HeroVideoBackground({ className }: HeroVideoBackgroundProps) {
         preload="auto"
         aria-hidden
       >
-        <source src={HERO_VIDEO.webm} type="video/webm" />
-        <source src={HERO_VIDEO.mp4} type="video/mp4" />
+        {webm ? <source src={webm} type="video/webm" /> : null}
+        <source src={mp4} type="video/mp4" />
       </video>
     </div>
   );

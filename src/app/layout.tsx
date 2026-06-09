@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
+import { headers } from "next/headers";
 import "./globals.css";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { PageTransitionProvider } from "@/components/providers/page-transition-provider";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { FloatingActions } from "@/components/shared/floating-actions";
+import { PromoPopup } from "@/components/shared/promo-popup";
 import { OrganizationJsonLd } from "@/components/shared/json-ld";
 import { SITE_CONFIG } from "@/lib/constants";
 import { SEO_KEYWORDS } from "@/lib/seo-keywords";
@@ -38,6 +40,10 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
+  icons: {
+    icon: [{ url: "/logo/favicon2.png", type: "image/png" }],
+    apple: "/logo/favicon2.png",
+  },
 };
 
 export default function RootLayout({
@@ -45,6 +51,9 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const pathname = headers().get("x-pathname") ?? "";
+  const isAdmin = pathname.startsWith("/admin");
+
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
@@ -57,17 +66,24 @@ export default function RootLayout({
         <link href={DM_SANS_STYLESHEET} rel="stylesheet" />
       </head>
       <body className="font-sans antialiased">
-        <OrganizationJsonLd />
+        {!isAdmin && <OrganizationJsonLd />}
         <ThemeProvider>
-          <a href="#main-content" className="skip-link">
-            Skip to main content
-          </a>
-          <Header />
-          <main id="main-content" tabIndex={-1} className="outline-none">
-            <PageTransitionProvider>{children}</PageTransitionProvider>
-          </main>
-          <Footer />
-          <FloatingActions />
+          {!isAdmin && (
+            <a href="#main-content" className="skip-link">
+              Skip to main content
+            </a>
+          )}
+          {!isAdmin && <Header />}
+          {isAdmin ? (
+            children
+          ) : (
+            <main id="main-content" tabIndex={-1} className="outline-none">
+              <PageTransitionProvider>{children}</PageTransitionProvider>
+            </main>
+          )}
+          {!isAdmin && <Footer />}
+          {!isAdmin && <FloatingActions />}
+          {!isAdmin && <PromoPopup />}
         </ThemeProvider>
       </body>
     </html>

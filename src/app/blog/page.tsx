@@ -5,7 +5,7 @@ import { SECTION_IMAGES } from "@/lib/images";
 import { BlogEnhanced } from "@/components/sections/blog-enhanced";
 import { NewsletterSignup } from "@/components/sections/newsletter-signup";
 import { AnimatedSection } from "@/components/shared/animated-section";
-import { blogPosts } from "@/data/blog";
+import { getBlogPosts } from "@/data/blog";
 import { SEO_META } from "@/lib/seo-keywords";
 
 export const metadata: Metadata = {
@@ -36,7 +36,7 @@ export default function BlogPage() {
           />
           <div className="absolute inset-0 bg-gradient-to-r from-background/90 via-background/55 to-transparent" />
         </div>
-        <BlogEnhanced posts={blogPosts} />
+        <BlogEnhanced posts={getBlogPosts()} />
       </AnimatedSection>
 
       <AnimatedSection className="bg-muted/20">

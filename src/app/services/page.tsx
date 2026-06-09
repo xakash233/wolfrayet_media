@@ -9,14 +9,13 @@ import { ProcessWorkflow } from "@/components/sections/process-workflow";
 import { CTASection } from "@/components/sections/cta-section";
 import { AnimatedSection } from "@/components/shared/animated-section";
 import { SectionHeading } from "@/components/shared/section-heading";
-import { services } from "@/data/services";
-import {
-  digitalMarketingCategories,
-  itServicesCategory,
-} from "@/data/service-categories";
+import { getCmsServices } from "@/lib/cms/data";
+import { buildServicesFromCms } from "@/lib/cms/services";
 import { customAddOns, pricingNote, pricingPlans } from "@/data/pricing";
 import { SEO_META } from "@/lib/seo-keywords";
 import { Check, X } from "lucide-react";
+
+export const revalidate = 60;
 
 export const metadata: Metadata = {
   title: SEO_META.services.title,
@@ -36,6 +35,9 @@ const comparison = [
 ];
 
 export default function ServicesPage() {
+  const services = buildServicesFromCms();
+  const { digitalMarketingCategories, itServicesCategory } = getCmsServices();
+
   return (
     <>
       <Hero

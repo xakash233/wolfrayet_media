@@ -106,7 +106,7 @@
 
   /* Hero typography — shared across all page heroes (max title: text-4xl) */
   .hero-eyebrow {
-    @apply text-sm font-semibold uppercase tracking-[0.16em] sm:text-base;
+    @apply text-base font-semibold uppercase tracking-[0.16em] sm:text-lg;
   }
 
   .hero-title {
@@ -114,11 +114,11 @@
   }
 
   .hero-title-home {
-    @apply text-xl font-bold leading-snug sm:text-2xl lg:text-4xl;
+    @apply text-2xl font-bold leading-snug sm:text-3xl md:text-4xl lg:text-5xl;
   }
 
   .hero-subtitle {
-    @apply text-base leading-relaxed sm:text-lg;
+    @apply text-base leading-relaxed sm:text-lg lg:text-xl;
   }
 
   .skip-link {

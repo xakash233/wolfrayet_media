@@ -11,6 +11,7 @@ import { HERO_IMAGES } from "@/lib/images";
 import { sectionTransition } from "@/lib/animations";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import type { CmsHeroVideo } from "@/lib/cms/types";
 
 interface HeroProps {
   title?: string;
@@ -29,6 +30,7 @@ interface HeroProps {
   hideEyebrow?: boolean;
   /** Homepage: full-screen video background with image fallback */
   videoIntro?: boolean;
+  videoConfig?: CmsHeroVideo;
 }
 
 export function Hero({
@@ -43,6 +45,7 @@ export function Hero({
   heroImage = "default",
   hideEyebrow = false,
   videoIntro = false,
+  videoConfig,
 }: HeroProps) {
   const backgroundSrc = imageSrc ?? HERO_IMAGES[heroImage];
   const reducedMotion = useReducedMotion();
@@ -56,7 +59,12 @@ export function Hero({
       {/* Full-bleed background — covers entire hero to all edges */}
       <div className="absolute inset-0 z-0 min-h-[100svh] w-full" aria-hidden>
         {videoIntro ? (
-          <HeroVideoBackground className="min-h-[100svh] w-full" />
+          <HeroVideoBackground
+            className="min-h-[100svh] w-full"
+            webm={videoConfig?.webm}
+            mp4={videoConfig?.mp4}
+            poster={videoConfig?.poster}
+          />
         ) : (
           <AnimatedSectionImage
             src={backgroundSrc}
@@ -98,7 +106,7 @@ export function Hero({
           animate={{ opacity: 1, y: 0 }}
           transition={sectionTransition(0.12)}
           className={cn(
-            "mx-auto max-w-5xl text-white text-balance",
+            "mx-auto max-w-6xl text-white text-balance",
             isHomeTagline ? "hero-title-home tracking-wide" : "hero-title"
           )}
         >

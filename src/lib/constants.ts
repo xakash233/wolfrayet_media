@@ -8,9 +8,9 @@ export const SITE_CONFIG = {
   heroHeadline:
     "Your Trusted Digital Marketing And Web Development Partner",
   heroDescription:
-    "As a best digital marketing agency and top marketing agency, we help businesses grow through customized SEO, PPC, social media marketing, and web development. From best local SEO agency strategies to performance marketing and ecommerce campaigns, we deliver high-performing websites and paid advertising that boost visibility, generate leads, and increase conversions.",
+    "Wolfrayet Media is your trusted digital marketing and web development partner, transforming bold ideas into powerful digital success through innovative strategies, SEO-driven growth, and high-performance websites that attract, engage, and convert customers while accelerating your brand's growth in a competitive online marketplace.",
   description:
-    "Wolfrayet Media is among the best digital marketing agencies and top digital marketing companies — offering SEO, PPC, social media marketing, performance marketing, local SEO, web development, and IT services.",
+    "Wolfrayet Media is your trusted digital marketing and web development partner, transforming bold ideas into powerful digital success through innovative strategies, SEO-driven growth, and high-performance websites that attract, engage, and convert customers while accelerating your brand's growth in a competitive online marketplace.",
   seoDescription:
     "Wolfrayet Media is a best digital marketing agency and top digital marketing company offering SEO, PPC, social media marketing, performance marketing, local SEO, web development, and IT services near you.",
   bannerLongDescription:

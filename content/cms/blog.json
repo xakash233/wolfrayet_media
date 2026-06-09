@@ -1,0 +1,69 @@
+[
+  {
+    "slug": "seo-trends-2024",
+    "title": "10 SEO Trends That Will Dominate 2024",
+    "excerpt": "Stay ahead of the curve with these essential SEO strategies—from AI content to Core Web Vitals.",
+    "content": "Search engine optimization continues to evolve at breakneck speed. In 2024, AI-generated content, E-E-A-T signals, and user experience metrics are more important than ever.\n\n**Key trends to watch:**\n\n1. **AI and Search** - Google is getting better at detecting AI content. Focus on human expertise and original insights.\n2. **Core Web Vitals** - Page experience remains a ranking factor. Optimize LCP, FID, and CLS.\n3. **Zero-click searches** - Optimize for featured snippets and People Also Ask boxes.\n4. **Video SEO** - YouTube and video results dominate many SERPs.\n5. **Local SEO** - Google Business Profile optimization is critical for local businesses.\n\nThe brands that win in 2024 will combine technical excellence with genuinely helpful content that serves user intent.",
+    "category": "SEO",
+    "author": "Sneha Kapoor",
+    "date": "2024-03-15",
+    "readTime": "8 min read",
+    "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=500&fit=crop&q=80",
+    "featured": true
+  },
+  {
+    "slug": "social-media-strategy-guide",
+    "title": "The Complete Social Media Strategy Guide for 2024",
+    "excerpt": "Build an engaged audience and drive conversions with this step-by-step social media playbook.",
+    "content": "Social media isn't just about posting—it's about building relationships and driving measurable business outcomes.\n\n**Your strategy framework:**\n\n- Define clear goals (awareness, engagement, leads, sales)\n- Know your audience deeply—demographics, pain points, content preferences\n- Choose platforms wisely—don't spread thin across every network\n- Create a content calendar with mix of educational, entertaining, and promotional\n- Engage authentically—respond to comments and DMs promptly\n- Measure what matters—track reach, engagement rate, click-through, and conversions\n\nConsistency beats perfection. Post regularly, test different formats, and double down on what works.",
+    "category": "Social Media",
+    "author": "Priya Mehta",
+    "date": "2024-03-10",
+    "readTime": "12 min read",
+    "image": "https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=800&h=500&fit=crop&q=80"
+  },
+  {
+    "slug": "ppc-roas-optimization",
+    "title": "How to Optimize PPC Campaigns for Maximum ROAS",
+    "excerpt": "Practical tactics to improve your paid advertising return on ad spend by 2x or more.",
+    "content": "Getting positive ROAS from PPC requires continuous optimization across targeting, creative, and landing pages.\n\n**Optimization checklist:**\n\n1. **Negative keywords** - Regularly audit search terms and add negatives\n2. **Audience segmentation** - Create tailored ad groups for each persona\n3. **Landing page alignment** - Message match between ad and landing page\n4. **Bid strategies** - Test Target ROAS vs Maximize Conversions\n5. **Creative testing** - A/B test headlines, images, and CTAs weekly\n6. **Conversion tracking** - Ensure all micro and macro conversions are tracked\n\nStart with your highest-spending campaigns and apply these optimizations systematically.",
+    "category": "PPC",
+    "author": "Rahul Verma",
+    "date": "2024-03-05",
+    "readTime": "10 min read",
+    "image": "https://images.unsplash.com/photo-1553877522-43269d4ea984?w=800&h=500&fit=crop&q=80"
+  },
+  {
+    "slug": "content-marketing-roi",
+    "title": "Measuring Content Marketing ROI: A Practical Framework",
+    "excerpt": "Learn how to attribute revenue to content and prove marketing's impact to stakeholders.",
+    "content": "Content marketing ROI is notoriously hard to measure—but not impossible. Here's a framework that works.\n\n**Metrics to track:**\n\n- **Traffic metrics** - Organic sessions, time on page, pages per session\n- **Engagement** - Comments, shares, email signups from content\n- **Lead metrics** - Content-attributed form fills and demo requests\n- **Revenue** - Multi-touch attribution connecting content to closed deals\n\nUse UTM parameters, marketing automation, and CRM integration to build a complete picture. Report monthly with clear narratives tying content to business outcomes.",
+    "category": "Content",
+    "author": "Akash Sharma",
+    "date": "2024-02-28",
+    "readTime": "7 min read",
+    "image": "https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?w=800&h=500&fit=crop&q=80"
+  },
+  {
+    "slug": "brand-storytelling",
+    "title": "Brand Storytelling: Connecting Emotionally with Your Audience",
+    "excerpt": "Why stories sell better than features—and how to craft narratives that build lasting brand loyalty.",
+    "content": "Humans are wired for stories. Brands that master storytelling create emotional connections that transcend transactional relationships.\n\n**Elements of powerful brand stories:**\n\n- **Authenticity** - Share real challenges and victories\n- **Relatability** - Your customer is the hero, not your brand\n- **Consistency** - Same voice and values across all touchpoints\n- **Visual storytelling** - Images and video amplify narrative impact\n\nStart with your origin story, customer success stories, and the \"why\" behind what you do. Weave these into every piece of content you create.",
+    "category": "Branding",
+    "author": "Rahul Verma",
+    "date": "2024-02-20",
+    "readTime": "6 min read",
+    "image": "https://images.unsplash.com/photo-1547658719-da2b51169166?w=800&h=500&fit=crop&q=80"
+  },
+  {
+    "slug": "email-marketing-automation",
+    "title": "Email Marketing Automation: Workflows That Convert",
+    "excerpt": "Set up automated email sequences that nurture leads and recover abandoned carts on autopilot.",
+    "content": "Email remains one of the highest-ROI marketing channels. Automation lets you scale personalization.\n\n**Essential workflows:**\n\n1. Welcome series for new subscribers\n2. Lead nurture sequences based on behavior\n3. Abandoned cart recovery\n4. Post-purchase follow-up and upsell\n5. Re-engagement for inactive subscribers\n\nSegment your list, personalize beyond {first_name}, and always provide value before asking for the sale.",
+    "category": "Email",
+    "author": "Priya Mehta",
+    "date": "2024-02-15",
+    "readTime": "9 min read",
+    "image": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&h=500&fit=crop&q=80"
+  }
+]

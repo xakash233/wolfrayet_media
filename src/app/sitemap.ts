@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 import { SITE_CONFIG } from "@/lib/constants";
-import { blogPosts } from "@/data/blog";
+import { getBlogPosts } from "@/data/blog";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = SITE_CONFIG.url;
@@ -14,7 +14,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })
   );
 
-  const blogPages = blogPosts.map((post) => ({
+  const blogPages = getBlogPosts().map((post) => ({
     url: `${baseUrl}/blog/${post.slug}`,
     lastModified: new Date(post.date),
     changeFrequency: "monthly" as const,

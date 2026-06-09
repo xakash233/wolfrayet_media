@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, Calendar, Clock, User } from "lucide-react";
 import { Hero } from "@/components/sections/hero";
-import { blogPosts, getBlogPostBySlug } from "@/data/blog";
+import { getBlogPosts, getBlogPostBySlug } from "@/data/blog";
 import { Button } from "@/components/ui/button";
 import { AnimatedSection } from "@/components/shared/animated-section";
 import { NewsletterSignup } from "@/components/sections/newsletter-signup";
@@ -13,7 +13,7 @@ interface BlogPostPageProps {
 }
 
 export async function generateStaticParams() {
-  return blogPosts.map((post) => ({ slug: post.slug }));
+  return getBlogPosts().map((post) => ({ slug: post.slug }));
 }
 
 export async function generateMetadata({

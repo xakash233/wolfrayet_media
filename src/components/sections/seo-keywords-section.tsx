@@ -10,64 +10,20 @@ export function SeoKeywordsSection() {
         compact
         align="center"
         eyebrow="Why Wolfrayet Media"
-        title="Among the Best Digital Marketing Agencies & Top Marketing Companies"
-        description="Businesses searching for a best digital marketing agency near me, top PPC agencies, or best local SEO agency choose Wolfrayet Media for measurable growth across India and worldwide."
+        title="Why Wolfrayet Media Is Among the Best Digital Marketing Agencies"
+        description="Wolfrayet Media is a leading digital marketing agency dedicated to transforming brands through innovative strategies, data-driven marketing, and creative excellence. We help businesses increase online visibility, generate high-quality leads, and achieve measurable growth through expert SEO, social media marketing, performance advertising, branding, and web development solutions. Our commitment to delivering real results, maximizing ROI, and creating meaningful customer engagement makes us a trusted partner for businesses seeking long-term digital success."
       />
-      <div className="mx-auto max-w-4xl space-y-6 text-center text-sm leading-relaxed text-muted-foreground sm:text-base">
+      <div className="mx-auto mt-6 max-w-4xl text-center text-sm leading-relaxed text-muted-foreground sm:text-base">
         <p>
-          As one of the{" "}
-          <strong className="font-semibold text-foreground">
-            best digital marketing companies
-          </strong>{" "}
-          and{" "}
-          <strong className="font-semibold text-foreground">
-            top digital marketing firms
-          </strong>
-          , we combine SEO, paid search, social media, and web development. Whether
-          you need a{" "}
-          <strong className="font-semibold text-foreground">
-            best PPC agency
-          </strong>
-          ,{" "}
-          <strong className="font-semibold text-foreground">
-            best content marketing agencies
-          </strong>
-          -level strategy, or{" "}
-          <strong className="font-semibold text-foreground">
-            digital performance marketing agency
-          </strong>{" "}
-          support, our team delivers end-to-end{" "}
-          <strong className="font-semibold text-foreground">
-            best digital marketing services
-          </strong>{" "}
-          tailored to your goals.
-        </p>
-        <p>
-          From{" "}
-          <strong className="font-semibold text-foreground">
-            best ecommerce marketing agency
-          </strong>{" "}
-          campaigns and{" "}
-          <strong className="font-semibold text-foreground">
-            top social media marketing companies
-          </strong>{" "}
-          workflows to{" "}
-          <strong className="font-semibold text-foreground">
-            best marketing agencies for startups
-          </strong>{" "}
-          and real estate brands, we help you compete with the{" "}
-          <strong className="font-semibold text-foreground">
-            biggest digital marketing companies
-          </strong>{" "}
-          — without enterprise overhead. Explore our{" "}
+          Explore our{" "}
           <Link href="/services" className="font-medium text-primary hover:underline">
             top digital marketing services
           </Link>{" "}
           or{" "}
           <Link href="/contact" className="font-medium text-primary hover:underline">
-            get online marketing services near me
-          </Link>
-          .
+            get in touch
+          </Link>{" "}
+          to start growing your brand today.
         </p>
       </div>
       <ul
