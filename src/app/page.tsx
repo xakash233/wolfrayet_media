@@ -24,7 +24,7 @@ import { NewsletterSignup } from "@/components/sections/newsletter-signup";
 import { CTASection } from "@/components/sections/cta-section";
 import { AnimatedSection } from "@/components/shared/animated-section";
 import { SectionHeading } from "@/components/shared/section-heading";
-import { getCmsSettings } from "@/lib/cms/data";
+import { getCmsSettings } from "@/lib/api/cms";
 import { buildFeaturedServicesFromCms } from "@/lib/cms/services";
 import { features } from "@/data/stats";
 import { testimonials } from "@/data/testimonials";

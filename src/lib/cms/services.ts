@@ -1,5 +1,5 @@
 import type { Service } from "@/types";
-import { getCmsServices } from "@/lib/cms/data";
+import { getCmsServices } from "@/lib/api/cms";
 
 export async function buildServicesFromCms(): Promise<Service[]> {
   const { digitalMarketingCategories, itServicesCategory } =

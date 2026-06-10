@@ -1,0 +1,7 @@
+/** Resolve CMS asset paths for admin previews (relative, blob, or absolute). */
+export function resolveAssetUrl(path: string): string {
+  if (!path) return "";
+  if (path.startsWith("http://") || path.startsWith("https://")) return path;
+  if (path.startsWith("/")) return path;
+  return `/${path}`;
+}

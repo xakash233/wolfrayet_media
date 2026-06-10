@@ -7,7 +7,7 @@ import { ProcessWorkflow } from "@/components/sections/process-workflow";
 import { CTASection } from "@/components/sections/cta-section";
 import { AnimatedSection } from "@/components/shared/animated-section";
 import { SectionHeading } from "@/components/shared/section-heading";
-import { getCmsServices } from "@/lib/cms/data";
+import { getCmsServices } from "@/lib/api/cms";
 import { customAddOns, pricingNote, pricingPlans } from "@/data/pricing";
 import { SEO_META } from "@/lib/seo-keywords";
 import { Check, X } from "lucide-react";

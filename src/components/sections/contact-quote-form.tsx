@@ -14,6 +14,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { LoadingSpinner } from "@/components/shared/loading-spinner";
+import { apiUrl } from "@/lib/api/config";
 import { cn } from "@/lib/utils";
 
 const SERVICE_OPTIONS = [
@@ -76,7 +77,7 @@ export function ContactQuoteForm() {
   };
 
   const onSubmit = async (formData: ContactQuoteValues) => {
-    const response = await fetch("/api/contact", {
+    const response = await fetch(apiUrl("/api/contact"), {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

@@ -126,39 +126,38 @@ export function ServicesBentoGrid({
     if (!containerEl || !rowAEl || !rowBEl) return;
 
     const ctx = gsap.context(() => {
+      const travel = Math.max(rowAEl.scrollWidth, rowBEl.scrollWidth) * 0.22;
+      const startX = -travel * 0.35;
+      const endX = -travel * 1.25;
+
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: containerEl,
+          scroller: document.documentElement,
           start: "top 12%",
           end: "+=2500",
           scrub: 1,
           pin: true,
           anticipatePin: 1,
+          invalidateOnRefresh: true,
         },
       });
 
-      // Shift using explicit pixels (-1000px to -3500px) which creates exactly 2500px of movement to match the scroll distance.
-      // Keeping the values negative guarantees the left edge is never seen. 
-      // 3 copies = ~9400px wide, so -3500px guarantees the right edge is never seen.
-      tl.fromTo(
-        rowAEl,
-        { x: -1000 },
-        { x: -3500, ease: "none" },
-        0
-      );
-      
-      tl.fromTo(
-        rowBEl,
-        { x: -3500 },
-        { x: -1000, ease: "none" },
-        0
-      );
+      tl.fromTo(rowAEl, { x: startX }, { x: endX, ease: "none" }, 0);
+      tl.fromTo(rowBEl, { x: endX }, { x: startX, ease: "none" }, 0);
     }, scrollRef);
 
-    ScrollTrigger.refresh();
+    const refresh = () => ScrollTrigger.refresh();
+    refresh();
+    window.addEventListener("load", refresh);
+    window.addEventListener("resize", refresh);
 
-    return () => ctx.revert();
-  }, [ready, reduceMotion]);
+    return () => {
+      window.removeEventListener("load", refresh);
+      window.removeEventListener("resize", refresh);
+      ctx.revert();
+    };
+  }, [ready, reduceMotion, rowA.length, rowB.length]);
 
   return (
     <section className="space-y-8">
@@ -172,7 +171,7 @@ export function ServicesBentoGrid({
       </ScrollReveal>
 
       <div ref={scrollRef} className="py-6 sm:py-10">
-        <div className="space-y-4 overflow-hidden">
+        <div className="relative left-1/2 w-screen max-w-[100vw] -translate-x-1/2 space-y-4 overflow-hidden">
           <div className="overflow-hidden">
             <div
               ref={rowARef}

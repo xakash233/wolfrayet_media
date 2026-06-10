@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input";
 import { SITE_CONFIG } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 import { LoadingSpinner } from "@/components/shared/loading-spinner";
+import { apiUrl } from "@/lib/api/config";
 
 interface ChatMessage {
   id: string;
@@ -52,7 +53,7 @@ export function AIAgent({ open, onOpenChange }: AIAgentProps) {
     setLoading(true);
 
     try {
-      const res = await fetch("/api/chat", {
+      const res = await fetch(apiUrl("/api/chat"), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message: trimmed }),

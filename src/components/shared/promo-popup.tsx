@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { X } from "lucide-react";
+import { apiUrl } from "@/lib/api/config";
 import type { CmsPopup } from "@/lib/cms/types";
 
 export function PromoPopup() {
@@ -11,7 +12,7 @@ export function PromoPopup() {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    fetch("/api/cms/settings")
+    fetch(apiUrl("/api/cms/settings"))
       .then((r) => r.json())
       .then((data: { popup: CmsPopup }) => {
         if (data.popup?.enabled && data.popup.image) {

@@ -18,6 +18,8 @@ import { defaultCmsServices } from "@/lib/cms/defaults";
 import { SITE_CONFIG, WHATSAPP_URL } from "@/lib/constants";
 import type { ServiceCategory } from "@/types";
 import type { CmsServicesData } from "@/lib/cms/types";
+import { Button } from "@/components/ui/button";
+import { apiUrl } from "@/lib/api/config";
 import { cn } from "@/lib/utils";
 
 interface MobileNavMenuProps {
@@ -133,7 +135,7 @@ export function MobileNavMenu({ onClose, className }: MobileNavMenuProps) {
     useState<CmsServicesData>(defaultCmsServices);
 
   useEffect(() => {
-    fetch("/api/cms/services")
+    fetch(apiUrl("/api/cms/services"))
       .then((r) => (r.ok ? r.json() : null))
       .then((data: CmsServicesData | null) => {
         if (data?.digitalMarketingCategories?.length) {
@@ -200,14 +202,17 @@ export function MobileNavMenu({ onClose, className }: MobileNavMenuProps) {
                       external={"external" in item && item.external}
                     />
                   ))}
-                  <Link
-                    href={tab.href}
-                    onClick={onClose}
-                    className="mt-1 inline-flex items-center gap-1 px-3 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-white/45 transition-colors hover:text-white/90"
+                  <Button
+                    asChild
+                    variant="premium"
+                    size="sm"
+                    className="group mt-2 h-10 w-full rounded-full text-xs font-semibold sm:text-sm"
                   >
-                    View all {tab.label}
-                    <ArrowUpRight className="h-3 w-3" />
-                  </Link>
+                    <Link href={tab.href} onClick={onClose}>
+                      View all {tab.label}
+                      <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                    </Link>
+                  </Button>
                 </div>
               </AccordionContent>
             </AccordionItem>

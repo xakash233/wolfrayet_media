@@ -1,0 +1,28 @@
+import type { TeamMember } from "@/types";
+
+export const teamMembers: TeamMember[] = [
+  {
+    id: "1",
+    name: "Krishna Kumar",
+    role: "Founder, CEO",
+    bio: "Leads Wolfrayet Media with a vision to deliver best-in-class digital marketing and web development for growing brands.",
+    image: "/Team/krishna.jpeg",
+    social: {},
+  },
+  {
+    id: "2",
+    name: "Ranjith",
+    role: "IT Head",
+    bio: "Oversees technology infrastructure and IT operations to keep platforms secure, stable, and ready for growth.",
+    image: "/Team/ranjith.jpeg",
+    social: {},
+  },
+  {
+    id: "3",
+    name: "Akash",
+    role: "Technical Lead",
+    bio: "Architects and delivers scalable web solutions, ensuring every project meets high standards for performance and reliability.",
+    image: "/Team/akash.png",
+    social: {},
+  },
+];

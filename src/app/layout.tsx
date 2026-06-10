@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { headers } from "next/headers";
 import "./globals.css";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { MotionProvider } from "@/components/providers/motion-provider";
@@ -43,8 +42,12 @@ export const metadata: Metadata = {
     follow: true,
   },
   icons: {
-    icon: [{ url: "/logo/favicon2.png", type: "image/png" }],
-    apple: "/logo/favicon2.png",
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/logo/favicon2.png", type: "image/png", sizes: "512x512" },
+    ],
+    apple: [{ url: "/logo/favicon2.png", sizes: "180x180", type: "image/png" }],
+    shortcut: "/favicon.ico",
   },
 };
 
@@ -53,9 +56,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const pathname = headers().get("x-pathname") ?? "";
-  const isAdmin = pathname.startsWith("/admin");
-
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
@@ -68,25 +68,21 @@ export default function RootLayout({
         <link href={DM_SANS_STYLESHEET} rel="stylesheet" />
       </head>
       <body className="font-sans antialiased">
-        {!isAdmin && <OrganizationJsonLd />}
+        <OrganizationJsonLd />
         <ThemeProvider>
-          {!isAdmin ? (
-            <MotionProvider>
-              <a href="#main-content" className="skip-link">
-                Skip to main content
-              </a>
-              <Header />
-              <main id="main-content" tabIndex={-1} className="outline-none">
-                <PageTransitionProvider>{children}</PageTransitionProvider>
-              </main>
-              <Footer />
-              <FloatingActions />
-              <StartProjectFab />
-              <PromoPopup />
-            </MotionProvider>
-          ) : (
-            children
-          )}
+          <MotionProvider>
+            <a href="#main-content" className="skip-link">
+              Skip to main content
+            </a>
+            <Header />
+            <main id="main-content" tabIndex={-1} className="outline-none">
+              <PageTransitionProvider>{children}</PageTransitionProvider>
+            </main>
+            <Footer />
+            <FloatingActions />
+            <StartProjectFab />
+            <PromoPopup />
+          </MotionProvider>
         </ThemeProvider>
       </body>
     </html>

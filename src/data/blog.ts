@@ -1,6 +1,6 @@
 import type { BlogPost } from "@/types";
 import { BLOG_SEED_POSTS } from "@/data/blog-seed";
-import { getCmsBlogPosts } from "@/lib/cms/data";
+import { getCmsBlogPosts } from "@/lib/api/cms";
 
 export { BLOG_SEED_POSTS };
 

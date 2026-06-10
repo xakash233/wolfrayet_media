@@ -77,6 +77,30 @@ const PORTFOLIO_CATEGORY_PHOTOS: Record<string, string> = {
 
 const DEFAULT_SERVICE_PHOTO = "1460925895917-afdab827c52f";
 
+/** Moody, premium photos for mega menu hover backgrounds */
+const MEGA_MENU_PHOTO_IDS: Record<string, string> = {
+  seo: "1551288049-bebda4e38f71",
+  ppc: "1533750347-512d00fcbb89",
+  smm: "1611162616305-c69b3fa7fbe0",
+  "social-ads": "1611929045428-45834c4d0bdc",
+  content: "1456324501454-4203679c2f0c",
+  email: "1516321318423-f06f85e504b3",
+  "web-development": "1498050108023-c5249f4df085",
+  branding: "1618005189-456a8b4e4c0e",
+  cro: "1556761175-5973dc0d32e8",
+  orm: "1563986768609-322da13575f3",
+  influencer: "1529156069898-49953e39b3ac",
+  video: "1574717024653-61fd2cf4d44d",
+  analytics: "1460925895917-afdab827c52f",
+  "digital-growth": "1454165804606-c3d57bc86b40",
+  "it-services": "1558494949-ef010cbdcc31",
+};
+
+export function megaMenuImageUrl(serviceId: string): string {
+  const id = MEGA_MENU_PHOTO_IDS[serviceId] ?? DEFAULT_SERVICE_PHOTO;
+  return unsplash(id, 720, 400, 88);
+}
+
 export function serviceImageUrl(
   serviceId: string,
   width = 900,

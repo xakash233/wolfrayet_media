@@ -7,7 +7,7 @@ import { FeaturesGrid } from "@/components/sections/features-grid";
 import { CTASection } from "@/components/sections/cta-section";
 import { AnimatedSection } from "@/components/shared/animated-section";
 import { SectionHeading } from "@/components/shared/section-heading";
-import { getCmsTeam } from "@/lib/cms/data";
+import { getCmsTeam } from "@/lib/api/cms";
 import { timeline, features } from "@/data/stats";
 import { SEO_META } from "@/lib/seo-keywords";
 

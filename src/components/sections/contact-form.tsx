@@ -15,6 +15,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { LoadingSpinner } from "@/components/shared/loading-spinner";
+import { apiUrl } from "@/lib/api/config";
 export function ContactForm() {
   const [submitted, setSubmitted] = useState(false);
   const {
@@ -27,7 +28,7 @@ export function ContactForm() {
   });
 
   const onSubmit = async (formData: ContactFormValues) => {
-    const response = await fetch("/api/contact", {
+    const response = await fetch(apiUrl("/api/contact"), {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(formData),
