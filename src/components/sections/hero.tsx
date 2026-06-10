@@ -58,7 +58,6 @@ export function Hero({
             className="min-h-[100svh] w-full"
             webm={videoConfig?.webm}
             mp4={videoConfig?.mp4 || HERO_VIDEO.mp4}
-            poster={videoConfig?.poster || HERO_VIDEO.poster}
           />
         ) : (
           <AnimatedSectionImage
