@@ -1,6 +1,6 @@
 export const MEGA_MENU_TABS = [
   { id: "home", label: "Home", href: "/", directLink: true },
-  { id: "about", label: "About", href: "/about" },
+  { id: "about", label: "About", href: "/about", directLink: true },
   { id: "services", label: "Services", href: "/services" },
   { id: "blog", label: "Blog", href: "/blog" },
   { id: "contact", label: "Contact", href: "/contact" },

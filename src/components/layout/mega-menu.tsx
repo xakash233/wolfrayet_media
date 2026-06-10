@@ -2,9 +2,8 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
-import { createPortal } from "react-dom";
 import { DotMatrixIcon } from "@/components/layout/dot-matrix-icon";
 import {
   MEGA_MENU_TABS,
@@ -141,22 +140,6 @@ function TabPanel({
   }
 
 
-  if (activeTab === "about") {
-    const items = [
-      { href: "/about", title: "About Wolfrayet", subtitle: "Vision & story" },
-      { href: "/about-details", title: "Company Details", subtitle: "Who we are" },
-      { href: "/testimonials", title: "Testimonials", subtitle: "120+ clients" },
-      { href: "/about#team", title: "Our Team", subtitle: "Meet experts" },
-    ];
-    return (
-      <div className={gridClass}>
-        {items.map((item, i) => (
-          <LinkCard key={item.title} {...item} onNavigate={onClose} index={i} />
-        ))}
-      </div>
-    );
-  }
-
   if (activeTab === "blog") {
     const items = [
       { href: "/blog", title: "All Articles", subtitle: "Tips & trends" },
@@ -228,11 +211,6 @@ function TabPanel({
 export function MegaMenu({ open, activeTab, onClose }: MegaMenuProps) {
   const [services, setServices] =
     useState<CmsServicesData>(defaultCmsServices);
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   useEffect(() => {
     if (!open) return;
@@ -267,53 +245,27 @@ export function MegaMenu({ open, activeTab, onClose }: MegaMenuProps) {
   const tabLabel =
     MEGA_MENU_TABS.find((t) => t.id === activeTab)?.label ?? "Services";
 
-  const backdrop =
-    mounted &&
-    createPortal(
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            key="mega-backdrop"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-40 bg-black/30 backdrop-blur-[3px]"
-            onClick={onClose}
-            aria-hidden
-          />
-        )}
-      </AnimatePresence>,
-      document.body
-    );
-
   return (
     <>
-      {backdrop}
-
-      <div role="dialog" aria-modal="true" aria-label="Site menu">
+      <div
+        role="dialog"
+        aria-modal="true"
+        aria-label="Site menu"
+        className="border-t border-white/10"
+      >
         <div
           className={cn(
             "py-3 sm:py-4",
-            activeTab !== "services" &&
-              "max-h-[min(38vh,260px)] overflow-y-auto overscroll-contain sm:max-h-[min(42vh,300px)]"
+            activeTab === "services"
+              ? "max-h-[min(52vh,420px)] overflow-y-auto overscroll-contain lg:max-h-none lg:overflow-visible"
+              : "max-h-[min(38vh,280px)] overflow-y-auto overscroll-contain"
           )}
         >
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={activeTab}
-              initial={{ opacity: 0, x: -8 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: 8 }}
-              transition={{ duration: 0.2, ease: EASE }}
-            >
-              <TabPanel
-                activeTab={activeTab}
-                allCategories={allCategories}
-                onClose={onClose}
-              />
-            </motion.div>
-          </AnimatePresence>
+          <TabPanel
+            activeTab={activeTab}
+            allCategories={allCategories}
+            onClose={onClose}
+          />
         </div>
 
         <div className="pb-3 pt-1 sm:pb-4 sm:pt-2">

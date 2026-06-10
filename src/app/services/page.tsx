@@ -56,6 +56,7 @@ export default async function ServicesPage() {
         compact
         hideEyebrow
         heroImage="services"
+        videoIntro
       />
 
       <div className="py-12 sm:py-16 lg:py-20">

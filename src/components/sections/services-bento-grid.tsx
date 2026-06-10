@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import { motion, useScroll, useTransform, useReducedMotion, useSpring } from "framer-motion";
+import { useReducedMotion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { useLenis } from "@/components/providers/smooth-scroll-provider";
 import { gsap, ScrollTrigger } from "@/lib/motion/lenis-gsap";
@@ -119,7 +119,7 @@ export function ServicesBentoGrid({
   const extendedRowB = [...rowB, ...rowB, ...rowB];
 
   useEffect(() => {
-    if (!ready) return;
+    if (!ready || reduceMotion) return;
     const containerEl = scrollRef.current;
     const rowAEl = rowARef.current;
     const rowBEl = rowBRef.current;
@@ -158,7 +158,7 @@ export function ServicesBentoGrid({
     ScrollTrigger.refresh();
 
     return () => ctx.revert();
-  }, [ready]);
+  }, [ready, reduceMotion]);
 
   return (
     <section className="space-y-8">

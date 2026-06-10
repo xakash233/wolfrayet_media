@@ -6,8 +6,8 @@
     "alt": "Special offer"
   },
   "heroVideo": {
-    "webm": "/video/hero-intro.webm",
-    "mp4": "/video/hero-intro.mp4",
+    "webm": "/video/hero-intro2.webm",
+    "mp4": "",
     "poster": "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1920&h=1080&fit=crop&q=80"
   }
 }

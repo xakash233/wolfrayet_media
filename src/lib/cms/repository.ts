@@ -6,6 +6,7 @@ import {
   defaultCmsSettings,
   defaultCmsTeam,
 } from "@/lib/cms/defaults";
+import { resolveHeroVideo } from "@/lib/media";
 import type {
   CmsBlogData,
   CmsEnquiry,
@@ -48,6 +49,14 @@ function mapSettings(row: {
       mp4: row.heroMp4,
       poster: row.heroPoster,
     },
+  };
+}
+
+function mapSettingsResolved(row: Parameters<typeof mapSettings>[0]): CmsSettings {
+  const settings = mapSettings(row);
+  return {
+    ...settings,
+    heroVideo: resolveHeroVideo(settings.heroVideo),
   };
 }
 
@@ -141,18 +150,18 @@ export async function seedCmsDatabase(): Promise<void> {
       popupImage: settings.popup.image,
       popupLink: settings.popup.link,
       popupAlt: settings.popup.alt,
-      heroWebm: settings.heroVideo.webm,
+      heroWebm: settings.heroVideo.webm ?? "",
       heroMp4: settings.heroVideo.mp4,
-      heroPoster: settings.heroVideo.poster,
+      heroPoster: settings.heroVideo.poster ?? "",
     },
     update: {
       popupEnabled: settings.popup.enabled,
       popupImage: settings.popup.image,
       popupLink: settings.popup.link,
       popupAlt: settings.popup.alt,
-      heroWebm: settings.heroVideo.webm,
+      heroWebm: settings.heroVideo.webm ?? "",
       heroMp4: settings.heroVideo.mp4,
-      heroPoster: settings.heroVideo.poster,
+      heroPoster: settings.heroVideo.poster ?? "",
     },
   });
 
@@ -202,7 +211,7 @@ export async function fetchCmsSettings(): Promise<CmsSettings> {
   await ensureSeeded();
   const row = await prisma.siteSettings.findUnique({ where: { id: "default" } });
   if (!row) return defaultCmsSettings;
-  return mapSettings(row);
+  return mapSettingsResolved(row);
 }
 
 export async function saveCmsSettings(data: CmsSettings): Promise<void> {
@@ -215,18 +224,18 @@ export async function saveCmsSettings(data: CmsSettings): Promise<void> {
       popupImage: data.popup.image,
       popupLink: data.popup.link,
       popupAlt: data.popup.alt,
-      heroWebm: data.heroVideo.webm,
+      heroWebm: data.heroVideo.webm ?? "",
       heroMp4: data.heroVideo.mp4,
-      heroPoster: data.heroVideo.poster,
+      heroPoster: data.heroVideo.poster ?? "",
     },
     update: {
       popupEnabled: data.popup.enabled,
       popupImage: data.popup.image,
       popupLink: data.popup.link,
       popupAlt: data.popup.alt,
-      heroWebm: data.heroVideo.webm,
+      heroWebm: data.heroVideo.webm ?? "",
       heroMp4: data.heroVideo.mp4,
-      heroPoster: data.heroVideo.poster,
+      heroPoster: data.heroVideo.poster ?? "",
     },
   });
 }

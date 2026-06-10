@@ -8,9 +8,9 @@ export interface CmsPopup {
 }
 
 export interface CmsHeroVideo {
-  webm: string;
+  webm?: string;
   mp4: string;
-  poster: string;
+  poster?: string;
 }
 
 export interface CmsSettings {

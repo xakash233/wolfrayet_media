@@ -81,8 +81,8 @@ export function BrandIntroSection({
                 href="/"
                 size="lg"
                 imageClassName={cn(
-                  "h-14 sm:h-16 md:h-[4.5rem] w-auto",
-                  fullScreen && "sm:h-[4.75rem] md:h-24"
+                  "h-[4.5rem] sm:h-20 md:h-[5.25rem] w-auto",
+                  fullScreen && "sm:h-[5.5rem] md:h-28"
                 )}
               />
             </div>

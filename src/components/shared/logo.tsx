@@ -20,9 +20,9 @@ interface LogoProps {
 }
 
 const sizeMap = {
-  sm: { box: "h-10 sm:h-11" },
-  md: { box: "h-11 sm:h-12" },
-  lg: { box: "h-14 sm:h-16" },
+  sm: { box: "h-12 sm:h-14" },
+  md: { box: "h-14 sm:h-16" },
+  lg: { box: "h-[4.5rem] sm:h-20 lg:h-[5.25rem]" },
 };
 
 function LogoImage({
@@ -47,7 +47,7 @@ function LogoImage({
         alt={alt}
         fill
         priority={priority}
-        sizes="(max-width: 768px) 220px, 300px"
+        sizes="(max-width: 768px) 280px, 380px"
         className={cn("object-contain object-left", imageClassName)}
       />
     </span>

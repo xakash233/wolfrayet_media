@@ -4,7 +4,7 @@ import {
   itServicesCategory,
 } from "@/data/service-categories";
 import { teamMembers } from "@/data/team";
-import { HERO_VIDEO } from "@/lib/media";
+import { HERO_VIDEO, resolveHeroVideo } from "@/lib/media";
 import type {
   CmsBlogData,
   CmsServicesData,
@@ -19,11 +19,7 @@ export const defaultCmsSettings: CmsSettings = {
     link: "/contact",
     alt: "Special offer",
   },
-  heroVideo: {
-    webm: HERO_VIDEO.webm,
-    mp4: HERO_VIDEO.mp4,
-    poster: HERO_VIDEO.poster,
-  },
+  heroVideo: resolveHeroVideo(HERO_VIDEO),
 };
 
 export const defaultCmsServices: CmsServicesData = {

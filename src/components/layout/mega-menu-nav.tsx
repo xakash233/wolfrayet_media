@@ -1,27 +1,27 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { ChevronDown } from "lucide-react";
 import { MEGA_MENU_TABS, type MegaMenuTabId } from "@/lib/mega-menu";
 import { cn } from "@/lib/utils";
 
 interface MegaMenuNavProps {
   activeTab: MegaMenuTabId;
   onSelect: (tab: MegaMenuTabId) => void;
-  onHover?: (tab: MegaMenuTabId) => void;
   isOpen: boolean;
   pathname: string;
   scrolled: boolean;
+  onClose?: () => void;
   className?: string;
 }
 
 export function MegaMenuNav({
   activeTab,
   onSelect,
-  onHover,
   isOpen,
   pathname,
   scrolled,
+  onClose,
   className,
 }: MegaMenuNavProps) {
   const isActive = (tab: (typeof MEGA_MENU_TABS)[number]) =>
@@ -59,40 +59,20 @@ export function MegaMenuNav({
 
   return (
     <nav
-      className={cn(
-        "flex items-center gap-0.5",
-        "max-lg:scrollbar-none max-lg:-mx-1 max-lg:overflow-x-auto max-lg:px-1",
-        className
-      )}
+      className={cn("flex items-center gap-0.5", className)}
       aria-label="Main navigation"
     >
       {MEGA_MENU_TABS.map((tab) => {
         const active = isActive(tab);
         const isDirectLink = "directLink" in tab && tab.directLink;
-        
-        const className = cn(
-          "relative shrink-0 rounded-full px-3 py-1.5 text-sm font-medium transition-colors",
+
+        const itemClass = cn(
+          "relative inline-flex shrink-0 cursor-pointer items-center gap-1 rounded-full px-3 py-1.5 text-sm font-medium transition-colors",
           "focus-visible:outline-none focus-visible:ring-2",
           focusRing,
-          "sm:px-4 sm:py-2",
-          tabClass(active)
-        );
-
-        const content = (
-          <>
-            {active && (
-              <motion.span
-                layoutId="mega-tab-pill"
-                className={cn("absolute inset-0 rounded-full", pillClass)}
-                transition={{
-                  type: "spring",
-                  stiffness: 420,
-                  damping: 34,
-                }}
-              />
-            )}
-            <span className="relative z-10 whitespace-nowrap">{tab.label}</span>
-          </>
+          "sm:gap-1.5 sm:px-4 sm:py-2",
+          tabClass(active),
+          active && pillClass
         );
 
         if (isDirectLink) {
@@ -100,11 +80,10 @@ export function MegaMenuNav({
             <Link
               key={tab.id}
               href={tab.href}
-              onMouseEnter={() => onHover?.(tab.id)}
-              onFocus={() => onHover?.(tab.id)}
-              className={className}
+              onClick={onClose}
+              className={itemClass}
             >
-              {content}
+              <span className="whitespace-nowrap">{tab.label}</span>
             </Link>
           );
         }
@@ -113,14 +92,23 @@ export function MegaMenuNav({
           <button
             key={tab.id}
             type="button"
-            onClick={() => onSelect(tab.id)}
-            onMouseEnter={() => onHover?.(tab.id)}
-            onFocus={() => onHover?.(tab.id)}
-            className={className}
+            onPointerDown={(e) => e.stopPropagation()}
+            onClick={(e) => {
+              e.stopPropagation();
+              onSelect(tab.id);
+            }}
+            className={itemClass}
             aria-expanded={isOpen && activeTab === tab.id}
-            aria-haspopup="dialog"
+            aria-haspopup="true"
           >
-            {content}
+            <span className="whitespace-nowrap">{tab.label}</span>
+            <ChevronDown
+              className={cn(
+                "h-3.5 w-3.5 shrink-0 transition-transform duration-200",
+                isOpen && activeTab === tab.id && "rotate-180"
+              )}
+              aria-hidden
+            />
           </button>
         );
       })}
