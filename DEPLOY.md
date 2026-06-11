@@ -86,4 +86,21 @@ ALLOWED_ORIGINS=http://localhost:3000
 
 ## Admin access
 
-Open **backend** URL → `/admin` (not the frontend site).
+**Production:** `https://wolfrayetmedia.in/admin` (proxied from frontend to backend).
+
+**Direct backend URL** also works: `https://your-api.vercel.app/admin`
+
+Backend env (required for proxied admin + server actions):
+
+```
+ALLOWED_ORIGINS=https://wolfrayetmedia.in,https://www.wolfrayetmedia.in
+NEXT_PUBLIC_FRONTEND_URL=https://wolfrayetmedia.in
+```
+
+Frontend env:
+
+```
+NEXT_PUBLIC_API_URL=https://your-api.vercel.app
+```
+
+Redeploy **both** projects after changing these.

@@ -1,5 +1,14 @@
 /** @type {import('next').NextConfig} */
+function getAssetPrefix() {
+  if (process.env.NODE_ENV !== "production") return undefined;
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "");
+  if (siteUrl) return siteUrl;
+  if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`;
+  return undefined;
+}
+
 const nextConfig = {
+  assetPrefix: getAssetPrefix(),
   images: {
     remotePatterns: [
       {
