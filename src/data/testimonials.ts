@@ -73,8 +73,7 @@ export const testimonials: Testimonial[] = [
     company: "FinancePro",
     content:
       "They cut our CPA by 45% while scaling spend 3x. The landing pages and bid strategy work was world-class. Best marketing investment we've made.",
-    avatar:
-      "https://images.unsplash.com/photo-1580894732930-5920f48153a6?w=200&h=200&fit=crop",
+    avatar: "/testimonials/meena-ravi.jpg",
     rating: 5,
     metric: "45% lower CPA",
     service: "PPC",
