@@ -5,6 +5,8 @@
   "regions": ["iad1"],
   "env": {
     "ALLOWED_ORIGINS": "https://wolfrayetmedia.in,https://www.wolfrayetmedia.in,http://localhost:3000",
-    "NEXT_PUBLIC_FRONTEND_URL": "https://www.wolfrayetmedia.in"
+    "NEXT_PUBLIC_FRONTEND_URL": "https://www.wolfrayetmedia.in",
+    "BACKEND_URL": "https://backend-wolf-ten.vercel.app",
+    "NEXT_PUBLIC_BACKEND_URL": "https://backend-wolf-ten.vercel.app"
   }
 }
