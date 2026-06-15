@@ -26,6 +26,20 @@ function requireDatabase(): void {
   }
 }
 
+async function withCmsFallback<T>(
+  label: string,
+  fallback: T,
+  fn: () => Promise<T>
+): Promise<T> {
+  if (!hasDatabase()) return fallback;
+  try {
+    return await fn();
+  } catch (error) {
+    console.error(`[CMS] ${label} failed, using defaults:`, error);
+    return fallback;
+  }
+}
+
 const TX_OPTIONS = { maxWait: 10_000, timeout: 60_000 };
 
 function mapSettings(row: {
@@ -207,11 +221,12 @@ async function ensureSeeded(): Promise<void> {
 }
 
 export async function fetchCmsSettings(): Promise<CmsSettings> {
-  if (!hasDatabase()) return defaultCmsSettings;
-  await ensureSeeded();
-  const row = await prisma.siteSettings.findUnique({ where: { id: "default" } });
-  if (!row) return defaultCmsSettings;
-  return mapSettingsResolved(row);
+  return withCmsFallback("fetchCmsSettings", defaultCmsSettings, async () => {
+    await ensureSeeded();
+    const row = await prisma.siteSettings.findUnique({ where: { id: "default" } });
+    if (!row) return defaultCmsSettings;
+    return mapSettingsResolved(row);
+  });
 }
 
 export async function saveCmsSettings(data: CmsSettings): Promise<void> {
@@ -241,25 +256,26 @@ export async function saveCmsSettings(data: CmsSettings): Promise<void> {
 }
 
 export async function fetchCmsServices(): Promise<CmsServicesData> {
-  if (!hasDatabase()) return defaultCmsServices;
-  await ensureSeeded();
-  const categories = await prisma.serviceCategory.findMany({
-    include: { items: true },
-    orderBy: [{ type: "asc" }, { sortOrder: "asc" }],
+  return withCmsFallback("fetchCmsServices", defaultCmsServices, async () => {
+    await ensureSeeded();
+    const categories = await prisma.serviceCategory.findMany({
+      include: { items: true },
+      orderBy: [{ type: "asc" }, { sortOrder: "asc" }],
+    });
+
+    if (categories.length === 0) return defaultCmsServices;
+
+    const digitalMarketingCategories = categories
+      .filter((c) => c.type === ServiceCategoryType.DIGITAL)
+      .map(mapServiceCategory);
+
+    const itRow = categories.find((c) => c.type === ServiceCategoryType.IT);
+    const itServicesCategory = itRow
+      ? mapServiceCategory(itRow)
+      : defaultCmsServices.itServicesCategory;
+
+    return { digitalMarketingCategories, itServicesCategory };
   });
-
-  if (categories.length === 0) return defaultCmsServices;
-
-  const digitalMarketingCategories = categories
-    .filter((c) => c.type === ServiceCategoryType.DIGITAL)
-    .map(mapServiceCategory);
-
-  const itRow = categories.find((c) => c.type === ServiceCategoryType.IT);
-  const itServicesCategory = itRow
-    ? mapServiceCategory(itRow)
-    : defaultCmsServices.itServicesCategory;
-
-  return { digitalMarketingCategories, itServicesCategory };
 }
 
 export async function saveCmsServices(data: CmsServicesData): Promise<void> {
@@ -318,11 +334,12 @@ export async function saveCmsServices(data: CmsServicesData): Promise<void> {
 }
 
 export async function fetchCmsBlogPosts(): Promise<CmsBlogData> {
-  if (!hasDatabase()) return defaultCmsBlog;
-  await ensureSeeded();
-  const rows = await prisma.blogPost.findMany({ orderBy: { date: "desc" } });
-  if (rows.length === 0) return defaultCmsBlog;
-  return rows.map(mapBlogPost);
+  return withCmsFallback("fetchCmsBlogPosts", defaultCmsBlog, async () => {
+    await ensureSeeded();
+    const rows = await prisma.blogPost.findMany({ orderBy: { date: "desc" } });
+    if (rows.length === 0) return defaultCmsBlog;
+    return rows.map(mapBlogPost);
+  });
 }
 
 export async function saveCmsBlogPosts(data: CmsBlogData): Promise<void> {
@@ -364,11 +381,12 @@ export async function saveCmsBlogPosts(data: CmsBlogData): Promise<void> {
 }
 
 export async function fetchCmsTeam(): Promise<CmsTeamData> {
-  if (!hasDatabase()) return defaultCmsTeam;
-  await ensureSeeded();
-  const rows = await prisma.teamMember.findMany({ orderBy: { sortOrder: "asc" } });
-  if (rows.length === 0) return defaultCmsTeam;
-  return rows.map(mapTeamMember);
+  return withCmsFallback("fetchCmsTeam", defaultCmsTeam, async () => {
+    await ensureSeeded();
+    const rows = await prisma.teamMember.findMany({ orderBy: { sortOrder: "asc" } });
+    if (rows.length === 0) return defaultCmsTeam;
+    return rows.map(mapTeamMember);
+  });
 }
 
 export async function saveCmsTeam(data: CmsTeamData): Promise<void> {

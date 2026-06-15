@@ -2,11 +2,9 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { useReducedMotion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
-import { useLenis } from "@/components/providers/smooth-scroll-provider";
-import { gsap, ScrollTrigger } from "@/lib/motion/lenis-gsap";
 import { serviceImageUrl } from "@/lib/images";
 import { ScrollReveal } from "@/components/shared/scroll-reveal";
 import type { ServiceCategory } from "@/types";
@@ -32,7 +30,7 @@ function ServiceMarqueeCard({ category }: { category: ServiceCategory }) {
 
   return (
     <article
-      className="group relative w-[min(82vw,280px)] shrink-0 sm:w-[320px] lg:w-[360px]"
+      className="group relative w-[min(82vw,280px)] shrink-0 snap-start sm:w-[320px] lg:w-[360px]"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
@@ -100,64 +98,55 @@ function ServiceMarqueeCard({ category }: { category: ServiceCategory }) {
   );
 }
 
+function MarqueeRow({
+  categories,
+  direction,
+}: {
+  categories: ServiceCategory[];
+  direction: "forward" | "reverse";
+}) {
+  const looped = [...categories, ...categories];
+
+  return (
+    <div className="marquee-row overflow-hidden">
+      <div
+        className={cn(
+          "marquee-track flex w-max gap-4 py-1",
+          direction === "forward"
+            ? "marquee-track-forward"
+            : "marquee-track-reverse"
+        )}
+      >
+        {looped.map((category, index) => (
+          <ServiceMarqueeCard key={`${category.id}-${index}`} category={category} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function ScrollableRow({ categories }: { categories: ServiceCategory[] }) {
+  return (
+    <div
+      className="flex gap-4 overflow-x-auto overscroll-x-contain py-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+      data-lenis-prevent
+    >
+      {categories.map((category) => (
+        <ServiceMarqueeCard key={category.id} category={category} />
+      ))}
+    </div>
+  );
+}
+
 export function ServicesBentoGrid({
   categories,
   itCategory,
 }: ServicesBentoGridProps) {
-  const scrollRef = useRef<HTMLDivElement>(null);
   const reduceMotion = useReducedMotion();
-  const rowARef = useRef<HTMLDivElement>(null);
-  const rowBRef = useRef<HTMLDivElement>(null);
-  const { ready } = useLenis();
 
   const allCategories = [...categories, itCategory];
   const rowA = allCategories.filter((_, i) => i % 2 === 0);
   const rowB = allCategories.filter((_, i) => i % 2 === 1);
-
-  // Duplicate the arrays 3 times to ensure the marquee never runs out of cards with minimal DOM nodes
-  const extendedRowA = [...rowA, ...rowA, ...rowA];
-  const extendedRowB = [...rowB, ...rowB, ...rowB];
-
-  useEffect(() => {
-    if (!ready || reduceMotion) return;
-    const containerEl = scrollRef.current;
-    const rowAEl = rowARef.current;
-    const rowBEl = rowBRef.current;
-    if (!containerEl || !rowAEl || !rowBEl) return;
-
-    const ctx = gsap.context(() => {
-      const travel = Math.max(rowAEl.scrollWidth, rowBEl.scrollWidth) * 0.22;
-      const startX = -travel * 0.35;
-      const endX = -travel * 1.25;
-
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: containerEl,
-          scroller: document.documentElement,
-          start: "top 12%",
-          end: "+=2500",
-          scrub: 1,
-          pin: true,
-          anticipatePin: 1,
-          invalidateOnRefresh: true,
-        },
-      });
-
-      tl.fromTo(rowAEl, { x: startX }, { x: endX, ease: "none" }, 0);
-      tl.fromTo(rowBEl, { x: endX }, { x: startX, ease: "none" }, 0);
-    }, scrollRef);
-
-    const refresh = () => ScrollTrigger.refresh();
-    refresh();
-    window.addEventListener("load", refresh);
-    window.addEventListener("resize", refresh);
-
-    return () => {
-      window.removeEventListener("load", refresh);
-      window.removeEventListener("resize", refresh);
-      ctx.revert();
-    };
-  }, [ready, reduceMotion, rowA.length, rowB.length]);
 
   return (
     <section className="space-y-8">
@@ -170,28 +159,19 @@ export function ServicesBentoGrid({
         </h2>
       </ScrollReveal>
 
-      <div ref={scrollRef} className="py-6 sm:py-10">
-        <div className="relative left-1/2 w-screen max-w-[100vw] -translate-x-1/2 space-y-4 overflow-hidden">
-          <div className="overflow-hidden">
-            <div
-              ref={rowARef}
-              className="flex w-max gap-4 py-1"
-            >
-              {extendedRowA.map((category, index) => (
-                <ServiceMarqueeCard key={`${category.id}-${index}`} category={category} />
-              ))}
-            </div>
-          </div>
-          <div className="overflow-hidden">
-            <div
-              ref={rowBRef}
-              className="flex w-max gap-4 py-1"
-            >
-              {extendedRowB.map((category, index) => (
-                <ServiceMarqueeCard key={`${category.id}-${index}`} category={category} />
-              ))}
-            </div>
-          </div>
+      <div className="py-6 sm:py-10">
+        <div className="relative left-1/2 w-screen max-w-[100vw] -translate-x-1/2 space-y-4">
+          {reduceMotion ? (
+            <>
+              <ScrollableRow categories={rowA} />
+              <ScrollableRow categories={rowB} />
+            </>
+          ) : (
+            <>
+              <MarqueeRow categories={rowA} direction="forward" />
+              <MarqueeRow categories={rowB} direction="reverse" />
+            </>
+          )}
         </div>
       </div>
 

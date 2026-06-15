@@ -1,6 +1,10 @@
 {
-  "buildCommand": "npm run build",
+  "buildCommand": "npm run vercel-build",
   "installCommand": "npm install",
   "framework": "nextjs",
-  "regions": ["iad1"]
+  "regions": ["iad1"],
+  "env": {
+    "ALLOWED_ORIGINS": "https://wolfrayetmedia.in,https://www.wolfrayetmedia.in,http://localhost:3000",
+    "NEXT_PUBLIC_FRONTEND_URL": "https://www.wolfrayetmedia.in"
+  }
 }

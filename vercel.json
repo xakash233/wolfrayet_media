@@ -2,5 +2,10 @@
   "framework": "nextjs",
   "buildCommand": "npm run build",
   "installCommand": "npm install",
-  "regions": ["iad1"]
+  "regions": ["iad1"],
+  "env": {
+    "NEXT_PUBLIC_API_URL": "https://backend-wolf-ten.vercel.app",
+    "BACKEND_URL": "https://backend-wolf-ten.vercel.app",
+    "NEXT_PUBLIC_SITE_URL": "https://www.wolfrayetmedia.in"
+  }
 }

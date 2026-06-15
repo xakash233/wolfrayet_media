@@ -11,11 +11,16 @@ function createPrismaClient(): PrismaClient {
   if (rawDbUrl) {
     try {
       const url = new URL(rawDbUrl);
+      const isServerless = Boolean(process.env.VERCEL);
+
       if (!url.searchParams.get("connection_limit")) {
-        url.searchParams.set("connection_limit", "5");
+        url.searchParams.set("connection_limit", isServerless ? "1" : "5");
       }
       if (!url.searchParams.get("pool_timeout")) {
         url.searchParams.set("pool_timeout", "20");
+      }
+      if (isServerless && !url.searchParams.get("connect_timeout")) {
+        url.searchParams.set("connect_timeout", "15");
       }
       dbUrl = url.toString();
     } catch {
@@ -30,6 +35,5 @@ function createPrismaClient(): PrismaClient {
 
 export const prisma = globalForPrisma.prisma ?? createPrismaClient();
 
-if (process.env.NODE_ENV !== "production") {
-  globalForPrisma.prisma = prisma;
-}
+// Reuse one client per serverless instance (required on Vercel).
+globalForPrisma.prisma = prisma;

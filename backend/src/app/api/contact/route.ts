@@ -26,7 +26,8 @@ export async function POST(request: Request) {
       { success: true, message: "Message received successfully" },
       { status: 200 }
     );
-  } catch {
+  } catch (error) {
+    console.error("[contact]", error);
     return jsonWithCors(request, { error: "Internal server error" }, { status: 500 });
   }
 }

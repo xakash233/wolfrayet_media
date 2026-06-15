@@ -37,14 +37,17 @@ Or use Neon SQL console / Prisma migrate in CI.
 
 1. **Add New Project** (same repo, different Vercel project).
 2. **Root Directory** → `.` (leave empty / root)
-3. Environment variables:
+3. Environment variables (optional — `vercel.json` already sets defaults):
 
 ```
-NEXT_PUBLIC_SITE_URL=https://www.yourdomain.com
-NEXT_PUBLIC_API_URL=https://wolfrayet-api.vercel.app
+NEXT_PUBLIC_SITE_URL=https://www.wolfrayetmedia.in
+NEXT_PUBLIC_API_URL=https://backend-wolf-ten.vercel.app
+BACKEND_URL=https://backend-wolf-ten.vercel.app
 ```
 
-4. Deploy.
+4. Deploy. The frontend proxies `/api/*` and `/admin` to the backend automatically.
+
+**Required on backend only:** `DATABASE_URL`, `ADMIN_PASSWORD`, and optionally `BLOB_READ_WRITE_TOKEN` for uploads. Schema + seed run automatically on Vercel deploy when `DATABASE_URL` is set.
 
 ## 3. Local development
 

@@ -1,4 +1,8 @@
-const DEFAULT_ORIGINS = ["http://localhost:3000"];
+const DEFAULT_ORIGINS = [
+  "http://localhost:3000",
+  "https://wolfrayetmedia.in",
+  "https://www.wolfrayetmedia.in",
+];
 
 function isLocalDevOrigin(origin: string): boolean {
   return /^https?:\/\/localhost(:\d+)?$/.test(origin);

@@ -1,21 +1,19 @@
+import { resolveBackendUrl } from "@/lib/api/backend-url";
+
 /** Base URL for the Wolfrayet backend API (no trailing slash). */
 export function getApiUrl(): string {
-  const url =
-    process.env.NEXT_PUBLIC_API_URL?.trim() ||
-    process.env.API_URL?.trim() ||
-    "http://localhost:3001";
-  return url.replace(/\/$/, "");
+  return resolveBackendUrl();
 }
 
 /**
  * Resolve API path for fetch calls.
- * - Browser (dev): same-origin `/api/*` → proxied to backend via next.config rewrites (no CORS).
- * - Server (dev) & production: direct backend URL.
+ * - Browser: same-origin `/api/*` → proxied to backend via next.config rewrites (no CORS).
+ * - Server: direct backend URL (SSR / build-time data fetching).
  */
 export function apiUrl(path: string): string {
   const normalized = path.startsWith("/") ? path : `/${path}`;
 
-  if (typeof window !== "undefined" && process.env.NODE_ENV === "development") {
+  if (typeof window !== "undefined") {
     return normalized;
   }
 

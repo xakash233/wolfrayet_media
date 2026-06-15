@@ -233,10 +233,12 @@
 
   .marquee-track-forward {
     animation: marquee-forward 55s linear infinite;
+    will-change: transform;
   }
 
   .marquee-track-reverse {
     animation: marquee-reverse 60s linear infinite;
+    will-change: transform;
   }
 
   @media (prefers-reduced-motion: reduce) {
