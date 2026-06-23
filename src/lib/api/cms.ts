@@ -1,28 +1,19 @@
-import { apiUrl } from "@/lib/api/config";
-import { defaultCmsBlog, defaultCmsServices, defaultCmsSettings, defaultCmsTeam } from "@/lib/cms/defaults";
+import {
+  defaultCmsBlog,
+  defaultCmsServices,
+  defaultCmsSettings,
+  defaultCmsTeam,
+} from "@/lib/cms/defaults";
 import type {
   CmsBlogData,
   CmsServicesData,
   CmsSettings,
   CmsTeamData,
 } from "@/lib/cms/types";
-
-const REVALIDATE = 60;
-
-async function fetchJson<T>(path: string, fallback: T): Promise<T> {
-  try {
-    const res = await fetch(apiUrl(path), {
-      next: { revalidate: REVALIDATE },
-    });
-    if (!res.ok) return fallback;
-    return (await res.json()) as T;
-  } catch {
-    return fallback;
-  }
-}
+import { fetchBackendCmsJson } from "@/lib/api/cms-fetch";
 
 export async function getCmsSettings(): Promise<CmsSettings> {
-  const data = await fetchJson<Pick<CmsSettings, "popup" | "heroVideo">>(
+  const data = await fetchBackendCmsJson<Pick<CmsSettings, "popup" | "heroVideo">>(
     "/api/cms/settings",
     defaultCmsSettings
   );
@@ -30,13 +21,16 @@ export async function getCmsSettings(): Promise<CmsSettings> {
 }
 
 export async function getCmsServices(): Promise<CmsServicesData> {
-  return fetchJson<CmsServicesData>("/api/cms/services", defaultCmsServices);
+  return fetchBackendCmsJson<CmsServicesData>(
+    "/api/cms/services",
+    defaultCmsServices
+  );
 }
 
 export async function getCmsBlogPosts(): Promise<CmsBlogData> {
-  return fetchJson<CmsBlogData>("/api/cms/blog", defaultCmsBlog);
+  return fetchBackendCmsJson<CmsBlogData>("/api/cms/blog", defaultCmsBlog);
 }
 
 export async function getCmsTeam(): Promise<CmsTeamData> {
-  return fetchJson<CmsTeamData>("/api/cms/team", defaultCmsTeam);
+  return fetchBackendCmsJson<CmsTeamData>("/api/cms/team", defaultCmsTeam);
 }

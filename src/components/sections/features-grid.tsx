@@ -32,7 +32,7 @@ function FeatureCard({
   index: number;
 }) {
   const Icon = iconMap[feature.icon] ?? Zap;
-  const reveal = useScrollReveal({ index, duration: 1.3 });
+  const reveal = useScrollReveal({ index, duration: 1 });
 
   return (
     <motion.div
@@ -40,8 +40,7 @@ function FeatureCard({
       initial={reveal.initial}
       animate={reveal.animate}
       transition={reveal.transition}
-      whileHover={{ scale: 1.02, y: -4 }}
-      className="glass-card group p-6"
+      className="card-premium-hover glass-card group p-6"
     >
       <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
         <Icon className="h-6 w-6" />

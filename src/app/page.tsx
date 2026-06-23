@@ -1,6 +1,29 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Hero } from "@/components/sections/hero";
+import { HorizontalShowcase } from "@/components/sections/horizontal-showcase";
 import { SeoKeywordsSection } from "@/components/sections/seo-keywords-section";
+import { AnimatedSectionImage } from "@/components/shared/animated-section-image";
+import { BrandIntroSection } from "@/components/sections/brand-intro-section";
+import { ServiceCard } from "@/components/sections/service-card";
+import { FeaturesGrid } from "@/components/sections/features-grid";
+import { TestimonialsCarousel } from "@/components/sections/testimonials-carousel";
+import { PricingCards } from "@/components/sections/pricing-cards";
+import { FAQAccordion } from "@/components/sections/faq-accordion";
+import { NewsletterSignup } from "@/components/sections/newsletter-signup";
+import { CTASection } from "@/components/sections/cta-section";
+import { AnimatedSection } from "@/components/shared/animated-section";
+import { SectionHeading } from "@/components/shared/section-heading";
+import { BlogCard } from "@/components/sections/blog-card";
+import { Button } from "@/components/ui/button";
+import { getCmsSettings } from "@/lib/api/cms";
+import { buildFeaturedServicesFromCms } from "@/lib/cms/services";
+import { features } from "@/data/stats";
+import { testimonials } from "@/data/testimonials";
+import { pricingPlans } from "@/data/pricing";
+import { faqItems } from "@/data/faq";
+import { getBlogPosts } from "@/data/blog";
+import { SECTION_IMAGES } from "@/lib/images";
 import { SEO_META } from "@/lib/seo-keywords";
 import { SITE_CONFIG } from "@/lib/constants";
 
@@ -12,28 +35,6 @@ export const metadata: Metadata = {
     description: SEO_META.home.description,
   },
 };
-import { AnimatedSectionImage } from "@/components/shared/animated-section-image";
-import { SECTION_IMAGES } from "@/lib/images";
-import { BrandIntroSection } from "@/components/sections/brand-intro-section";
-import { ServiceCard } from "@/components/sections/service-card";
-import { FeaturesGrid } from "@/components/sections/features-grid";
-import { TestimonialsCarousel } from "@/components/sections/testimonials-carousel";
-import { PricingCards } from "@/components/sections/pricing-cards";
-import { FAQAccordion } from "@/components/sections/faq-accordion";
-import { NewsletterSignup } from "@/components/sections/newsletter-signup";
-import { CTASection } from "@/components/sections/cta-section";
-import { AnimatedSection } from "@/components/shared/animated-section";
-import { SectionHeading } from "@/components/shared/section-heading";
-import { getCmsSettings } from "@/lib/api/cms";
-import { buildFeaturedServicesFromCms } from "@/lib/cms/services";
-import { features } from "@/data/stats";
-import { testimonials } from "@/data/testimonials";
-import { pricingPlans } from "@/data/pricing";
-import { faqItems } from "@/data/faq";
-import { getBlogPosts } from "@/data/blog";
-import { BlogCard } from "@/components/sections/blog-card";
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
 
 export const revalidate = 60;
 
@@ -87,6 +88,8 @@ export default async function HomePage() {
         />
         <FeaturesGrid features={features} />
       </AnimatedSection>
+
+      <HorizontalShowcase />
 
       <AnimatedSection compact>
         <SectionHeading

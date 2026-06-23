@@ -45,6 +45,7 @@ const SERVICE_PHOTO_IDS: Record<string, string> = {
   content: "1432888498266-38ffec3eaf0a",
   email: "1516321318423-f06f85e504b3",
   "web-development": "1526374965328-7f61d4dc18c5",
+  "app-development": "1512941937669-90a1b58e7e9c",
   branding: "1547658719-da2b51169166",
   cro: "1460925895917-afdab827c52f",
   orm: "1552664730-d307ca884978",
@@ -86,6 +87,7 @@ const MEGA_MENU_PHOTO_IDS: Record<string, string> = {
   content: "1486312338219-ce68d2c6f44d",
   email: "1516321318423-f06f85e504b3",
   "web-development": "1498050108023-c5249f4df085",
+  "app-development": "1512941937669-90a1b58e7e9c",
   branding: "1561070791-2526d30994b5",
   cro: "1460925895917-afdab827c52f",
   orm: "1563986768609-322da13575f3",
@@ -122,6 +124,14 @@ export function portfolioImageUrl(
 ): string {
   const id = PORTFOLIO_CATEGORY_PHOTOS[category] ?? DEFAULT_SERVICE_PHOTO;
   return unsplash(id, width, height);
+}
+
+export function testimonialAvatarUrl(
+  photoId: string,
+  size = 200,
+  quality = 85
+): string {
+  return `https://images.unsplash.com/photo-${photoId}?w=${size}&h=${size}&fit=crop&crop=faces&facepad=2&q=${quality}`;
 }
 
 export function staggerDelay(index: number, step = 0.1, baseDuration = 0.55): number {

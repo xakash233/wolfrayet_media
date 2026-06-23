@@ -9,6 +9,10 @@ interface StatsCounterProps {
   stats: Stat[];
 }
 
+function easeOutExpo(t: number) {
+  return t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
+}
+
 function AnimatedNumber({
   value,
   suffix = "",
@@ -19,24 +23,29 @@ function AnimatedNumber({
   prefix?: string;
 }) {
   const ref = useRef<HTMLSpanElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-50px" });
+  const isInView = useInView(ref, { once: true, margin: "-60px" });
   const [display, setDisplay] = useState(0);
 
   useEffect(() => {
     if (!isInView) return;
 
-    const duration = 2000;
-    const steps = 60;
-    const increment = value / steps;
-    let step = 0;
+    const duration = 2200;
+    let start: number | null = null;
+    let frame = 0;
 
-    const timer = setInterval(() => {
-      step++;
-      setDisplay(Math.min(Math.round(increment * step), value));
-      if (step >= steps) clearInterval(timer);
-    }, duration / steps);
+    const tick = (now: number) => {
+      if (start === null) start = now;
+      const elapsed = now - start;
+      const progress = Math.min(elapsed / duration, 1);
+      setDisplay(Math.round(value * easeOutExpo(progress)));
 
-    return () => clearInterval(timer);
+      if (progress < 1) {
+        frame = requestAnimationFrame(tick);
+      }
+    };
+
+    frame = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(frame);
   }, [isInView, value]);
 
   return (
@@ -49,7 +58,7 @@ function AnimatedNumber({
 }
 
 function StatItem({ stat, index }: { stat: Stat; index: number }) {
-  const reveal = useScrollReveal({ index, duration: 1.4 });
+  const reveal = useScrollReveal({ index, duration: 1 });
 
   return (
     <motion.div

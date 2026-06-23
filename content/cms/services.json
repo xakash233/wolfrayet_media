@@ -77,6 +77,23 @@
     },
     {
       "number": 5,
+      "id": "app-development",
+      "title": "App Development Services",
+      "description": "Build high-performance iOS, Android, and cross-platform apps designed for engagement, scalability, and lasting business growth.",
+      "icon": "Smartphone",
+      "items": [
+        "iOS App Development",
+        "Android App Development",
+        "React Native & Cross-Platform Apps",
+        "Flutter App Development",
+        "UI/UX Design for Mobile",
+        "App Store & Play Store Optimization",
+        "API Integration & Backend Development",
+        "App Maintenance & Updates"
+      ]
+    },
+    {
+      "number": 6,
       "id": "content",
       "title": "Content Marketing",
       "description": "Attract and convert audiences with blogs, copy, long-form assets, and strategic content planning.",
@@ -94,7 +111,7 @@
       ]
     },
     {
-      "number": 6,
+      "number": 7,
       "id": "email",
       "title": "Email Marketing & Automation",
       "description": "Nurture leads and customers with newsletters, automations, and performance-focused email flows.",
@@ -112,7 +129,7 @@
       ]
     },
     {
-      "number": 7,
+      "number": 8,
       "id": "web-development",
       "title": "Website Design & Development",
       "description": "Launch fast, secure, mobile-ready websites and stores built for UX, speed, and conversions.",
@@ -130,7 +147,7 @@
       ]
     },
     {
-      "number": 8,
+      "number": 9,
       "id": "branding",
       "title": "Branding & Creative Services",
       "description": "Build a memorable brand with identity systems, messaging, and creative assets across channels.",
@@ -147,7 +164,7 @@
       ]
     },
     {
-      "number": 9,
+      "number": 10,
       "id": "cro",
       "title": "Conversion Rate Optimization (CRO)",
       "description": "Turn more visitors into customers with UX audits, testing, and funnel optimization.",
@@ -163,7 +180,7 @@
       ]
     },
     {
-      "number": 10,
+      "number": 11,
       "id": "orm",
       "title": "Online Reputation Management (ORM)",
       "description": "Protect and improve how your brand is perceived online with review and sentiment strategies.",
@@ -178,7 +195,7 @@
       ]
     },
     {
-      "number": 11,
+      "number": 12,
       "id": "influencer",
       "title": "Influencer & Creator Marketing",
       "description": "Partner with creators to expand reach, build trust, and drive campaign performance.",
@@ -193,7 +210,7 @@
       ]
     },
     {
-      "number": 12,
+      "number": 13,
       "id": "video",
       "title": "Video Marketing",
       "description": "Engage audiences with short-form, product, testimonial, and edited video content.",
@@ -208,7 +225,7 @@
       ]
     },
     {
-      "number": 13,
+      "number": 14,
       "id": "analytics",
       "title": "Analytics, Tracking & Reporting",
       "description": "Measure what matters with GA4, tags, dashboards, and clear performance reporting.",
@@ -223,7 +240,7 @@
       ]
     },
     {
-      "number": 14,
+      "number": 15,
       "id": "digital-growth",
       "title": "Additional Digital Growth Services",
       "description": "Extend your stack with automation, CRM, funnels, and strategic growth consulting.",

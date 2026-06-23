@@ -1,9 +1,10 @@
 import type { Service } from "@/types";
 import { getCmsServices } from "@/lib/api/cms";
+import { normalizeCmsServices } from "@/lib/cms/normalize-services";
 
 export async function buildServicesFromCms(): Promise<Service[]> {
-  const { digitalMarketingCategories, itServicesCategory } =
-    await getCmsServices();
+  const cmsServices = normalizeCmsServices(await getCmsServices());
+  const { digitalMarketingCategories, itServicesCategory } = cmsServices;
 
   const categoryServices: Service[] = digitalMarketingCategories.map(
     (category) => ({
@@ -40,10 +41,11 @@ const featuredIds = [
   "seo",
   "ppc",
   "smm",
+  "social-ads",
+  "app-development",
   "web-development",
   "it-services",
   "content",
-  "social-ads",
 ] as const;
 
 export async function buildFeaturedServicesFromCms(): Promise<Service[]> {

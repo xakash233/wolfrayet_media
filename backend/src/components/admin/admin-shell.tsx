@@ -99,8 +99,8 @@ export function AdminShell({
       {/* Sidebar */}
       <aside
         className={cn(
-          "fixed inset-y-0 left-0 z-50 flex w-72 flex-col border-r border-white/[0.06] bg-[hsl(var(--admin-sidebar))] p-5 transition-transform duration-300 lg:static lg:translate-x-0",
-          mobileOpen ? "translate-x-0" : "-translate-x-full"
+          "fixed inset-y-0 left-0 z-50 flex w-72 shrink-0 flex-col border-r border-white/[0.06] bg-[hsl(var(--admin-sidebar))] p-5 transition-transform duration-300 lg:static lg:translate-x-0",
+          mobileOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
         )}
       >
         <div className="mb-8 flex items-center justify-between">
@@ -143,7 +143,7 @@ export function AdminShell({
       </aside>
 
       {/* Main */}
-      <div className="flex min-w-0 flex-1 flex-col">
+      <div className="flex min-h-screen min-w-0 flex-1 flex-col lg:min-h-0">
         <header className="sticky top-0 z-30 flex items-center gap-4 border-b border-border/60 bg-card/80 px-4 py-4 backdrop-blur-xl sm:px-8">
           <button
             type="button"
@@ -152,22 +152,28 @@ export function AdminShell({
           >
             <Menu className="h-5 w-5" />
           </button>
-          <div className="min-w-0 flex-1">
-            <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
-              <span>Admin</span>
-              <ChevronRight className="h-3 w-3" />
-              <span className="truncate font-medium text-foreground">{title}</span>
+          {title ? (
+            <div className="min-w-0 flex-1">
+              <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
+                <span>Admin</span>
+                <ChevronRight className="h-3 w-3" />
+                <span className="truncate font-medium text-foreground">{title}</span>
+              </div>
+              <h1 className="truncate text-xl font-bold tracking-tight sm:text-2xl">
+                {title}
+              </h1>
+              {description && (
+                <p className="mt-0.5 text-sm text-muted-foreground">{description}</p>
+              )}
             </div>
-            <h1 className="truncate text-xl font-bold tracking-tight sm:text-2xl">
-              {title}
-            </h1>
-            {description && (
-              <p className="mt-0.5 text-sm text-muted-foreground">{description}</p>
-            )}
-          </div>
+          ) : (
+            <div className="flex-1 lg:hidden" />
+          )}
         </header>
 
-        <main className="flex-1 px-4 py-6 sm:px-8 sm:py-8">{children}</main>
+        <main className={cn("flex-1", title ? "px-4 py-6 sm:px-8 sm:py-8" : "p-0")}>
+          {children}
+        </main>
       </div>
     </div>
   );

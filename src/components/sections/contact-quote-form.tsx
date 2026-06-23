@@ -55,6 +55,7 @@ function FormField({
 
 export function ContactQuoteForm() {
   const [submitted, setSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const {
     register,
     handleSubmit,
@@ -77,20 +78,34 @@ export function ContactQuoteForm() {
   };
 
   const onSubmit = async (formData: ContactQuoteValues) => {
-    const response = await fetch(apiUrl("/api/contact"), {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        name: formData.name,
-        email: formData.email,
-        phone: formData.phone || undefined,
-        subject: `Quote Request — ${formData.services.join(", ")}`,
-        message: formData.message,
-      }),
-    });
-    if (!response.ok) throw new Error("Failed to send message");
-    setSubmitted(true);
-    reset();
+    setSubmitError(null);
+    try {
+      const response = await fetch(apiUrl("/api/contact"), {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone || undefined,
+          subject: `Quote Request — ${formData.services.join(", ")}`,
+          message: formData.message,
+        }),
+      });
+      if (!response.ok) {
+        const data = (await response.json().catch(() => ({}))) as {
+          error?: string;
+        };
+        throw new Error(data.error ?? "Failed to send message");
+      }
+      setSubmitted(true);
+      reset();
+    } catch (error) {
+      setSubmitError(
+        error instanceof Error
+          ? error.message
+          : "Something went wrong. Please try again or WhatsApp us."
+      );
+    }
   };
 
   if (submitted) {
@@ -242,6 +257,12 @@ export function ContactQuoteForm() {
             )}
           </Button>
       </FormField>
+
+      {submitError && (
+        <p className="text-center text-sm text-red-400" role="alert">
+          {submitError}
+        </p>
+      )}
     </form>
   );
 }

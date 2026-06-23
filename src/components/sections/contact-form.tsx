@@ -18,6 +18,7 @@ import { LoadingSpinner } from "@/components/shared/loading-spinner";
 import { apiUrl } from "@/lib/api/config";
 export function ContactForm() {
   const [submitted, setSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const {
     register,
     handleSubmit,
@@ -28,14 +29,28 @@ export function ContactForm() {
   });
 
   const onSubmit = async (formData: ContactFormValues) => {
-    const response = await fetch(apiUrl("/api/contact"), {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(formData),
-    });
-    if (!response.ok) throw new Error("Failed to send message");
-    setSubmitted(true);
-    reset();
+    setSubmitError(null);
+    try {
+      const response = await fetch(apiUrl("/api/contact"), {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+      if (!response.ok) {
+        const data = (await response.json().catch(() => ({}))) as {
+          error?: string;
+        };
+        throw new Error(data.error ?? "Failed to send message");
+      }
+      setSubmitted(true);
+      reset();
+    } catch (error) {
+      setSubmitError(
+        error instanceof Error
+          ? error.message
+          : "Something went wrong. Please try again or WhatsApp us."
+      );
+    }
   };
 
   if (submitted) {
@@ -142,6 +157,11 @@ export function ContactForm() {
           </>
         )}
       </Button>
+      {submitError && (
+        <p className="text-center text-sm text-destructive" role="alert">
+          {submitError}
+        </p>
+      )}
     </form>
     </ScrollReveal>
   );

@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { motion, useInView, useReducedMotion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
+import { useHydrationSafeReducedMotion } from "@/lib/motion/use-hydration-safe-reduced-motion";
 import {
   SCROLL_REVEAL_BLUR,
   SCROLL_REVEAL_Y,
@@ -34,10 +35,16 @@ const MOTION_TAGS = {
   article: motion.article,
 } as const;
 
-const visibleState = { opacity: 1, y: 0, filter: "blur(0px)" };
+const visibleState = { opacity: 1, y: 0 };
 
 function hiddenState(y: number, blur: number) {
+  if (blur <= 0) return { opacity: 0, y };
   return { opacity: 0, y, filter: `blur(${blur}px)` };
+}
+
+function shownState(blur: number) {
+  if (blur <= 0) return visibleState;
+  return { opacity: 1, y: 0, filter: "blur(0px)" };
 }
 
 export function useScrollReveal({
@@ -48,7 +55,7 @@ export function useScrollReveal({
   once = true,
 }: ScrollRevealOptions = {}) {
   const ref = useRef<HTMLDivElement>(null);
-  const reducedMotion = useReducedMotion();
+  const reducedMotion = useHydrationSafeReducedMotion();
   const isInView = useInView(ref, {
     once,
     amount: 0.14,
@@ -83,7 +90,7 @@ export function useScrollReveal({
   return {
     ref,
     initial: false as const,
-    animate: shown ? visibleState : hiddenState(y, blur),
+    animate: shown ? shownState(blur) : hiddenState(y, blur),
     transition:
       phase === "hidden" && !isInView
         ? { duration: 0 }

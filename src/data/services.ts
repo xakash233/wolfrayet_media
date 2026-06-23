@@ -24,7 +24,7 @@ export const itServices: Service = {
 
 const webDevIndex = categoryServices.findIndex((s) => s.id === "web-development");
 
-/** All services — IT Services inserted after Website Design & Development. */
+/** All services — IT Services after Website Design & Development. */
 export const services: Service[] = [
   ...categoryServices.slice(0, webDevIndex + 1),
   itServices,
@@ -35,10 +35,11 @@ const featuredIds = [
   "seo",
   "ppc",
   "smm",
+  "social-ads",
+  "app-development",
   "web-development",
   "it-services",
   "content",
-  "social-ads",
 ] as const;
 
 /** Homepage service cards (ordered). */

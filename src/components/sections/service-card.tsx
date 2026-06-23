@@ -18,6 +18,7 @@ import {
   Video,
   Rocket,
   Server,
+  Smartphone,
   type LucideIcon,
 } from "lucide-react";
 import type { Service } from "@/types";
@@ -42,6 +43,7 @@ const iconMap: Record<string, LucideIcon> = {
   Video,
   Rocket,
   Server,
+  Smartphone,
 };
 
 interface ServiceCardProps {
@@ -49,9 +51,23 @@ interface ServiceCardProps {
   index?: number;
 }
 
+function uniquePreviewFeatures(features: string[], count = 3): string[] {
+  const seen = new Set<string>();
+  const preview: string[] = [];
+
+  for (const feature of features) {
+    if (seen.has(feature)) continue;
+    seen.add(feature);
+    preview.push(feature);
+    if (preview.length >= count) break;
+  }
+
+  return preview;
+}
+
 export function ServiceCard({ service, index = 0 }: ServiceCardProps) {
   const Icon = iconMap[service.icon] ?? Search;
-  const reveal = useScrollReveal({ index, duration: 1.25 });
+  const reveal = useScrollReveal({ index, duration: 1 });
 
   return (
     <motion.div
@@ -59,10 +75,10 @@ export function ServiceCard({ service, index = 0 }: ServiceCardProps) {
       initial={reveal.initial}
       animate={reveal.animate}
       transition={reveal.transition}
-      whileHover={{ y: -6 }}
+      whileHover={{ scale: 1.02 }}
     >
       <Link href={service.href}>
-        <Card className="group h-full overflow-hidden border-border/50 bg-card/50 transition-all hover:border-primary/50 hover:shadow-xl hover:shadow-primary/5">
+        <Card className="card-premium-hover group h-full overflow-hidden border-border/50 bg-card/50">
           <div className="relative aspect-[16/9] overflow-hidden">
             <AnimatedSectionImage
               src={serviceImageUrl(service.id, 640, 360)}
@@ -82,7 +98,7 @@ export function ServiceCard({ service, index = 0 }: ServiceCardProps) {
           <CardContent>
             <p className="text-muted-foreground">{service.description}</p>
             <ul className="mt-4 space-y-1">
-              {service.features.slice(0, 3).map((feature) => (
+              {uniquePreviewFeatures(service.features).map((feature) => (
                 <li
                   key={feature}
                   className="flex items-center gap-2 text-sm text-muted-foreground"

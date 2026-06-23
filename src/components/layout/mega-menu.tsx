@@ -57,7 +57,8 @@ function ServiceCard({
         className={cn(
           "group relative flex min-h-[3.25rem] items-center gap-3 overflow-hidden rounded-xl",
           "border border-white/[0.06] bg-white/[0.04] px-3 py-3 sm:min-h-[3.5rem] sm:px-3.5 sm:py-3.5",
-          "transition-[border-color,box-shadow] duration-500",
+          "transition-[border-color,box-shadow,transform,min-height,padding] duration-500",
+          "hover:min-h-[4.1rem] hover:py-4 hover:scale-[1.02] sm:hover:min-h-[4.3rem]",
           "hover:border-white/15 hover:shadow-[0_8px_32px_rgba(0,0,0,0.45)]"
         )}
         data-cursor="pointer"
@@ -69,7 +70,7 @@ function ServiceCard({
           className={cn(
             "object-cover object-center",
             "scale-110 opacity-0 transition-all duration-[650ms] ease-[cubic-bezier(0.16,1,0.3,1)]",
-            "group-hover:scale-100 group-hover:opacity-100"
+            "group-hover:scale-[1.03] group-hover:opacity-100"
           )}
           sizes="(max-width: 1024px) 50vw, 360px"
         />

@@ -2,9 +2,11 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
-import { useReducedMotion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
 import { ArrowUpRight } from "lucide-react";
+import { useLenis } from "@/components/providers/smooth-scroll-provider";
+import { gsap, ScrollTrigger } from "@/lib/motion/lenis-gsap";
+import { useHydrationSafeReducedMotion } from "@/lib/motion/use-hydration-safe-reduced-motion";
 import { serviceImageUrl } from "@/lib/images";
 import { ScrollReveal } from "@/components/shared/scroll-reveal";
 import type { ServiceCategory } from "@/types";
@@ -22,6 +24,7 @@ function displayTitle(title: string): string {
 }
 
 const PREVIEW_COUNT = 6;
+const ROW_COPIES = 3;
 
 function ServiceMarqueeCard({ category }: { category: ServiceCategory }) {
   const [hovered, setHovered] = useState(false);
@@ -30,7 +33,7 @@ function ServiceMarqueeCard({ category }: { category: ServiceCategory }) {
 
   return (
     <article
-      className="group relative w-[min(82vw,280px)] shrink-0 snap-start sm:w-[320px] lg:w-[360px]"
+      className="group relative w-[min(82vw,280px)] shrink-0 sm:w-[320px] lg:w-[360px]"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
@@ -98,33 +101,6 @@ function ServiceMarqueeCard({ category }: { category: ServiceCategory }) {
   );
 }
 
-function MarqueeRow({
-  categories,
-  direction,
-}: {
-  categories: ServiceCategory[];
-  direction: "forward" | "reverse";
-}) {
-  const looped = [...categories, ...categories];
-
-  return (
-    <div className="marquee-row overflow-hidden">
-      <div
-        className={cn(
-          "marquee-track flex w-max gap-4 py-1",
-          direction === "forward"
-            ? "marquee-track-forward"
-            : "marquee-track-reverse"
-        )}
-      >
-        {looped.map((category, index) => (
-          <ServiceMarqueeCard key={`${category.id}-${index}`} category={category} />
-        ))}
-      </div>
-    </div>
-  );
-}
-
 function ScrollableRow({ categories }: { categories: ServiceCategory[] }) {
   return (
     <div
@@ -138,15 +114,92 @@ function ScrollableRow({ categories }: { categories: ServiceCategory[] }) {
   );
 }
 
+function extendRow(categories: ServiceCategory[]) {
+  return Array.from({ length: ROW_COPIES }, () => categories).flat();
+}
+
 export function ServicesBentoGrid({
   categories,
   itCategory,
 }: ServicesBentoGridProps) {
-  const reduceMotion = useReducedMotion();
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const rowARef = useRef<HTMLDivElement>(null);
+  const rowBRef = useRef<HTMLDivElement>(null);
+  const reduceMotion = useHydrationSafeReducedMotion();
+  const { ready } = useLenis();
 
   const allCategories = [...categories, itCategory];
   const rowA = allCategories.filter((_, i) => i % 2 === 0);
   const rowB = allCategories.filter((_, i) => i % 2 === 1);
+  const extendedRowA = extendRow(rowA);
+  const extendedRowB = extendRow(rowB);
+
+  useEffect(() => {
+    if (!ready || reduceMotion) return;
+
+    const containerEl = scrollRef.current;
+    const rowAEl = rowARef.current;
+    const rowBEl = rowBRef.current;
+    if (!containerEl || !rowAEl || !rowBEl) return;
+
+    const ctx = gsap.context(() => {
+      const measure = () => {
+        const segmentA = rowAEl.scrollWidth / ROW_COPIES;
+        const segmentB = rowBEl.scrollWidth / ROW_COPIES;
+        const distance = Math.max(segmentA, segmentB, window.innerWidth * 0.75);
+        return { segmentA, segmentB, distance };
+      };
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: containerEl,
+          start: "top top",
+          end: () => `+=${measure().distance}`,
+          scrub: 1,
+          pin: true,
+          anticipatePin: 1,
+          invalidateOnRefresh: true,
+        },
+      });
+
+      tl.fromTo(rowAEl, { x: 0 }, { x: () => -measure().segmentA, ease: "none" }, 0);
+      tl.fromTo(
+        rowBEl,
+        { x: () => -measure().segmentB },
+        { x: 0, ease: "none" },
+        0
+      );
+    }, scrollRef);
+
+    const refreshAfterImages = () => {
+      const images = containerEl.querySelectorAll("img");
+      if (images.length === 0) {
+        ScrollTrigger.refresh();
+        return;
+      }
+
+      let loaded = 0;
+      const onImageReady = () => {
+        loaded += 1;
+        if (loaded >= images.length) ScrollTrigger.refresh();
+      };
+
+      images.forEach((image) => {
+        if (image.complete) onImageReady();
+        else image.addEventListener("load", onImageReady, { once: true });
+      });
+    };
+
+    const onResize = () => ScrollTrigger.refresh();
+    window.addEventListener("resize", onResize);
+    ScrollTrigger.refresh();
+    refreshAfterImages();
+
+    return () => {
+      window.removeEventListener("resize", onResize);
+      ctx.revert();
+    };
+  }, [ready, reduceMotion, rowA.length, rowB.length]);
 
   return (
     <section className="space-y-8">
@@ -159,18 +212,36 @@ export function ServicesBentoGrid({
         </h2>
       </ScrollReveal>
 
-      <div className="py-6 sm:py-10">
-        <div className="relative left-1/2 w-screen max-w-[100vw] -translate-x-1/2 space-y-4">
+      <div ref={scrollRef} className="py-6 sm:py-10">
+        <div className="relative left-1/2 w-screen max-w-[100vw] -translate-x-1/2">
           {reduceMotion ? (
-            <>
+            <div className="space-y-4">
               <ScrollableRow categories={rowA} />
               <ScrollableRow categories={rowB} />
-            </>
+            </div>
           ) : (
-            <>
-              <MarqueeRow categories={rowA} direction="forward" />
-              <MarqueeRow categories={rowB} direction="reverse" />
-            </>
+            <div className="space-y-4 overflow-hidden">
+              <div className="overflow-hidden">
+                <div ref={rowARef} className="flex w-max gap-4 py-1 will-change-transform">
+                  {extendedRowA.map((category, index) => (
+                    <ServiceMarqueeCard
+                      key={`${category.id}-${index}`}
+                      category={category}
+                    />
+                  ))}
+                </div>
+              </div>
+              <div className="overflow-hidden">
+                <div ref={rowBRef} className="flex w-max gap-4 py-1 will-change-transform">
+                  {extendedRowB.map((category, index) => (
+                    <ServiceMarqueeCard
+                      key={`${category.id}-${index}`}
+                      category={category}
+                    />
+                  ))}
+                </div>
+              </div>
+            </div>
           )}
         </div>
       </div>

@@ -13,9 +13,9 @@ export function PromoPopup() {
 
   useEffect(() => {
     fetch(apiUrl("/api/cms/settings"))
-      .then((r) => r.json())
-      .then((data: { popup: CmsPopup }) => {
-        if (data.popup?.enabled && data.popup.image) {
+      .then((r) => (r.ok ? r.json() : null))
+      .then((data: { popup: CmsPopup } | null) => {
+        if (data?.popup?.enabled && data.popup.image) {
           const dismissed = sessionStorage.getItem("wolfrayet_popup_dismissed");
           if (!dismissed) {
             setPopup(data.popup);

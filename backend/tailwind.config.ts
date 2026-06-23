@@ -55,6 +55,7 @@ const config: Config = {
       },
       fontFamily: {
         sans: ["var(--font-dm-sans)"],
+        jakarta: ["var(--font-plus-jakarta)", "var(--font-dm-sans)", "sans-serif"],
         mono: ["var(--font-dm-sans)"],
       },
       backgroundImage: {

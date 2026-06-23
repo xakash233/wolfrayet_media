@@ -2,6 +2,7 @@ import {
   createCmsEnquiry,
   fetchCmsBlogPosts,
   fetchCmsEnquiries,
+  fetchCmsEnquiryById,
   fetchCmsServices,
   fetchCmsSettings,
   fetchCmsTeam,
@@ -36,6 +37,10 @@ export async function getCmsTeam(): Promise<CmsTeamData> {
 
 export async function getCmsEnquiries(): Promise<CmsEnquiry[]> {
   return fetchCmsEnquiries();
+}
+
+export async function getCmsEnquiryById(id: string): Promise<CmsEnquiry | null> {
+  return fetchCmsEnquiryById(id);
 }
 
 export {

@@ -4,11 +4,11 @@ import { MAX_ANIMATION_SEC } from "@/lib/images";
 export const EASE_LESSE = [0.16, 1, 0.3, 1] as const;
 export const EASE_SMOOTH = [0.22, 1, 0.36, 1] as const;
 
-export const SCROLL_REVEAL_Y = 72;
-export const SCROLL_REVEAL_BLUR = 8;
+export const SCROLL_REVEAL_Y = 80;
+export const SCROLL_REVEAL_BLUR = 0;
 /** Default scroll reveal duration — capped at MAX_ANIMATION_SEC (4s) for SEO/UX budget */
-export const SCROLL_REVEAL_DURATION = 1.35;
-export const SCROLL_STAGGER_STEP = 0.14;
+export const SCROLL_REVEAL_DURATION = 1;
+export const SCROLL_STAGGER_STEP = 0.12;
 
 /**
  * Scroll reveal transition — total delay + duration never exceeds MAX_ANIMATION_SEC.

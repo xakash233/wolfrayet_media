@@ -16,7 +16,7 @@ export function StartProjectFab() {
   return (
     <motion.div
       style={{ opacity, y }}
-      className="pointer-events-none fixed inset-x-0 bottom-6 z-40 flex justify-center"
+      className="pointer-events-none fixed inset-x-0 bottom-24 z-40 flex justify-center sm:bottom-6"
     >
       <Link
         href="/contact"

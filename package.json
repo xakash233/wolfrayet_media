@@ -3,8 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "lsof -ti :3000 | xargs kill -9 2>/dev/null; next dev -p 3000",
-    "dev:clean": "rm -rf .next && npm run dev",
+    "dev": "bash scripts/dev-all.sh",
+    "dev:fe": "next dev -p 3000",
+    "dev:clean": "rm -rf .next backend/.next && bash scripts/dev-all.sh",
+    "dev:stop": "bash scripts/kill-port.sh 3000; bash scripts/kill-port.sh 3001",
     "dev:all": "bash scripts/dev-all.sh",
     "build": "next build",
     "start": "next start",
@@ -36,6 +38,7 @@
     "react": "^18",
     "react-dom": "^18",
     "react-hook-form": "^7.76.1",
+    "split-type": "^0.3.4",
     "tailwind-merge": "^3.6.0",
     "zod": "^4.4.3"
   },

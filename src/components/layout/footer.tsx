@@ -19,6 +19,8 @@ import { Separator } from "@/components/ui/separator";
 import { Logo } from "@/components/shared/logo";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import { subscribeNewsletter } from "@/lib/newsletter";
+import { LoadingSpinner } from "@/components/shared/loading-spinner";
 
 const socialIcons = [
   { icon: FacebookIcon, href: SITE_CONFIG.social.facebook, label: "Facebook" },
@@ -33,16 +35,25 @@ export function Footer() {
   const pathname = usePathname();
   const [email, setEmail] = useState("");
   const [subscribed, setSubscribed] = useState(false);
+  const [subscribeError, setSubscribeError] = useState<string | null>(null);
+  const [subscribing, setSubscribing] = useState(false);
 
   if (pathname === "/about-details") {
     return null;
   }
 
-  const handleSubscribe = (e: React.FormEvent) => {
+  const handleSubscribe = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (email) {
+    if (!email.trim()) return;
+    setSubscribing(true);
+    setSubscribeError(null);
+    const result = await subscribeNewsletter(email.trim());
+    setSubscribing(false);
+    if (result.ok) {
       setSubscribed(true);
       setEmail("");
+    } else {
+      setSubscribeError(result.message);
     }
   };
 
@@ -104,13 +115,22 @@ export function Footer() {
                 aria-label="Email for newsletter"
                 className="border-white/20 bg-white/5 text-white placeholder:text-white/50"
               />
-              <Button type="submit" variant="premium">
-                Sign Up
+              <Button type="submit" variant="premium" disabled={subscribing}>
+                {subscribing ? (
+                  <LoadingSpinner size="sm" className="border-white border-t-transparent" />
+                ) : (
+                  "Sign Up"
+                )}
               </Button>
             </form>
             {subscribed && (
               <p className="mt-2 text-sm text-primary" role="status">
                 Thanks for subscribing!
+              </p>
+            )}
+            {subscribeError && (
+              <p className="mt-2 text-sm text-red-400" role="alert">
+                {subscribeError}
               </p>
             )}
           </div>

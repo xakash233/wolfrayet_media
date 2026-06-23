@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { DM_Sans } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { MotionProvider } from "@/components/providers/motion-provider";
@@ -12,8 +13,13 @@ import { OrganizationJsonLd } from "@/components/shared/json-ld";
 import { SITE_CONFIG } from "@/lib/constants";
 import { SEO_KEYWORDS } from "@/lib/seo-keywords";
 
-const DM_SANS_STYLESHEET =
-  "https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap";
+const dmSans = DM_Sans({
+  subsets: ["latin"],
+  variable: "--font-dm-sans",
+  display: "swap",
+});
+
+const OG_IMAGE = "/logo/favicon2.png";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_CONFIG.url),
@@ -26,28 +32,27 @@ export const metadata: Metadata = {
   authors: [{ name: SITE_CONFIG.name }],
   openGraph: {
     type: "website",
-    locale: "en_US",
+    locale: "en_IN",
     url: SITE_CONFIG.url,
     siteName: SITE_CONFIG.name,
     title: SITE_CONFIG.tagline,
     description: SITE_CONFIG.seoDescription,
+    images: [{ url: OG_IMAGE, width: 512, height: 512, alt: SITE_CONFIG.name }],
   },
   twitter: {
     card: "summary_large_image",
     title: SITE_CONFIG.tagline,
     description: SITE_CONFIG.seoDescription,
+    images: [OG_IMAGE],
   },
   robots: {
     index: true,
     follow: true,
   },
   icons: {
-    icon: [
-      { url: "/favicon.ico", sizes: "any" },
-      { url: "/logo/favicon2.png", type: "image/png", sizes: "512x512" },
-    ],
+    icon: [{ url: "/logo/favicon2.png", type: "image/png", sizes: "512x512" }],
     apple: [{ url: "/logo/favicon2.png", sizes: "180x180", type: "image/png" }],
-    shortcut: "/favicon.ico",
+    shortcut: "/logo/favicon2.png",
   },
 };
 
@@ -57,16 +62,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="anonymous"
-        />
-        <link href={DM_SANS_STYLESHEET} rel="stylesheet" />
-      </head>
+    <html lang="en" className={dmSans.variable} suppressHydrationWarning>
       <body className="font-sans antialiased">
         <OrganizationJsonLd />
         <ThemeProvider>

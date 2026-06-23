@@ -1,5 +1,7 @@
 "use client";
 
+import { MaskTextReveal } from "@/components/motion/mask-text-reveal";
+import { TextReveal } from "@/components/motion/text-reveal";
 import { Logo } from "@/components/shared/logo";
 import { AnimatedSectionImage } from "@/components/shared/animated-section-image";
 import { SITE_CONFIG } from "@/lib/constants";
@@ -87,23 +89,26 @@ export function BrandIntroSection({
               />
             </div>
 
-            <h2
-              className={cn(
-                "hero-title mx-auto mt-8 max-w-5xl uppercase tracking-wide text-balance",
-                fullScreen ? "text-white" : "text-foreground lg:mx-0"
-              )}
-            >
-              {SITE_CONFIG.heroHeadline}
-            </h2>
+            <MaskTextReveal>
+              <h2
+                className={cn(
+                  "hero-title mx-auto mt-8 max-w-5xl uppercase tracking-wide text-balance",
+                  fullScreen ? "text-white" : "text-foreground lg:mx-0"
+                )}
+              >
+                {SITE_CONFIG.heroHeadline}
+              </h2>
+            </MaskTextReveal>
 
-            <p
+            <TextReveal
+              mode="words"
               className={cn(
                 "hero-subtitle mx-auto mt-8 w-full max-w-4xl text-balance",
                 fullScreen ? "text-white/90" : "text-muted-foreground lg:mx-0"
               )}
             >
-              {SITE_CONFIG.heroDescription}
-            </p>
+              <p>{SITE_CONFIG.heroDescription}</p>
+            </TextReveal>
           </ScrollReveal>
         </div>
       </div>

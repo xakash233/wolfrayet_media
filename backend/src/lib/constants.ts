@@ -12,15 +12,15 @@ export const SITE_CONFIG = {
   description:
     "Wolfrayet Media is your trusted digital marketing and web development partner, transforming bold ideas into powerful digital success through innovative strategies, SEO-driven growth, and high-performance websites that attract, engage, and convert customers while accelerating your brand's growth in a competitive online marketplace.",
   seoDescription:
-    "Wolfrayet Media is a best digital marketing agency and top digital marketing company offering SEO, PPC, social media marketing, performance marketing, local SEO, web development, and IT services near you.",
+    "Wolfrayet Media is a top-rated digital marketing agency delivering smart, results-driven strategies that help businesses grow, boost visibility, and connect with the right audience.",
   bannerLongDescription:
     "By combining creativity, technology, and data-driven insights, we build powerful websites and execute targeted marketing campaigns that enhance brand visibility, attract qualified leads, and increase conversions. Our team works closely with every client to understand their goals, ensuring each solution is customized to reflect their brand identity and support long-term business growth. From website design and development to SEO, social media marketing, and paid advertising, we provide end-to-end digital solutions that help businesses stay ahead in today's competitive digital landscape.",
   vision:
     "To become a trusted digital growth partner, empowering businesses worldwide with innovative marketing and technology solutions that drive measurable success and long-term growth.",
   mission:
     "We transform ideas into impactful digital experiences through strategic marketing, performance-driven campaigns, creative branding, and innovative online solutions that help businesses attract, engage, and convert their ideal audience while achieving sustainable growth in a competitive digital landscape.",
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://wolfrayetmedia.com",
-  email: "info@wolfrayetmedia.com",
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.wolfrayetmedia.in",
+  email: "info@wolfrayetmedia.in",
   phone: "+91 85310 72803",
   whatsapp: "918531072803",
   social: {

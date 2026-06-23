@@ -4,8 +4,6 @@
 const PRODUCTION_BACKEND_URL = "https://backend-wolf-ten.vercel.app";
 
 function getAssetPrefix() {
-  if (process.env.NODE_ENV !== "production") return undefined;
-
   const stable = (
     process.env.BACKEND_URL ||
     process.env.NEXT_PUBLIC_BACKEND_URL ||
@@ -14,7 +12,12 @@ function getAssetPrefix() {
     .trim()
     .replace(/\/$/, "");
 
-  if (process.env.VERCEL === "1") {
+  // Dev: admin is proxied via localhost:3000/admin — assets must load from :3001.
+  if (process.env.NODE_ENV === "development") {
+    return process.env.BACKEND_ASSET_PREFIX?.trim() || "http://localhost:3001";
+  }
+
+  if (process.env.NODE_ENV === "production" && process.env.VERCEL === "1") {
     return stable;
   }
 
@@ -27,7 +30,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "*.public.blob.vercel-storage.com",
+        hostname: "**.public.blob.vercel-storage.com",
         pathname: "/**",
       },
     ],

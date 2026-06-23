@@ -114,9 +114,9 @@ export const PRIMARY_SEO_KEYWORDS = [
 
 export const SEO_META = {
   home: {
-    title: "Best Digital Marketing Agency & Top Marketing Companies",
+    title: "Best Digital Marketing Agency for Business Growth",
     description:
-      "Wolfrayet Media is a best digital marketing agency and top digital marketing company offering SEO, PPC, social media marketing, performance marketing, local SEO, web development, and IT services near you.",
+      "Wolfrayet Media is a top-rated digital marketing agency delivering smart, results-driven strategies that help businesses grow, boost visibility, and connect with the right audience.",
   },
   services: {
     title: "Best Digital Marketing Services | PPC, SEO & Social Media",

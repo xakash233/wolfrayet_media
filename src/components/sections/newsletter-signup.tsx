@@ -5,19 +5,24 @@ import { Mail } from "lucide-react";
 import { ScrollReveal } from "@/components/shared/scroll-reveal";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { LoadingSpinner } from "@/components/shared/loading-spinner";
+import { subscribeNewsletter } from "@/lib/newsletter";
 
 export function NewsletterSignup() {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
+  const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (email.includes("@")) {
-      setStatus("success");
-      setEmail("");
-    } else {
-      setStatus("error");
-    }
+    setLoading(true);
+    setStatus("idle");
+    const result = await subscribeNewsletter(email.trim());
+    setLoading(false);
+    setStatus(result.ok ? "success" : "error");
+    setMessage(result.message);
+    if (result.ok) setEmail("");
   };
 
   return (
@@ -41,21 +46,29 @@ export function NewsletterSignup() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
+          disabled={loading}
           aria-label="Email address"
           className="flex-1"
         />
-        <Button type="submit" variant="premium">
-          Subscribe
+        <Button type="submit" variant="premium" disabled={loading}>
+          {loading ? (
+            <>
+              <LoadingSpinner size="sm" className="mr-2 border-white border-t-transparent" />
+              Subscribing...
+            </>
+          ) : (
+            "Subscribe"
+          )}
         </Button>
       </form>
       {status === "success" && (
         <p className="mt-3 text-sm text-primary" role="status">
-          You&apos;re subscribed! Check your inbox.
+          {message}
         </p>
       )}
       {status === "error" && (
         <p className="mt-3 text-sm text-destructive" role="alert">
-          Please enter a valid email address.
+          {message}
         </p>
       )}
     </ScrollReveal>

@@ -83,6 +83,24 @@ export const digitalMarketingCategories: ServiceCategory[] = [
   },
   {
     number: 5,
+    id: "app-development",
+    title: "App Development Services",
+    description:
+      "Build high-performance iOS, Android, and cross-platform apps designed for engagement, scalability, and lasting business growth.",
+    icon: "Smartphone",
+    items: [
+      "iOS App Development",
+      "Android App Development",
+      "React Native & Cross-Platform Apps",
+      "Flutter App Development",
+      "UI/UX Design for Mobile",
+      "App Store & Play Store Optimization",
+      "API Integration & Backend Development",
+      "App Maintenance & Updates",
+    ],
+  },
+  {
+    number: 6,
     id: "content",
     title: "Content Marketing",
     description:
@@ -101,7 +119,7 @@ export const digitalMarketingCategories: ServiceCategory[] = [
     ],
   },
   {
-    number: 6,
+    number: 7,
     id: "email",
     title: "Email Marketing & Automation",
     description:
@@ -120,7 +138,7 @@ export const digitalMarketingCategories: ServiceCategory[] = [
     ],
   },
   {
-    number: 7,
+    number: 8,
     id: "web-development",
     title: "Website Design & Development",
     description:
@@ -139,7 +157,7 @@ export const digitalMarketingCategories: ServiceCategory[] = [
     ],
   },
   {
-    number: 8,
+    number: 9,
     id: "branding",
     title: "Branding & Creative Services",
     description:
@@ -157,7 +175,7 @@ export const digitalMarketingCategories: ServiceCategory[] = [
     ],
   },
   {
-    number: 9,
+    number: 10,
     id: "cro",
     title: "Conversion Rate Optimization (CRO)",
     description:
@@ -174,7 +192,7 @@ export const digitalMarketingCategories: ServiceCategory[] = [
     ],
   },
   {
-    number: 10,
+    number: 11,
     id: "orm",
     title: "Online Reputation Management (ORM)",
     description:
@@ -190,7 +208,7 @@ export const digitalMarketingCategories: ServiceCategory[] = [
     ],
   },
   {
-    number: 11,
+    number: 12,
     id: "influencer",
     title: "Influencer & Creator Marketing",
     description:
@@ -206,7 +224,7 @@ export const digitalMarketingCategories: ServiceCategory[] = [
     ],
   },
   {
-    number: 12,
+    number: 13,
     id: "video",
     title: "Video Marketing",
     description:
@@ -222,7 +240,7 @@ export const digitalMarketingCategories: ServiceCategory[] = [
     ],
   },
   {
-    number: 13,
+    number: 14,
     id: "analytics",
     title: "Analytics, Tracking & Reporting",
     description:
@@ -238,7 +256,7 @@ export const digitalMarketingCategories: ServiceCategory[] = [
     ],
   },
   {
-    number: 14,
+    number: 15,
     id: "digital-growth",
     title: "Additional Digital Growth Services",
     description:

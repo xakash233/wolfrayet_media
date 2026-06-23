@@ -58,6 +58,9 @@ export function AIAgent({ open, onOpenChange }: AIAgentProps) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message: trimmed }),
       });
+      if (!res.ok) {
+        throw new Error("Chat request failed");
+      }
       const data = await res.json();
       const reply =
         data.reply ??

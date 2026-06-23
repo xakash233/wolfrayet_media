@@ -74,6 +74,62 @@ function mapSettingsResolved(row: Parameters<typeof mapSettings>[0]): CmsSetting
   };
 }
 
+function hasDuplicateItems(items: string[]): boolean {
+  return new Set(items).size !== items.length;
+}
+
+/** Merge DB services with defaults — restores missing categories and fixes duplicated items. */
+function normalizeCmsServices(data: CmsServicesData): {
+  data: CmsServicesData;
+  repaired: boolean;
+} {
+  let repaired = false;
+  const dbMap = new Map(
+    data.digitalMarketingCategories.map((category) => [category.id, category])
+  );
+
+  const digitalMarketingCategories =
+    defaultCmsServices.digitalMarketingCategories.map((defaultCategory) => {
+      const dbCategory = dbMap.get(defaultCategory.id);
+      if (!dbCategory) {
+        repaired = true;
+        return {
+          ...defaultCategory,
+          items: [...defaultCategory.items],
+        };
+      }
+
+      if (hasDuplicateItems(dbCategory.items)) {
+        repaired = true;
+        return {
+          ...dbCategory,
+          number: defaultCategory.number,
+          title: defaultCategory.title,
+          description: defaultCategory.description,
+          icon: defaultCategory.icon,
+          items: [...defaultCategory.items],
+        };
+      }
+
+      return { ...dbCategory, items: [...dbCategory.items] };
+    });
+
+  const defaultIt = defaultCmsServices.itServicesCategory;
+  let itServicesCategory = data.itServicesCategory;
+  if (hasDuplicateItems(itServicesCategory.items)) {
+    repaired = true;
+    itServicesCategory = {
+      ...itServicesCategory,
+      items: [...defaultIt.items],
+    };
+  }
+
+  return {
+    data: { digitalMarketingCategories, itServicesCategory },
+    repaired,
+  };
+}
+
 function mapServiceCategory(
   row: {
     id: string;
@@ -274,7 +330,18 @@ export async function fetchCmsServices(): Promise<CmsServicesData> {
       ? mapServiceCategory(itRow)
       : defaultCmsServices.itServicesCategory;
 
-    return { digitalMarketingCategories, itServicesCategory };
+    const { data, repaired } = normalizeCmsServices({
+      digitalMarketingCategories,
+      itServicesCategory,
+    });
+
+    if (repaired) {
+      void saveCmsServices(data).catch((error) => {
+        console.error("[CMS] services repair failed:", error);
+      });
+    }
+
+    return data;
   });
 }
 
@@ -290,6 +357,9 @@ export async function saveCmsServices(data: CmsServicesData): Promise<void> {
   const allIds = allCategories.map((c) => c.id);
 
   await prisma.$transaction(async (tx) => {
+    await tx.serviceCategoryItem.deleteMany({
+      where: { categoryId: { in: allIds } },
+    });
     await tx.serviceCategoryItem.deleteMany({
       where: { categoryId: { notIn: allIds } },
     });
@@ -436,6 +506,21 @@ export async function fetchCmsEnquiries(): Promise<CmsEnquiry[]> {
     message: row.message,
     createdAt: row.createdAt.toISOString(),
   }));
+}
+
+export async function fetchCmsEnquiryById(id: string): Promise<CmsEnquiry | null> {
+  if (!hasDatabase()) return null;
+  const row = await prisma.enquiry.findUnique({ where: { id } });
+  if (!row) return null;
+  return {
+    id: row.id,
+    name: row.name,
+    email: row.email,
+    phone: row.phone ?? undefined,
+    subject: row.subject,
+    message: row.message,
+    createdAt: row.createdAt.toISOString(),
+  };
 }
 
 export async function createCmsEnquiry(data: {
