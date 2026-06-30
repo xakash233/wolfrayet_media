@@ -43,15 +43,15 @@ export default async function AboutPage() {
         <Timeline events={timeline} />
       </AnimatedSection>
 
-      <AnimatedSection id="team">
+      {/* <AnimatedSection id="team">
         <SectionHeading
           align="center"
           eyebrow="Team"
           title="Meet the Experts"
-          description="Led by Krishna Kumar, Founder & CEO — passionate marketers, strategists, and creatives dedicated to your success."
+          description="."
         />
         <TeamCards members={teamMembers} />
-      </AnimatedSection>
+      </AnimatedSection> */}
 
       <AnimatedSection>
         <CTASection />
