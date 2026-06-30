@@ -23,7 +23,7 @@ export default async function AboutPage() {
     <>
       <Hero
         title="About Wolfrayet Media"
-        subtitle="Founded and led by Krishna Kumar, Founder & CEO — delivering exceptional digital marketing and web development solutions."
+        subtitle="."
         showCta={false}
         compact
         hideEyebrow
