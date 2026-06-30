@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { DM_Sans } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/providers/theme-provider";
+import { THEME_STORAGE_KEY } from "@/lib/theme";
 import { MotionProvider } from "@/components/providers/motion-provider";
 import { PageTransitionProvider } from "@/components/providers/page-transition-provider";
 import { Header } from "@/components/layout/header";
@@ -63,6 +64,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={dmSans.variable} suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var d=document.documentElement;var t=localStorage.getItem("${THEME_STORAGE_KEY}");if(t==="dark"){d.classList.add("dark");}else{d.classList.remove("dark");}}catch(e){}})();`,
+          }}
+        />
+      </head>
       <body className="font-sans antialiased">
         <OrganizationJsonLd />
         <ThemeProvider>

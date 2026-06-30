@@ -15,6 +15,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { LoadingSpinner } from "@/components/shared/loading-spinner";
 import { apiUrl } from "@/lib/api/config";
+import { ENQUIRY_QUOTE_SOURCE } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 
 const SERVICE_OPTIONS = [
@@ -79,6 +80,7 @@ export function ContactQuoteForm() {
 
   const onSubmit = async (formData: ContactQuoteValues) => {
     setSubmitError(null);
+    const servicesList = formData.services.join(", ");
     try {
       const response = await fetch(apiUrl("/api/contact"), {
         method: "POST",
@@ -87,8 +89,16 @@ export function ContactQuoteForm() {
           name: formData.name,
           email: formData.email,
           phone: formData.phone || undefined,
-          subject: `Quote Request — ${formData.services.join(", ")}`,
-          message: formData.message,
+          subject: `${ENQUIRY_QUOTE_SOURCE} — ${servicesList}`,
+          message: [
+            `Source: ${ENQUIRY_QUOTE_SOURCE}`,
+            "",
+            "Services interested in:",
+            ...formData.services.map((service) => `- ${service}`),
+            "",
+            "Project details:",
+            formData.message,
+          ].join("\n"),
         }),
       });
       if (!response.ok) {

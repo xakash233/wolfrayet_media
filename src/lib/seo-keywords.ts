@@ -126,7 +126,7 @@ export const SEO_META = {
   about: {
     title: "Top Digital Marketing Agency | About Wolfrayet Media",
     description:
-      "Learn why Wolfrayet Media ranks among the best digital marketing agencies and best marketing agencies for startups, ecommerce, real estate, and B2B brands worldwide.",
+      "Wolfrayet Media was founded by Krishna Kumar, Founder & CEO. Learn about our digital marketing, web development, and IT team serving brands in India and worldwide.",
   },
   contact: {
     title: "Best Digital Marketing Agency Near Me | Contact",

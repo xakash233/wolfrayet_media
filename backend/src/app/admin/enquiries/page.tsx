@@ -7,6 +7,8 @@ import { AdminCard, AdminShell } from "@/components/admin/admin-shell";
 import { adminFetch } from "@/lib/cms/admin-fetch";
 import type { CmsEnquiry } from "@/lib/cms/types";
 
+const QUOTE_SOURCE = "Ready to get started?";
+
 export default function AdminEnquiriesPage() {
   const [enquiries, setEnquiries] = useState<CmsEnquiry[]>([]);
 
@@ -35,6 +37,11 @@ export default function AdminEnquiriesPage() {
               <div className="min-w-0 space-y-1">
                 <div className="flex flex-wrap items-center gap-2">
                   <p className="font-semibold">{e.name}</p>
+                  {e.subject.startsWith(QUOTE_SOURCE) && (
+                    <span className="rounded-full bg-blue-50 px-2 py-0.5 text-xs font-medium text-primary">
+                      {QUOTE_SOURCE}
+                    </span>
+                  )}
                   <p className="text-xs text-muted-foreground">
                     {new Date(e.createdAt).toLocaleString()}
                   </p>

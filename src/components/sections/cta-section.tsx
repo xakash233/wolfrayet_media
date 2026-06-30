@@ -18,9 +18,9 @@ interface CTASectionProps {
 }
 
 export function CTASection({
-  title = "Ready to Grow Your Business?",
-  description = "Let's discuss how Wolfrayet Media can transform your digital presence and drive measurable results.",
-  primaryLabel = "Get Started Today",
+  title = "Ready to get started?",
+  description = "Share your project details and our team will respond within 24 hours with a tailored quote.",
+  primaryLabel = "Send Request",
   primaryHref = "/contact",
   secondaryLabel = "View Our Work",
   secondaryHref = "/portfolio",

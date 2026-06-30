@@ -12,6 +12,28 @@ import {
 } from "lucide-react";
 import type { CmsEnquiry } from "@/lib/cms/types";
 
+const QUOTE_SOURCE = "Ready to get started?";
+
+function isQuoteEnquiry(enquiry: CmsEnquiry) {
+  return enquiry.subject.startsWith(QUOTE_SOURCE);
+}
+
+function quoteServices(enquiry: CmsEnquiry) {
+  if (!isQuoteEnquiry(enquiry)) return null;
+  const fromSubject = enquiry.subject
+    .slice(QUOTE_SOURCE.length)
+    .replace(/^\s*[—-]\s*/, "")
+    .trim();
+  return fromSubject || null;
+}
+
+function quoteProjectMessage(message: string) {
+  const marker = "Project details:";
+  const index = message.indexOf(marker);
+  if (index === -1) return message;
+  return message.slice(index + marker.length).trim();
+}
+
 function initials(name: string) {
   return name
     .split(/\s+/)
@@ -73,6 +95,11 @@ export function LeadDetailsView({ enquiry }: { enquiry: CmsEnquiry }) {
   const whatsappHref = phone
     ? `https://wa.me/${phone.replace(/\D/g, "")}`
     : undefined;
+  const fromQuoteForm = isQuoteEnquiry(enquiry);
+  const services = quoteServices(enquiry);
+  const displayMessage = fromQuoteForm
+    ? quoteProjectMessage(enquiry.message)
+    : enquiry.message;
 
   return (
     <div className="font-jakarta mx-auto w-full max-w-3xl p-4 sm:p-6">
@@ -86,7 +113,9 @@ export function LeadDetailsView({ enquiry }: { enquiry: CmsEnquiry }) {
         </Link>
         <div>
           <h1 className="text-lg font-semibold text-neutral-900">Lead Details</h1>
-          <p className="text-xs text-neutral-500">Contact form submission</p>
+          <p className="text-xs text-neutral-500">
+            {fromQuoteForm ? QUOTE_SOURCE : "Contact form submission"}
+          </p>
         </div>
       </div>
 
@@ -106,7 +135,7 @@ export function LeadDetailsView({ enquiry }: { enquiry: CmsEnquiry }) {
                   {formatDate(enquiry.createdAt)}
                 </span>
                 <span className="inline-flex items-center gap-1 rounded-full bg-blue-50 px-2.5 py-0.5 text-xs font-medium text-primary">
-                  Website
+                  {fromQuoteForm ? QUOTE_SOURCE : "Website"}
                 </span>
               </div>
             </div>
@@ -150,7 +179,20 @@ export function LeadDetailsView({ enquiry }: { enquiry: CmsEnquiry }) {
             value={phone ?? "Not provided"}
             href={telHref}
           />
-          <DetailRow icon={Tag} label="Subject / Services" value={enquiry.subject} />
+          {fromQuoteForm ? (
+            <>
+              <DetailRow icon={Tag} label="Source" value={QUOTE_SOURCE} />
+              {services && (
+                <DetailRow
+                  icon={Tag}
+                  label="Services selected"
+                  value={services}
+                />
+              )}
+            </>
+          ) : (
+            <DetailRow icon={Tag} label="Subject" value={enquiry.subject} />
+          )}
           <DetailRow
             icon={Clock}
             label="Submitted"
@@ -168,7 +210,7 @@ export function LeadDetailsView({ enquiry }: { enquiry: CmsEnquiry }) {
         </div>
         <div className="p-5 sm:p-6">
           <p className="whitespace-pre-wrap text-sm leading-relaxed text-neutral-700">
-            {enquiry.message}
+            {displayMessage}
           </p>
         </div>
       </div>

@@ -2,13 +2,11 @@ import type { Metadata } from "next";
 import { Hero } from "@/components/sections/hero";
 import { ServicesBentoGrid } from "@/components/sections/services-bento-grid";
 import { ServiceCatalog } from "@/components/sections/service-catalog";
-import { PricingPackages } from "@/components/sections/pricing-packages";
 import { ProcessWorkflow } from "@/components/sections/process-workflow";
 import { CTASection } from "@/components/sections/cta-section";
 import { AnimatedSection } from "@/components/shared/animated-section";
 import { SectionHeading } from "@/components/shared/section-heading";
 import { getCmsServices } from "@/lib/api/cms";
-import { customAddOns, pricingNote, pricingPlans } from "@/data/pricing";
 import { SEO_META } from "@/lib/seo-keywords";
 import { Check, X } from "lucide-react";
 import type { ServiceCategory } from "@/types";
@@ -51,7 +49,7 @@ export default async function ServicesPage() {
     <>
       <Hero
         title="Our Services"
-        subtitle="Full digital marketing services and India-based pricing packages — SEO, PPC, social, web, branding, and growth."
+        subtitle="Full digital marketing services — SEO, PPC, social, web, branding, and growth."
         showCta
         compact
         hideEyebrow
@@ -72,19 +70,6 @@ export default async function ServicesPage() {
           description="Detailed breakdown of everything included in each category."
         />
         <ServiceCatalog categories={allCategories} />
-      </AnimatedSection>
-
-      <AnimatedSection id="pricing">
-        <SectionHeading
-          eyebrow="Pricing"
-          title="Digital Marketing Pricing Packages"
-          description="India-based, Tamil Nadu–focused packages in INR covering our full service range."
-        />
-        <PricingPackages
-          plans={pricingPlans}
-          note={pricingNote}
-          customAddOns={customAddOns}
-        />
       </AnimatedSection>
 
       <AnimatedSection className="bg-muted/20">

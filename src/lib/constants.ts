@@ -38,6 +38,11 @@ export const SITE_CONFIG = {
   email: "info@wolfrayetmedia.in",
   phone: "+91 85310 72803",
   whatsapp: "918531072803",
+  founder: {
+    name: "Krishna Kumar",
+    jobTitle: "Founder & CEO",
+    image: "/Team/krishna.jpeg",
+  },
   social: {
     facebook: "https://facebook.com",
     instagram: "https://instagram.com",
@@ -66,3 +71,6 @@ export const HEADER_NAV_LINKS = NAV_LINKS.filter(
 export const WHATSAPP_URL = `https://wa.me/${SITE_CONFIG.whatsapp}?text=${encodeURIComponent(
   "Hi Wolfrayet Media! I'd like to discuss digital marketing for my business."
 )}`;
+
+/** Label for contact quote form submissions in admin enquiries. */
+export const ENQUIRY_QUOTE_SOURCE = "Ready to get started?";

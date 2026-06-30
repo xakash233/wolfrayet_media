@@ -4,6 +4,10 @@ const GREETINGS = ["hi", "hello", "hey", "good morning", "good afternoon"];
 
 const KEYWORD_RESPONSES: { keywords: string[]; response: string }[] = [
   {
+    keywords: ["founder", "ceo", "who owns", "who runs", "leadership", "owner"],
+    response: `${SITE_CONFIG.founder.name} is the ${SITE_CONFIG.founder.jobTitle} of ${SITE_CONFIG.name}. Learn more about our team at /about#team.`,
+  },
+  {
     keywords: ["price", "pricing", "cost", "package", "plan"],
     response: `Our plans start at $999/month (Starter), $2,499/month (Growth — most popular), and $4,999/month (Enterprise). Every plan includes strategy, reporting, and dedicated support. Visit /contact or WhatsApp us for a custom quote tailored to your goals.`,
   },

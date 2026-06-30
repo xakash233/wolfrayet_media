@@ -8,7 +8,6 @@ import { BrandIntroSection } from "@/components/sections/brand-intro-section";
 import { ServiceCard } from "@/components/sections/service-card";
 import { FeaturesGrid } from "@/components/sections/features-grid";
 import { TestimonialsCarousel } from "@/components/sections/testimonials-carousel";
-import { PricingCards } from "@/components/sections/pricing-cards";
 import { FAQAccordion } from "@/components/sections/faq-accordion";
 import { NewsletterSignup } from "@/components/sections/newsletter-signup";
 import { CTASection } from "@/components/sections/cta-section";
@@ -20,7 +19,6 @@ import { getCmsSettings } from "@/lib/api/cms";
 import { buildFeaturedServicesFromCms } from "@/lib/cms/services";
 import { features } from "@/data/stats";
 import { testimonials } from "@/data/testimonials";
-import { pricingPlans } from "@/data/pricing";
 import { faqItems } from "@/data/faq";
 import { getBlogPosts } from "@/data/blog";
 import { SECTION_IMAGES } from "@/lib/images";
@@ -99,21 +97,6 @@ export default async function HomePage() {
           description="Our clients love us for delivering powerful digital solutions, exceptional service, and measurable results that drive sustainable business growth and long-term success."
         />
         <TestimonialsCarousel testimonials={testimonials} showViewAll />
-      </AnimatedSection>
-
-      <AnimatedSection compact>
-        <SectionHeading
-          compact
-          eyebrow="Pricing"
-          title="Plans That Scale With You"
-          description="India-based digital marketing packages in INR. GST extra. View all plans on our services page."
-        />
-        <PricingCards plans={pricingPlans} compact />
-        <div className="mt-6 text-center">
-          <Button asChild variant="outline">
-            <Link href="/services#pricing">View All Pricing Packages</Link>
-          </Button>
-        </div>
       </AnimatedSection>
 
       <AnimatedSection compact className="bg-muted/20">

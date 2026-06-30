@@ -57,7 +57,12 @@
 
   html {
     overflow-x: hidden;
+    color-scheme: light;
     @apply font-sans;
+  }
+
+  html.dark {
+    color-scheme: dark;
   }
 
   body {

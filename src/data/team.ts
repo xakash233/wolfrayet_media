@@ -16,13 +16,5 @@ export const teamMembers: TeamMember[] = [
     bio: "Oversees technology infrastructure and IT operations to keep platforms secure, stable, and ready for growth.",
     image: "/Team/ranjith.jpeg",
     social: {},
-  },
-  {
-    id: "3",
-    name: "Akash",
-    role: "Technical Lead",
-    bio: "Architects and delivers scalable web solutions, ensuring every project meets high standards for performance and reliability.",
-    image: "/Team/akash.png",
-    social: {},
-  },
+  }
 ];

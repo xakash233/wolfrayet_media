@@ -1,5 +1,8 @@
 import type { CustomAddOn, PricingPlan } from "@/types";
 
+/** Set to true to show pricing on /services#pricing (and homepage if re-enabled). */
+export const PRICING_SECTION_ENABLED = false;
+
 export const pricingNote =
   "India-based, Tamil Nadu–focused pricing in INR. All prices per month. GST extra.";
 
